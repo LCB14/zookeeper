@@ -2,8 +2,11 @@ package com.lcb.client.curator;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.recipes.cache.NodeCache;
+import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.apache.curator.retry.RetryNTimes;
 import org.apache.zookeeper.CreateMode;
+
 
 /**
  * @author changbao.li
@@ -21,5 +24,16 @@ public class CuratorClient {
         client.start();
 
         client.create().withMode(CreateMode.EPHEMERAL).forPath("/data2", "lcb data".getBytes());
+
+        NodeCache nodeCache = new NodeCache(client,"/data2");
+        nodeCache.start();
+        nodeCache.getListenable().addListener(new NodeCacheListener() {
+            @Override
+            public void nodeChanged() throws Exception {
+                System.out.println("节点数据发生变更");
+            }
+        });
+
+        System.in.read();
     }
 }
