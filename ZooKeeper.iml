@@ -87,6 +87,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/java/generated" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/java/test" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/java/systest" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -96,7 +97,9 @@
           <root url="jar://$USER_HOME$/.ant/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.25.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.ideaLibSources/slf4j-api-1.7.25-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
