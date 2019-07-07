@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="curator-client-4.2.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/java/lib/curator-client-4.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/java/lib/curator-framework-4.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/java/lib/curator-recipes-4.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

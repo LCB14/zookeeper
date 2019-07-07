@@ -12,6 +12,7 @@ import org.apache.zookeeper.ZooKeeper;
 public class ZookeeperClientTest {
 
     public static void main(String[] args) throws Exception {
+
         ZooKeeper client = new ZooKeeper("localhost:2181", 5000, new Watcher() {
             @Override
             public void process(WatchedEvent event) {

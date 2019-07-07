@@ -732,5 +732,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="zkclient-0.11" level="project" />
+    <orderEntry type="library" name="curator-client-4.2.0" level="project" />
   </component>
 </module>
