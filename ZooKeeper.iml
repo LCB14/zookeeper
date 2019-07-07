@@ -87,7 +87,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/java/generated" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/java/test" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/java/systest" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/java/lcb" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
