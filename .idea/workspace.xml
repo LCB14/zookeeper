@@ -1,57 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="644db599-15cf-4871-a862-6860e0081943" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/java/lcb/com/lcb/client/zookeeper/ZookeeperClientTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/OldChangeLog" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/generated/.generated" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/lib/ant-eclipse-1.0-jvm1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/lib/cobertura/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/lib/ivy-2.4.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/lib/jdiff/zookeeper_3.1.1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/lib/jline-0.9.94.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/lib/log4j-1.2.17.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/lib/slf4j-1.7.25.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/main/log4j.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/main/org/apache/jute/compiler/generated/package.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/main/org/apache/jute/compiler/generated/rcc.jj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/main/org/apache/jute/compiler/package.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/main/org/apache/jute/package.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/main/org/apache/zookeeper/server/package.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/main/overview.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/systest/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/bin/check_compatibility.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/bin/test-github-pr.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/bin/test-patch.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/bin/test-patch.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/checkstyle-noframes-sorted.xsl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/checkstyle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/config/findbugsExcludeFile.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/buffersize/create/version-2/log.1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/buffersize/create/version-2/snapshot.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/buffersize/set/version-2/log.1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/buffersize/set/version-2/snapshot.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/buffersize/snapshot/version-2/log.1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/buffersize/snapshot/version-2/snapshot.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/buffersize/snapshot/version-2/snapshot.2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/invalidsnap/version-2/log.1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/invalidsnap/version-2/log.274" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/invalidsnap/version-2/log.42" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/invalidsnap/version-2/log.63b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/invalidsnap/version-2/snapshot.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/invalidsnap/version-2/snapshot.272" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/invalidsnap/version-2/snapshot.273" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/invalidsnap/version-2/snapshot.639" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/invalidsnap/version-2/snapshot.83f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/kerberos/minikdc-krb5.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/kerberos/minikdc.ldiff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/upgrade/log.100000001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/upgrade/log.100001bf0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/upgrade/snapshot.100000000" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/test/data/upgrade/snapshot.100001bec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZooKeeper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZooKeeper.iml" afterDir="false" />
-    </list>
+    <list default="true" id="644db599-15cf-4871-a862-6860e0081943" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.eclipse/classes-main/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,10 +18,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/java/lcb/com/lcb/client/zookeeper/ZookeeperClientTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+            <state relative-caret-position="88">
+              <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="e#481#482#0" expanded="true" />
                 <element signature="e#533#534#0" expanded="true" />
               </folding>
@@ -226,7 +175,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Designer" />
       <window_info id="Image Layers" />
@@ -234,7 +182,7 @@
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Capture Tool" />
       <window_info id="Learn" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24964234" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" weight="0.32218093" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -329,10 +277,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/lcb/com/lcb/client/zookeeper/ZookeeperClientTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        <state relative-caret-position="88">
+          <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="e#481#482#0" expanded="true" />
             <element signature="e#533#534#0" expanded="true" />
           </folding>

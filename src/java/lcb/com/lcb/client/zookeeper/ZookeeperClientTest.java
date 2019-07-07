@@ -6,7 +6,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 /**
  * @author changbao.li
- * @Description zk 自带客户端
+ * @Description zk 自带客户端测试
  * @Date 2019-07-07 17:57
  */
 public class ZookeeperClientTest {

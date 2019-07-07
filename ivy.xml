@@ -92,6 +92,12 @@
     <dependency org="commons-io" name="commons-io" rev="${commons-io.version}"
                 conf="test->default"/>
 
+      <!--zkClient客户端依赖-->
+      <dependency>
+          <groupId>com.101tec</groupId>
+          <artifactId>zkclient</artifactId>
+          <version>0.11</version>
+      </dependency>
 
     <!-- Apache directory server project, org.apache.directory.* packages for miniKdc tests -->
     <dependency org="org.apache.directory.server" name="apacheds-core-api" rev="${apache-directory-server.version}" conf="test->default">
