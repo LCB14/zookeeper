@@ -91,6 +91,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     updateLastHeard();
                     initialized = true;
                 } else {
+                    // 读取服务端响应
                     sendThread.readResponse(incomingBuffer);
                     lenBuffer.clear();
                     incomingBuffer = lenBuffer;
@@ -100,6 +101,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
         }
         if (sockKey.isWritable()) {
             synchronized(outgoingQueue) {
+                // 从队列中取出待发送信息
                 Packet p = findSendablePacket(outgoingQueue,
                         cnxn.sendThread.clientTunneledAuthenticationInProgress());
 
@@ -114,15 +116,19 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                         }
                         p.createBB();
                     }
+                    // 将数据发送给服务端
                     sock.write(p.bb);
+
                     // 判断数据是否都已经发送完毕
                     if (!p.bb.hasRemaining()) {
                         sentCount++;
+                        // 发送成功后，将发送请求从队列中移除。
                         outgoingQueue.removeFirstOccurrence(p);
                         if (p.requestHeader != null
                                 && p.requestHeader.getType() != OpCode.ping
                                 && p.requestHeader.getType() != OpCode.auth) {
                             synchronized (pendingQueue) {
+                                // 把已经发送的请求暂时存放在pendingQueue中，等待服务端返回结果。
                                 pendingQueue.add(p);
                             }
                         }

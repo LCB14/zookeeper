@@ -420,7 +420,9 @@ public class ClientCnxn {
         disableAutoWatchReset = b;
     }
     public void start() {
+        // 该线程主要负责建立socket通信
         sendThread.start();
+        // 该线程主要负责处理zk中的watch事件
         eventThread.start();
     }
 
@@ -847,6 +849,7 @@ public class ClientCnxn {
                             + Long.toHexString(sessionId) + ", packet:: " + packet);
                 }
             } finally {
+                // 唤醒提交请求之后等待服务端响应的packet
                 finishPacket(packet);
             }
         }
@@ -881,6 +884,7 @@ public class ClientCnxn {
                      + ", initiating session");
             isFirstConnect = false;
             long sessId = (seenRwServerBefore) ? sessionId : 0;
+            // 构建连接请求
             ConnectRequest conReq = new ConnectRequest(0, lastZxid,
                     sessionTimeout, sessId, sessionPasswd);
             synchronized (outgoingQueue) {
@@ -1043,7 +1047,7 @@ public class ClientCnxn {
             InetSocketAddress serverAddress = null;
             while (state.isAlive()) {
                 try {
-                    // 判断socket有没有建立连接
+                    // 判断socket建立是否连接
                     if (!clientCnxnSocket.isConnected()) {
                         if(!isFirstConnect){
                             try {
@@ -1062,6 +1066,7 @@ public class ClientCnxn {
                         } else {
                             serverAddress = hostProvider.next(1000);
                         }
+                        // 创建socket连接
                         startConnect(serverAddress);
                         clientCnxnSocket.updateLastSendAndHeard();
                     }
@@ -1143,7 +1148,7 @@ public class ClientCnxn {
                         }
                         to = Math.min(to, pingRwTimeout - idlePingRwServer);
                     }
-
+                    // 从请求队列中取出数据进行发送
                     clientCnxnSocket.doTransport(to, pendingQueue, outgoingQueue, ClientCnxn.this);
                 } catch (Throwable e) {
                     if (closing) {
