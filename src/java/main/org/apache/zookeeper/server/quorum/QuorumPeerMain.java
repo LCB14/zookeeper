@@ -99,6 +99,7 @@ public class QuorumPeerMain {
     protected void initializeAndRun(String[] args)
         throws ConfigException, IOException
     {
+        // 解析配置文件
         QuorumPeerConfig config = new QuorumPeerConfig();
         if (args.length == 1) {
             config.parse(args[0]);
@@ -110,12 +111,14 @@ public class QuorumPeerMain {
                 .getSnapRetainCount(), config.getPurgeInterval());
         purgeMgr.start();
 
+        // 启动服务器--集群模式(通过参考配置文件中是否包含server属性进行判断)
         if (args.length == 1 && config.servers.size() > 0) {
             runFromConfig(config);
         } else {
             LOG.warn("Either no config or no quorum defined in config, running "
                     + " in standalone mode");
             // there is only server in the quorum -- run as standalone
+            // 启动服务器--单机模式
             ZooKeeperServerMain.main(args);
         }
     }

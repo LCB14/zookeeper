@@ -109,6 +109,8 @@ public abstract class ServerCnxnFactory {
         String serverCnxnFactoryName =
             System.getProperty(ZOOKEEPER_SERVER_CNXN_FACTORY);
         if (serverCnxnFactoryName == null) {
+            // NIOServerCnxnFactoryh实现了Runable接口
+            // 在run方法中负责建立socket通信
             serverCnxnFactoryName = NIOServerCnxnFactory.class.getName();
         }
         try {

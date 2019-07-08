@@ -410,6 +410,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     
     public synchronized void startup() {
         if (sessionTracker == null) {
+            // 监视session是否过期
             createSessionTracker();
         }
         startSessionTracker();

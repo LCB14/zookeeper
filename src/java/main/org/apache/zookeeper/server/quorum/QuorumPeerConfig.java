@@ -140,7 +140,7 @@ public class QuorumPeerConfig {
                 throw new IllegalArgumentException(configFile.toString()
                         + " file is missing");
             }
-
+            // 读取配置文件
             Properties cfg = new Properties();
             FileInputStream in = new FileInputStream(configFile);
             try {
@@ -149,6 +149,7 @@ public class QuorumPeerConfig {
                 in.close();
             }
 
+            // 解析配置文件
             parseProperties(cfg);
         } catch (IOException e) {
             throw new ConfigException("Error processing " + path, e);
