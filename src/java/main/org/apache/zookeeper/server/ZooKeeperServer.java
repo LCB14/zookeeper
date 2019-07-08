@@ -281,6 +281,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
             setZxid(zkDb.getDataTreeLastProcessedZxid());
         }
         else {
+            // 加载数据
             setZxid(zkDb.loadDataBase());
         }
         
@@ -410,10 +411,11 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     
     public synchronized void startup() {
         if (sessionTracker == null) {
-            // 监视session是否过期
+            // 创建session监听器，监视session是否过期
             createSessionTracker();
         }
         startSessionTracker();
+        // 设置请求处理器
         setupRequestProcessors();
 
         registerJMX();

@@ -117,8 +117,10 @@ public class ZooKeeperServerMain {
             zkServer.setTickTime(config.tickTime);
             zkServer.setMinSessionTimeout(config.minSessionTimeout);
             zkServer.setMaxSessionTimeout(config.maxSessionTimeout);
+
             // 创建socket工厂
             cnxnFactory = ServerCnxnFactory.createFactory();
+            // 默认设置的是NIO Socket（可以通过配置设置为Netty)
             cnxnFactory.configure(config.getClientPortAddress(),
                     config.getMaxClientCnxns());
             // 启动线程
