@@ -1043,6 +1043,7 @@ public class ClientCnxn {
             InetSocketAddress serverAddress = null;
             while (state.isAlive()) {
                 try {
+                    // 判断socket有没有建立连接
                     if (!clientCnxnSocket.isConnected()) {
                         if(!isFirstConnect){
                             try {
@@ -1097,6 +1098,7 @@ public class ClientCnxn {
                                       authState,null));
                             }
                         }
+                        // getIdleRecv()方法获取当前距离上一次心跳检测的时间
                         to = readTimeout - clientCnxnSocket.getIdleRecv();
                     } else {
                         to = connectTimeout - clientCnxnSocket.getIdleRecv();
@@ -1400,6 +1402,16 @@ public class ClientCnxn {
         return xid++;
     }
 
+    /**
+     * 该方法负责把客户端的所有的请求发送给服务端
+     *
+     * @param h
+     * @param request
+     * @param response
+     * @param watchRegistration
+     * @return
+     * @throws InterruptedException
+     */
     public ReplyHeader submitRequest(RequestHeader h, Record request,
             Record response, WatchRegistration watchRegistration)
             throws InterruptedException {
@@ -1458,6 +1470,7 @@ public class ClientCnxn {
                 if (h.getType() == OpCode.closeSession) {
                     closing = true;
                 }
+                // 将请求信息包装成packet，并添加队列等待后续处理。
                 outgoingQueue.add(packet);
             }
         }

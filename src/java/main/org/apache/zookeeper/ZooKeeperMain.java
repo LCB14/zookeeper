@@ -287,11 +287,15 @@ public class ZooKeeperMain {
     public static void main(String args[])
         throws KeeperException, IOException, InterruptedException
     {
+        // 建立和服务端的连接
         ZooKeeperMain main = new ZooKeeperMain(args);
+        // 处理命令行输入命令
         main.run();
     }
 
     public ZooKeeperMain(String args[]) throws IOException, InterruptedException {
+        // cl主要用于获取server地址和端口号等信息，用于客户端与服务端进行连接。
+        // args存放的是Zookeeper命令参数
         cl.parseOptions(args);
         System.out.println("Connecting to " + cl.getOption("server"));
         connectToZK(cl.getOption("server"));
@@ -329,6 +333,7 @@ public class ZooKeeperMain {
                 String line;
                 Method readLine = consoleC.getMethod("readLine", String.class);
                 while ((line = (String)readLine.invoke(console, getPrompt())) != null) {
+                    // 执行命令行命令
                     executeLine(line);
                 }
             } catch (ClassNotFoundException e) {
@@ -369,6 +374,7 @@ public class ZooKeeperMain {
       if (!line.equals("")) {
         cl.parseCommand(line);
         addToHistory(commandCount,line);
+        // 进行命令处理
         processCmd(cl);
         commandCount++;
       }

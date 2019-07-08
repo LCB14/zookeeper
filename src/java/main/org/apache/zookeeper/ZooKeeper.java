@@ -444,13 +444,21 @@ public class ZooKeeper {
 
         watchManager.defaultWatcher = watcher;
 
+        // 将地址包装成socket通信中的InetSocketAddress地址形式。
+        // 通过阅读源码可以发现，connectString字符串可以表示用多个逗号进行分割地址集合。
         ConnectStringParser connectStringParser = new ConnectStringParser(
                 connectString);
+
+        // 对地址进行解析并做乱序处理，保证服务器连接的负载均衡。
         HostProvider hostProvider = new StaticHostProvider(
                 connectStringParser.getServerAddresses());
+
+        // 进行socket连接
         cnxn = new ClientCnxn(connectStringParser.getChrootPath(),
                 hostProvider, sessionTimeout, this, watchManager,
                 getClientCnxnSocket(), canBeReadOnly);
+
+        // 开启两个线程进行连接处理
         cnxn.start();
     }
 
@@ -776,6 +784,7 @@ public class ZooKeeper {
 
         final String serverPath = prependChroot(clientPath);
 
+        // 构建请求头
         RequestHeader h = new RequestHeader();
         h.setType(ZooDefs.OpCode.create);
         CreateRequest request = new CreateRequest();
@@ -787,6 +796,7 @@ public class ZooKeeper {
             throw new KeeperException.InvalidACLException();
         }
         request.setAcl(acl);
+
         ReplyHeader r = cnxn.submitRequest(h, request, response, null);
         if (r.getErr() != 0) {
             throw KeeperException.create(KeeperException.Code.get(r.getErr()),
@@ -1838,6 +1848,12 @@ public class ZooKeeper {
         return cnxn.sendThread.getClientCnxnSocket().getLocalSocketAddress();
     }
 
+    /**
+     * 获取一个NIO实例，用于底层通信
+     *
+     * @return
+     * @throws IOException
+     */
     private static ClientCnxnSocket getClientCnxnSocket() throws IOException {
         String clientCnxnSocketName = System
                 .getProperty(ZOOKEEPER_CLIENT_CNXN_SOCKET);

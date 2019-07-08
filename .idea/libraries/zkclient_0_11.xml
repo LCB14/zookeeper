@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/src/java/lib/zkclient-0.11.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/zkclient-0.11-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

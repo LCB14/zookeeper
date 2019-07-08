@@ -71,6 +71,7 @@ public final class StaticHostProvider implements HostProvider {
                 return InetAddress.getAllByName(name);
             }
         };
+        // 将集合中的地址进行乱序排序
         init(serverAddresses);
     }
 

@@ -115,6 +115,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                         p.createBB();
                     }
                     sock.write(p.bb);
+                    // 判断数据是否都已经发送完毕
                     if (!p.bb.hasRemaining()) {
                         sentCount++;
                         outgoingQueue.removeFirstOccurrence(p);
@@ -363,6 +364,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     sendThread.primeConnection();
                 }
             } else if ((k.readyOps() & (SelectionKey.OP_READ | SelectionKey.OP_WRITE)) != 0) {
+                // 操作channel通道中的数据
                 doIO(pendingQueue, outgoingQueue, cnxn);
             }
         }
