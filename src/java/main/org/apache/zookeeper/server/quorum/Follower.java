@@ -69,6 +69,7 @@ public class Follower extends Learner{
         try {
             QuorumServer leaderServer = findLeader();            
             try {
+                // 同leader建立socket连接
                 connectToLeader(leaderServer.addr, leaderServer.hostname);
                 // 向leader发送数据
                 long newEpochZxid = registerWithLeader(Leader.FOLLOWERINFO);
