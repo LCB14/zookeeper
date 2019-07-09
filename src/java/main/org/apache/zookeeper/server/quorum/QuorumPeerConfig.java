@@ -397,11 +397,13 @@ public class QuorumPeerConfig {
                  */
 
                 LOG.info("Defaulting to majority quorums");
+                // 半数机制信息构建（此时observe角色未参与)
                 quorumVerifier = new QuorumMaj(servers.size());
             }
 
             // Now add observers to servers, once the quorums have been
             // figured out
+            // 半数机制信息构建完成后，才将observe角色加入map
             servers.putAll(observers);
 
             File myIdFile = new File(dataDir, "myid");

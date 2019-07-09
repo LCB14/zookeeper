@@ -70,6 +70,7 @@ public class Follower extends Learner{
             QuorumServer leaderServer = findLeader();            
             try {
                 connectToLeader(leaderServer.addr, leaderServer.hostname);
+                // 向leader发送数据
                 long newEpochZxid = registerWithLeader(Leader.FOLLOWERINFO);
 
                 //check to see if the leader zxid is lower than ours

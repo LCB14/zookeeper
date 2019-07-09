@@ -334,6 +334,7 @@ public class Leader {
                         BufferedInputStream is = new BufferedInputStream(
                                 s.getInputStream());
                         LearnerHandler fh = new LearnerHandler(s, is, Leader.this);
+                        // 开启一个线程负责数据处理
                         fh.start();
                     } catch (SocketException e) {
                         if (stop) {
@@ -392,6 +393,7 @@ public class Leader {
             // Start thread that waits for connection requests from 
             // new followers.
             cnxAcceptor = new LearnerCnxAcceptor();
+            // 开启一个线程等待其他learner连接
             cnxAcceptor.start();
             
             readyToStart = true;
