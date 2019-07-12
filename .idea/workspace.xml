@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="644db599-15cf-4871-a862-6860e0081943" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Follower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Follower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" afterDir="false" />
-    </list>
+    <list default="true" id="644db599-15cf-4871-a862-6860e0081943" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.eclipse/classes-main/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Follower.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="73" column="30" lean-forward="true" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+            <state relative-caret-position="166">
+              <caret line="62" column="63" lean-forward="true" selection-start-line="62" selection-start-column="63" selection-end-line="62" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -123,7 +120,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -276,11 +273,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.QuorumPeerMain" />
-      <item itemvalue="Application.ZookeeperClientTest" />
-      <item itemvalue="Application.ZkClientTest" />
       <item itemvalue="Application.CuratorClient" />
+      <item itemvalue="Application.QuorumPeerMain" />
+      <item itemvalue="Application.ZkClientTest" />
       <item itemvalue="Application.ZooKeeperMain" />
+      <item itemvalue="Application.ZookeeperClientTest" />
     </list>
     <recent_temporary>
       <list>
@@ -316,12 +313,12 @@
       <window_info content_ui="combo" id="Project" order="5" sideWeight="0.14745973" weight="0.21387696" />
       <window_info id="Learn" order="6" weight="0.3297568" />
       <window_info id="Structure" order="7" sideWeight="0.85254025" side_tool="true" weight="0.21387696" />
-      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5007153" side_tool="true" weight="0.377943" />
+      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50143063" side_tool="true" weight="0.377943" />
       <window_info anchor="bottom" id="Run with VisualVM" order="1" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="bottom" id="Messages" order="3" weight="0.32961586" />
       <window_info anchor="bottom" id="Debug with VisualVM" order="4" />
-      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49928468" weight="0.377943" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="5" sideWeight="0.4985694" visible="true" weight="0.377943" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32961586" />
       <window_info anchor="bottom" id="Run" order="8" weight="0.4324659" />
@@ -870,8 +867,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Follower.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="73" column="30" lean-forward="true" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+        <state relative-caret-position="166">
+          <caret line="62" column="63" lean-forward="true" selection-start-line="62" selection-start-column="63" selection-end-line="62" selection-end-column="63" />
         </state>
       </provider>
     </entry>
