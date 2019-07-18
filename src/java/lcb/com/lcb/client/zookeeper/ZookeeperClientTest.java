@@ -1,9 +1,6 @@
 package com.lcb.client.zookeeper;
 
-import org.apache.zookeeper.AsyncCallback;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 
 /**
@@ -24,6 +21,8 @@ public class ZookeeperClientTest {
                 System.out.println("连接" + event);
             }
         });
+        // 创建节点
+//        client.create("/data", "node data".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
         Stat stat = new Stat();
         // 使用自定义watch监听器

@@ -10,7 +10,7 @@ import org.apache.zookeeper.CreateMode;
 
 /**
  * @author changbao.li
- * @Description Curator 客户端测试(流逝)
+ * @Description Curator 客户端测试(流式)
  * @Date 2019-07-07 22:28
  */
 public class CuratorClient {
@@ -23,9 +23,15 @@ public class CuratorClient {
                 .newClient(ADDRESS + PORT, new RetryNTimes(3, 1000));
         client.start();
 
-        client.create().withMode(CreateMode.EPHEMERAL).forPath("/data2", "lcb data".getBytes());
+        // 创建一个临时节点
+        client.create()
+                .withMode(CreateMode.EPHEMERAL)
+                .forPath("/data2", "lcb data".getBytes());
 
         NodeCache nodeCache = new NodeCache(client,"/data2");
+//        nodeCache.start(true);
+//        System.out.println(nodeCache.getCurrentData());
+
         nodeCache.start();
         nodeCache.getListenable().addListener(new NodeCacheListener() {
             @Override

@@ -16,9 +16,11 @@ public class ZkClientTest {
 
     public static void main(String[] args) throws Exception{
 
+        // 注意序列化操作
         ZkClient zk = new ZkClient(ADDRESS+PORT,1000,1000,new SerializableSerializer());
 
-        zk.createPersistent("/data","lcb data");
+        // 创建节点
+//        zk.createPersistent("/data","lcb data");
 
         // 为节点添加监听器，类似watch
         zk.subscribeDataChanges("/data",new IZkDataListener(){
@@ -32,6 +34,7 @@ public class ZkClientTest {
                 System.out.println("/data节点数据被删除了");
             }
         });
+
 
         System.in.read();
     }
