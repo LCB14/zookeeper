@@ -735,6 +735,11 @@ public class ClientCnxn {
         private Random r = new Random(System.nanoTime());        
         private boolean isFirstConnect = true;
 
+        /**
+         * 读取服务端响应，成功响应则移除之前放入pendingQueue的请求
+         * @param incomingBuffer
+         * @throws IOException
+         */
         void readResponse(ByteBuffer incomingBuffer) throws IOException {
             ByteBufferInputStream bbis = new ByteBufferInputStream(
                     incomingBuffer);
@@ -1036,7 +1041,10 @@ public class ClientCnxn {
 
         private static final String RETRY_CONN_MSG =
             ", closing socket connection and attempting reconnect";
-        
+
+        /**
+         * sendThread线程不仅执行连接操作，还负责数据的发送操作
+         */
         @Override
         public void run() {
             clientCnxnSocket.introduce(this,sessionId);
