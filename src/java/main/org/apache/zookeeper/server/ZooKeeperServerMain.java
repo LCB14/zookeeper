@@ -119,6 +119,7 @@ public class ZooKeeperServerMain {
             zkServer.setMaxSessionTimeout(config.maxSessionTimeout);
 
             // 创建socket工厂
+            // 可以使用zk默认的NIO也可以配置netty来负责和客户端进行网络通信
             cnxnFactory = ServerCnxnFactory.createFactory();
             // 默认设置的是NIO Socket（可以通过配置设置为Netty)
             cnxnFactory.configure(config.getClientPortAddress(),
