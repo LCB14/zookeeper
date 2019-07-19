@@ -289,15 +289,19 @@ public class ZooKeeperMain {
     {
         // 建立和服务端的连接
         ZooKeeperMain main = new ZooKeeperMain(args);
+
         // 处理命令行输入命令
         main.run();
     }
 
     public ZooKeeperMain(String args[]) throws IOException, InterruptedException {
-        // cl主要用于获取server地址和端口号等信息，用于客户端与服务端进行连接。
-        // args存放的是Zookeeper命令参数
+        /**
+         *   cl主要用于获取server地址和端口号等信息，用于客户端与服务端进行连接。
+         *   args存放的是Zookeeper命令参数
+         */
         cl.parseOptions(args);
         System.out.println("Connecting to " + cl.getOption("server"));
+
         connectToZK(cl.getOption("server"));
         //zk = new ZooKeeper(cl.getOption("server"),
 //                Integer.parseInt(cl.getOption("timeout")), new MyWatcher());

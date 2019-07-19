@@ -444,8 +444,11 @@ public class ZooKeeper {
 
         watchManager.defaultWatcher = watcher;
 
-        // 将地址包装成socket通信中的InetSocketAddress地址形式。
-        // 通过阅读源码可以发现，connectString字符串可以表示用多个逗号进行分割地址集合。
+        /**
+         *  将地址包装成socket通信中的InetSocketAddress地址形式。
+         *
+         *  通过阅读源码可以发现，connectString字符串可以表示用多个逗号进行分割地址集合。
+         */
         ConnectStringParser connectStringParser = new ConnectStringParser(
                 connectString);
 
@@ -453,7 +456,8 @@ public class ZooKeeper {
         HostProvider hostProvider = new StaticHostProvider(
                 connectStringParser.getServerAddresses());
 
-        // 进行socket连接
+        // 进行socket连接前的初始化
+        // getClientCnxnSocket() -- 返回一个NIO实例
         cnxn = new ClientCnxn(connectStringParser.getChrootPath(),
                 hostProvider, sessionTimeout, this, watchManager,
                 getClientCnxnSocket(), canBeReadOnly);

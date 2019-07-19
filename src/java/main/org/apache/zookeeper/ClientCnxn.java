@@ -422,6 +422,7 @@ public class ClientCnxn {
     public void start() {
         // 该线程主要负责建立socket通信
         sendThread.start();
+
         // 该线程主要负责处理zk中的watch事件
         eventThread.start();
     }
