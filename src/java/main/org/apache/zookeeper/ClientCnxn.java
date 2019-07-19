@@ -1422,8 +1422,11 @@ public class ClientCnxn {
             Record response, WatchRegistration watchRegistration)
             throws InterruptedException {
         ReplyHeader r = new ReplyHeader();
+        // 对请求进行包装，并添加到请求队列中
         Packet packet = queuePacket(h, r, request, response, null, null, null,
                     null, watchRegistration);
+
+        // 进行阻塞，直到服务端对本次请求进行响应。
         synchronized (packet) {
             while (!packet.finished) {
                 packet.wait();
