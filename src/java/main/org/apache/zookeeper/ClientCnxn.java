@@ -504,10 +504,12 @@ public class ClientCnxn {
            try {
               isRunning = true;
               while (true) {
+                  // 取出之前添加到队列中的watch事件
                  Object event = waitingEvents.take();
                  if (event == eventOfDeath) {
                     wasKilled = true;
                  } else {
+                     // 服务端成功响应，需要处理之前添加的watch事件
                     processEvent(event);
                  }
                  if (wasKilled)
