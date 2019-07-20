@@ -800,6 +800,7 @@ public class ClientCnxn {
                             + Long.toHexString(sessionId));
                 }
 
+                // 将watch事件添加到eventThread中的队列中
                 eventThread.queueEvent( we );
                 return;
             }
