@@ -414,7 +414,9 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
             // 创建session监听器，监视session是否过期
             createSessionTracker();
         }
+        // 跟踪session
         startSessionTracker();
+
         // 设置请求处理器
         setupRequestProcessors();
 

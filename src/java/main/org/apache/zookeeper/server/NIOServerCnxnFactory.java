@@ -115,8 +115,9 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
             InterruptedException {
         start();
         setZooKeeperServer(zks);
-        // 同步zk数据到内存
+        // 同步zk快照数据到内存
         zks.startdata();
+
         zks.startup();
     }
 

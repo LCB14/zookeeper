@@ -270,6 +270,7 @@ public class NIOServerCnxn extends ServerCnxn {
                     }
                 }
             }
+
             if (k.isWritable()) {
                 // ZooLog.logTraceMessage(LOG,
                 // ZooLog.CLIENT_DATA_PACKET_TRACE_MASK
