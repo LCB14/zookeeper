@@ -1056,7 +1056,6 @@ public class ClientCnxn {
             InetSocketAddress serverAddress = null;
             while (state.isAlive()) {
                 try {
-                    // 判断socket建立是否连接
                     if (!clientCnxnSocket.isConnected()) {
                         if(!isFirstConnect){
                             try {
