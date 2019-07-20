@@ -373,7 +373,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                 if (sc.finishConnect()) {
                     updateLastSendAndHeard();
                     // todo 为什么连接成功了，还要调用primeConnection()?
-                    // TODO primeConnection()主要负责什么功能？
+                    // todo primeConnection()主要负责什么功能？
                     sendThread.primeConnection();
                 }
             } else if ((k.readyOps() & (SelectionKey.OP_READ | SelectionKey.OP_WRITE)) != 0) {
