@@ -64,6 +64,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
         if (sock == null) {
             throw new IOException("Socket is null!");
         }
+        // 读取服务端返回的数据
         if (sockKey.isReadable()) {
             int rc = sock.read(incomingBuffer);
             if (rc < 0) {
@@ -77,7 +78,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                 if (incomingBuffer == lenBuffer) {
                     recvCount++;
                     readLength();
-                } else if (!initialized) {
+                } else if (!initialized) {// TODO initialized目的是什么？
                     readConnectResult();
                     enableRead();
                     if (findSendablePacket(outgoingQueue,
@@ -99,6 +100,8 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                 }
             }
         }
+
+        // 向服务端发送数据
         if (sockKey.isWritable()) {
             synchronized(outgoingQueue) {
                 // 从队列中取出待发送信息
@@ -128,7 +131,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                                 && p.requestHeader.getType() != OpCode.ping
                                 && p.requestHeader.getType() != OpCode.auth) {
                             synchronized (pendingQueue) {
-                                // 把已经发送的请求暂时存放在pendingQueue中，等待服务端返回结果。
+                                // 把已经发送的packet请求暂时尚未收到服务端响应的packet存放在pendingQueue中
                                 pendingQueue.add(p);
                             }
                         }
@@ -166,7 +169,8 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
             if (outgoingQueue.isEmpty()) {
                 return null;
             }
-            if (outgoingQueue.getFirst().bb != null // If we've already starting sending the first packet, we better finish
+            // If we've already starting sending the first packet, we better finish
+            if (outgoingQueue.getFirst().bb != null
                 || !clientTunneledAuthenticationInProgress) {
                 return outgoingQueue.getFirst();
             }

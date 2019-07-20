@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="644db599-15cf-4871-a862-6860e0081943" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/proto/RequestHeader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/proto/RequestHeader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeperMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeperMain.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.eclipse/classes-main/" />
@@ -85,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="867" column="9" lean-forward="true" selection-start-line="867" selection-start-column="9" selection-end-line="867" selection-end-column="9" />
+            <state relative-caret-position="22">
+              <caret line="742" column="13" selection-start-line="742" selection-start-column="13" selection-end-line="742" selection-end-column="13" />
               <folding>
                 <element signature="e#5929#5937#0" expanded="true" />
               </folding>
@@ -97,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocket.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="149" column="18" selection-start-line="149" selection-start-column="18" selection-end-line="149" selection-end-column="18" />
+            <state relative-caret-position="232">
+              <caret line="117" column="9" selection-start-line="117" selection-start-column="9" selection-end-line="117" selection-end-column="9" />
               <folding>
                 <element signature="e#2617#2618#0" expanded="true" />
                 <element signature="e#2664#2665#0" expanded="true" />
@@ -112,8 +108,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="353" column="9" selection-start-line="353" selection-start-column="9" selection-end-line="353" selection-end-column="9" />
+            <state relative-caret-position="478">
+              <caret line="80" column="42" selection-start-line="80" selection-start-column="42" selection-end-line="80" selection-end-column="42" />
               <folding>
                 <element signature="e#1757#1758#0" expanded="true" />
                 <element signature="e#1795#1796#0" expanded="true" />
@@ -146,6 +142,7 @@
       <find>isFirstConnect</find>
       <find>dataWatches</find>
       <find>cnxn</find>
+      <find>initialized</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -433,7 +430,7 @@
       <window_info anchor="bottom" id="Version Control" order="2" weight="0.32961586" />
       <window_info anchor="bottom" id="Messages" order="3" weight="0.32961586" />
       <window_info anchor="bottom" id="Debug with VisualVM" order="4" />
-      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49785408" weight="0.22552665" />
+      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49785408" weight="0.22492401" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32961586" />
       <window_info anchor="bottom" id="Run" order="8" weight="0.4163569" />
@@ -508,7 +505,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>375</line>
+          <line>380</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
@@ -610,7 +607,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>119</line>
+          <line>122</line>
           <properties />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
@@ -622,7 +619,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>94</line>
+          <line>95</line>
           <properties />
           <option name="timeStamp" value="40" />
         </line-breakpoint>
@@ -688,13 +685,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>66</line>
+          <line>67</line>
           <properties />
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>371</line>
+          <line>376</line>
           <properties />
           <option name="timeStamp" value="63" />
         </line-breakpoint>
@@ -706,7 +703,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>294</line>
+          <line>298</line>
           <properties />
           <option name="timeStamp" value="66" />
         </line-breakpoint>
@@ -1118,10 +1115,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/nio/channels/SocketChannel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="388" column="28" selection-start-line="388" selection-start-column="28" selection-end-line="388" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocket.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="149" column="18" selection-start-line="149" selection-start-column="18" selection-end-line="149" selection-end-column="18" />
+        <state relative-caret-position="232">
+          <caret line="117" column="9" selection-start-line="117" selection-start-column="9" selection-end-line="117" selection-end-column="9" />
           <folding>
             <element signature="e#2617#2618#0" expanded="true" />
             <element signature="e#2664#2665#0" expanded="true" />
@@ -1131,17 +1135,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/nio/channels/SocketChannel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="388" column="28" selection-start-line="388" selection-start-column="28" selection-end-line="388" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="867" column="9" lean-forward="true" selection-start-line="867" selection-start-column="9" selection-end-line="867" selection-end-column="9" />
+        <state relative-caret-position="22">
+          <caret line="742" column="13" selection-start-line="742" selection-start-column="13" selection-end-line="742" selection-end-column="13" />
           <folding>
             <element signature="e#5929#5937#0" expanded="true" />
           </folding>
@@ -1150,8 +1147,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="353" column="9" selection-start-line="353" selection-start-column="9" selection-end-line="353" selection-end-column="9" />
+        <state relative-caret-position="478">
+          <caret line="80" column="42" selection-start-line="80" selection-start-column="42" selection-end-line="80" selection-end-column="42" />
           <folding>
             <element signature="e#1757#1758#0" expanded="true" />
             <element signature="e#1795#1796#0" expanded="true" />
