@@ -634,10 +634,13 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
     public synchronized void start() {
         // 从快照同步数据到内存
         loadDataBase();
+
         // 开启一个线程，接收客户端请求
         cnxnFactory.start();
+
         // 开始领导选举
         startLeaderElection();
+
         super.start();
     }
 
