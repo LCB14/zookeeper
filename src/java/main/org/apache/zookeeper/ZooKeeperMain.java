@@ -319,6 +319,7 @@ public class ZooKeeperMain {
             boolean jlinemissing = false;
             // only use jline if it's in the classpath
             try {
+                // jline.ConsoleReader -- java命令行实现类
                 Class<?> consoleC = Class.forName("jline.ConsoleReader");
                 Class<?> completorC =
                     Class.forName("org.apache.zookeeper.JLineZNodeCompletor");
@@ -337,7 +338,7 @@ public class ZooKeeperMain {
                 String line;
                 Method readLine = consoleC.getMethod("readLine", String.class);
                 while ((line = (String)readLine.invoke(console, getPrompt())) != null) {
-                    // 执行命令行命令
+                    // 执行用户命令行输入的命令
                     executeLine(line);
                 }
             } catch (ClassNotFoundException e) {

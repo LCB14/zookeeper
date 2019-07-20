@@ -1054,10 +1054,13 @@ public class ClientCnxn {
             long lastPingRwServer = Time.currentElapsedTime();
             final int MAX_SEND_PING_INTERVAL = 10000; //10 seconds
             InetSocketAddress serverAddress = null;
+            // state表示socket连接状态
             while (state.isAlive()) {
                 try {
+                    // 判断客户端是否已经和服务端建立socket连接，如果否则需要先建立socket连接
                     if (!clientCnxnSocket.isConnected()) {
                         if(!isFirstConnect){
+                            // todo 为什么不是第一次连接还需要睡眠一会呢？
                             try {
                                 Thread.sleep(r.nextInt(1000));
                             } catch (InterruptedException e) {
@@ -1072,9 +1075,10 @@ public class ClientCnxn {
                             serverAddress = rwServerAddress;
                             rwServerAddress = null;
                         } else {
+                            //该方法可以保证，上次连接异常的地址在重试的时候会被其它备份地址替换
                             serverAddress = hostProvider.next(1000);
                         }
-                        // 创建socket连接
+                        // 建立socket连接
                         startConnect(serverAddress);
                         clientCnxnSocket.updateLastSendAndHeard();
                     }
@@ -1111,9 +1115,11 @@ public class ClientCnxn {
                                       authState,null));
                             }
                         }
-                        // getIdleRecv()方法获取当前距离上一次心跳检测的时间
+                        // getIdleRecv()方法获取当前距离上一次读取数据的时间
+                        // 判断读取数据是否超时
                         to = readTimeout - clientCnxnSocket.getIdleRecv();
                     } else {
+                        // 判断连接是否超时
                         to = connectTimeout - clientCnxnSocket.getIdleRecv();
                     }
                     
@@ -1135,6 +1141,7 @@ public class ClientCnxn {
                         		((clientCnxnSocket.getIdleSend() > 1000) ? 1000 : 0);
                         //send a ping request either time is due or no packet sent out within MAX_SEND_PING_INTERVAL
                         if (timeToNextPing <= 0 || clientCnxnSocket.getIdleSend() > MAX_SEND_PING_INTERVAL) {
+                            // 发送心跳
                             sendPing();
                             clientCnxnSocket.updateLastSend();
                         } else {

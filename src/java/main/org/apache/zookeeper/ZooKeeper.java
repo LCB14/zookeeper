@@ -158,74 +158,74 @@ public class ZooKeeper {
             Set<Watcher> result = new HashSet<Watcher>();
 
             switch (type) {
-            case None:
-                result.add(defaultWatcher);
-                boolean clear = ClientCnxn.getDisableAutoResetWatch() &&
-                        state != Watcher.Event.KeeperState.SyncConnected;
+                case None:
+                    result.add(defaultWatcher);
+                    boolean clear = ClientCnxn.getDisableAutoResetWatch() &&
+                            state != Watcher.Event.KeeperState.SyncConnected;
 
-                synchronized(dataWatches) {
-                    for(Set<Watcher> ws: dataWatches.values()) {
-                        result.addAll(ws);
+                    synchronized (dataWatches) {
+                        for (Set<Watcher> ws : dataWatches.values()) {
+                            result.addAll(ws);
+                        }
+                        if (clear) {
+                            dataWatches.clear();
+                        }
                     }
-                    if (clear) {
-                        dataWatches.clear();
-                    }
-                }
 
-                synchronized(existWatches) {
-                    for(Set<Watcher> ws: existWatches.values()) {
-                        result.addAll(ws);
+                    synchronized (existWatches) {
+                        for (Set<Watcher> ws : existWatches.values()) {
+                            result.addAll(ws);
+                        }
+                        if (clear) {
+                            existWatches.clear();
+                        }
                     }
-                    if (clear) {
-                        existWatches.clear();
-                    }
-                }
 
-                synchronized(childWatches) {
-                    for(Set<Watcher> ws: childWatches.values()) {
-                        result.addAll(ws);
+                    synchronized (childWatches) {
+                        for (Set<Watcher> ws : childWatches.values()) {
+                            result.addAll(ws);
+                        }
+                        if (clear) {
+                            childWatches.clear();
+                        }
                     }
-                    if (clear) {
-                        childWatches.clear();
-                    }
-                }
 
-                return result;
-            case NodeDataChanged:
-            case NodeCreated:
-                synchronized (dataWatches) {
-                    addTo(dataWatches.remove(clientPath), result);
-                }
-                synchronized (existWatches) {
-                    addTo(existWatches.remove(clientPath), result);
-                }
-                break;
-            case NodeChildrenChanged:
-                synchronized (childWatches) {
-                    addTo(childWatches.remove(clientPath), result);
-                }
-                break;
-            case NodeDeleted:
-                synchronized (dataWatches) {
-                    addTo(dataWatches.remove(clientPath), result);
-                }
-                // XXX This shouldn't be needed, but just in case
-                synchronized (existWatches) {
-                    Set<Watcher> list = existWatches.remove(clientPath);
-                    if (list != null) {
-                        addTo(list, result);
-                        LOG.warn("We are triggering an exists watch for delete! Shouldn't happen!");
+                    return result;
+                case NodeDataChanged:
+                case NodeCreated:
+                    synchronized (dataWatches) {
+                        addTo(dataWatches.remove(clientPath), result);
                     }
-                }
-                synchronized (childWatches) {
-                    addTo(childWatches.remove(clientPath), result);
-                }
-                break;
-            default:
-                String msg = "Unhandled watch event type " + type
-                    + " with state " + state + " on path " + clientPath;
-                LOG.error(msg);
-                throw new RuntimeException(msg);
+                    synchronized (existWatches) {
+                        addTo(existWatches.remove(clientPath), result);
+                    }
+                    break;
+                case NodeChildrenChanged:
+                    synchronized (childWatches) {
+                        addTo(childWatches.remove(clientPath), result);
+                    }
+                    break;
+                case NodeDeleted:
+                    synchronized (dataWatches) {
+                        addTo(dataWatches.remove(clientPath), result);
+                    }
+                    // XXX This shouldn't be needed, but just in case
+                    synchronized (existWatches) {
+                        Set<Watcher> list = existWatches.remove(clientPath);
+                        if (list != null) {
+                            addTo(list, result);
+                            LOG.warn("We are triggering an exists watch for delete! Shouldn't happen!");
+                        }
+                    }
+                    synchronized (childWatches) {
+                        addTo(childWatches.remove(clientPath), result);
+                    }
+                    break;
+                default:
+                    String msg = "Unhandled watch event type " + type
+                            + " with state " + state + " on path " + clientPath;
+                    LOG.error(msg);
+                    throw new RuntimeException(msg);
             }
 
             return result;
@@ -459,6 +459,7 @@ public class ZooKeeper {
         /**
          *  进行socket连接前的初始化
          *  getClientCnxnSocket() -- 返回一个NIO实例
+         *  创建处理线程
          */
         cnxn = new ClientCnxn(connectStringParser.getChrootPath(),
                 hostProvider, sessionTimeout, this, watchManager,
@@ -786,6 +787,7 @@ public class ZooKeeper {
         throws KeeperException, InterruptedException
     {
         final String clientPath = path;
+        // 进行路径验证
         PathUtils.validatePath(clientPath, createMode.isSequential());
 
         final String serverPath = prependChroot(clientPath);
@@ -803,6 +805,7 @@ public class ZooKeeper {
         }
         request.setAcl(acl);
 
+        // 把客户端请求通过socket传送到服务端
         ReplyHeader r = cnxn.submitRequest(h, request, response, null);
         if (r.getErr() != 0) {
             throw KeeperException.create(KeeperException.Code.get(r.getErr()),

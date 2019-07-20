@@ -282,6 +282,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
     throws IOException {
         sockKey = sock.register(selector, SelectionKey.OP_CONNECT);
         boolean immediateConnect = sock.connect(addr);
+        // todo 连接失败了执行primeConnection()目的是什么？
         if (immediateConnect) {
             sendThread.primeConnection();
         }
@@ -367,6 +368,8 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
             if ((k.readyOps() & SelectionKey.OP_CONNECT) != 0) {
                 if (sc.finishConnect()) {
                     updateLastSendAndHeard();
+                    // todo 为什么连接成功了，还要调用primeConnection()?
+                    // TODO primeConnection()主要负责什么功能？
                     sendThread.primeConnection();
                 }
             } else if ((k.readyOps() & (SelectionKey.OP_READ | SelectionKey.OP_WRITE)) != 0) {
@@ -374,6 +377,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                 doIO(pendingQueue, outgoingQueue, cnxn);
             }
         }
+
         if (sendThread.getZkState().isConnected()) {
             synchronized(outgoingQueue) {
                 if (findSendablePacket(outgoingQueue,

@@ -23,6 +23,7 @@ import org.apache.jute.*;
 import org.apache.yetus.audience.InterfaceAudience;
 @InterfaceAudience.Public
 public class RequestHeader implements Record {
+  // TODO 表示什么东东
   private int xid;
   private int type;
   public RequestHeader() {
