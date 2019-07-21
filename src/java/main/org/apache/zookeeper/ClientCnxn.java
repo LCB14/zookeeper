@@ -480,6 +480,7 @@ public class ClientCnxn {
                     watcher.materialize(event.getState(), event.getType(),
                             event.getPath()),
                             event);
+
             // queue the pair (watch set & event) for later processing
             waitingEvents.add(pair);
         }
