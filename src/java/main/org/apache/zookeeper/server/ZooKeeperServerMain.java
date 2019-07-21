@@ -123,7 +123,7 @@ public class ZooKeeperServerMain {
              *  可以使用zk默认的NIO也可以配置netty来负责和客户端进行网络通信
              */
             cnxnFactory = ServerCnxnFactory.createFactory();
-            // 默认设置的是NIO Socket（可以通过配置设置为Netty)
+            // 设置socket信息
             cnxnFactory.configure(config.getClientPortAddress(),
                     config.getMaxClientCnxns());
             // 启动线程

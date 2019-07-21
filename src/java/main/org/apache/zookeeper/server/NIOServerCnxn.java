@@ -192,8 +192,10 @@ public class NIOServerCnxn extends ServerCnxn {
 
     /** Read the request payload (everything following the length prefix) */
     private void readPayload() throws IOException, InterruptedException {
-        if (incomingBuffer.remaining() != 0) { // have we read length bytes?
-            int rc = sock.read(incomingBuffer); // sock is non-blocking, so ok
+        // have we read length bytes?
+        if (incomingBuffer.remaining() != 0) {
+            // sock is non-blocking, so ok
+            int rc = sock.read(incomingBuffer);
             if (rc < 0) {
                 throw new EndOfStreamException(
                         "Unable to read additional data from client sessionid 0x"
@@ -202,7 +204,8 @@ public class NIOServerCnxn extends ServerCnxn {
             }
         }
 
-        if (incomingBuffer.remaining() == 0) { // have we read length bytes?
+        // have we read length bytes?
+        if (incomingBuffer.remaining() == 0) {
             packetReceived();
             incomingBuffer.flip();
             if (!initialized) {
@@ -242,6 +245,7 @@ public class NIOServerCnxn extends ServerCnxn {
 
                 return;
             }
+
             if (k.isReadable()) {
                 int rc = sock.read(incomingBuffer);
                 if (rc < 0) {
