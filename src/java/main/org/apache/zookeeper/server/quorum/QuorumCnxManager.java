@@ -391,6 +391,7 @@ public class QuorumCnxManager {
     public void receiveConnection(final Socket sock) {
         DataInputStream din = null;
         try {
+            // din即为接收到的投票信息的流
             din = new DataInputStream(
                     new BufferedInputStream(sock.getInputStream()));
 
@@ -440,7 +441,8 @@ public class QuorumCnxManager {
         try {
             // Read server id
             sid = din.readLong();
-            if (sid < 0) { // this is not a server id but a protocol version (see ZOOKEEPER-1633)
+            // this is not a server id but a protocol version (see ZOOKEEPER-1633)
+            if (sid < 0) {
                 sid = din.readLong();
 
                 // next comes the #bytes in the remainder of the message
@@ -760,6 +762,10 @@ public class QuorumCnxManager {
                         // authentication process may take few seconds to finish,
                         // this may delay next peer connection requests.
                         if (quorumSaslAuthEnabled) {
+                            /**
+                             * 是否采用异步的方式接受连接，receiveConnectionAsync()方法，
+                             * 让线程池去执行receiveConnection方法()
+                             */
                             receiveConnectionAsync(client);
                         } else {
                             receiveConnection(client);
