@@ -67,15 +67,15 @@ public class FastLeaderElection implements Election {
      * notification checks. This impacts the amount of time to get
      * the system up again after long partitions. Currently 60 seconds.
      */
-
     final static int maxNotificationInterval = 60000;
 
     /**
      * Connection manager. Fast leader election uses TCP for
      * communication between peers, and QuorumCnxManager manages
      * such connections.
+     *
+     * 负责选举期间QuorumPeer（集群节点)之间连接的建立和发送、接收消息队列的维护
      */
-
     QuorumCnxManager manager;
 
 
@@ -85,7 +85,6 @@ public class FastLeaderElection implements Election {
      * joined leader election or because it learned of another
      * peer with higher zxid or same zxid and higher server id
      */
-
     static public class Notification {
         /*
          * Format version, introduced in 3.4.6
@@ -215,7 +214,14 @@ public class FastLeaderElection implements Election {
         long peerEpoch;
     }
 
+    /**
+     *  存放了待发送出去的消息
+     */
     LinkedBlockingQueue<ToSend> sendqueue;
+
+    /**
+     *  存放了选举过程中接收到的消息
+     */
     LinkedBlockingQueue<Notification> recvqueue;
 
     /**
@@ -230,8 +236,9 @@ public class FastLeaderElection implements Election {
         /**
          * Receives messages from instance of QuorumCnxManager on
          * method run(), and processes such messages.
+         *
+         * 负责接收消息并将接收到的消息放入recvqueue中等待处理
          */
-
         class WorkerReceiver extends ZooKeeperThread {
             volatile boolean stop;
             QuorumCnxManager manager;
@@ -416,8 +423,9 @@ public class FastLeaderElection implements Election {
         /**
          * This worker simply dequeues a message to send and
          * and queues it on the manager's queue.
+         *
+         * 负责从sendqueue中取出待发送消息，交给下层的连接管理类QuorumCnxManager进行发送。
          */
-
         class WorkerSender extends ZooKeeperThread {
             volatile boolean stop;
             QuorumCnxManager manager;
@@ -604,6 +612,11 @@ public class FastLeaderElection implements Election {
      * Check if a pair (server id, zxid) succeeds our
      * current vote.
      *
+     * totalOrderPredicate为判断更合理的逻辑，比较的顺序是Epoch、zxid、Id，
+     * 优先选投票轮次高的，投票轮次相同选Zxid高的，Zxid相同选id高的，
+     * 因此在Zookeeper启动的时候，往往id高的获得Leader，但不绝对，
+     * 比如在5个节点的集群中，启动顺序分别是1->2->3->4->5，当票选到节点3时已经票选超过半数，那么后面启动的4和5就直接成为follower
+     *
      * @param id    Server identifier
      * @param zxid  Last zxid observed by the issuer of this vote
      */
@@ -621,7 +634,7 @@ public class FastLeaderElection implements Election {
          * 3- New epoch is the same as current epoch, new zxid is the same
          *  as current zxid, but server id is higher.
          */
-
+        // 返回true说明接收到的外部投票更合理，要覆盖内部投票
         return ((newEpoch > curEpoch) ||
                 ((newEpoch == curEpoch) &&
                         ((newZxid > curZxid) || ((newZxid == curZxid) && (newId > curId)))));
@@ -650,7 +663,7 @@ public class FastLeaderElection implements Election {
                 set.add(entry.getKey());
             }
         }
-
+        // 默认实现类为QuorumMaj
         return self.getQuorumVerifier().containsQuorum(set);
     }
 
@@ -844,6 +857,7 @@ public class FastLeaderElection implements Election {
                  * Sends more notifications if haven't received enough.
                  * Otherwise processes new notification.
                  */
+                // 从接收投票的队列中取出一条投票信息（相当于从信箱中取出投票)
                 if (n == null) {
                     if (manager.haveDelivered()) {
                         sendNotifications();
@@ -864,11 +878,21 @@ public class FastLeaderElection implements Election {
                      * voting view for a replica in the voting view.
                      */
                     switch (n.state) {
+                        // 拿别人的票跟自己对比，谁的更合理，就发出去更合理的选票(类似于冒泡排序算法，每次对比，都选比自己大/小的数)
                         case LOOKING:
+                            /**
+                             * 表示投票轮次大于本节点记录的轮次，表示自己已经落后投票了，将自己的
+                             * 投票轮次设置为最新的，清空自己的票箱，这个票箱记录了集群中其他节点
+                             * 的投票结果
+                             */
                             // If notification > current, replace and send messages out
                             if (n.electionEpoch > logicalclock.get()) {
                                 logicalclock.set(n.electionEpoch);
                                 recvset.clear();
+                                /**
+                                 * 将n节点的投票结果与自己的投票结果比较,如果投票比自己的投票合理，
+                                 * 覆盖自己的投票，否则还是投自己
+                                 */
                                 if (totalOrderPredicate(n.leader, n.zxid, n.peerEpoch,
                                         getInitId(), getInitLastLoggedZxid(), getPeerEpoch())) {
                                     updateProposal(n.leader, n.zxid, n.peerEpoch);
@@ -877,8 +901,10 @@ public class FastLeaderElection implements Election {
                                             getInitLastLoggedZxid(),
                                             getPeerEpoch());
                                 }
+                                //发送在此次PK过程中，发送更加合理的选票给其他节点
                                 sendNotifications();
                             } else if (n.electionEpoch < logicalclock.get()) {
+                                // 投票轮次比自己记录的轮次小，说明这个投票已经过时，不处理
                                 if (LOG.isDebugEnabled()) {
                                     LOG.debug("Notification election epoch is smaller than logicalclock. n.electionEpoch = 0x"
                                             + Long.toHexString(n.electionEpoch)
@@ -887,6 +913,7 @@ public class FastLeaderElection implements Election {
                                 break;
                             } else if (totalOrderPredicate(n.leader, n.zxid, n.peerEpoch,
                                     proposedLeader, proposedZxid, proposedEpoch)) {
+                                // 如果是一个轮次，将n节点的投票与自己PK，如果n节点的投票更合理，覆盖自己投票，并将更合理的选票给其他节点
                                 updateProposal(n.leader, n.zxid, n.peerEpoch);
                                 sendNotifications();
                             }
@@ -898,8 +925,15 @@ public class FastLeaderElection implements Election {
                                         ", proposed election epoch=0x" + Long.toHexString(n.electionEpoch));
                             }
 
+                            // 将n节点的投票记录下来
                             recvset.put(n.sid, new Vote(n.leader, n.zxid, n.electionEpoch, n.peerEpoch));
 
+                            /**
+                             * 尝试通过现在已经收到的信息，判断是否已经足够确认最终的leader了，通过方法termPredicate() ，判断标准很简单：是否已经有超过半数的机
+                             * 器所推举的leader为当前自己所推举的leader.如果是，保险起见，最多再等待finalizeWait（默认200ms）的时间进行最后的确认，如果发现有
+                             * 了更新的leader信息，则把这个Notification重新放回recvqueue,显然，选举将继续进行。否则，选举结束，根据选举的leader是否是自己，设
+                             * 置自己的状态为LEADING或者OBSERVING或者FOLLOWING。
+                             */
                             if (termPredicate(recvset,
                                     new Vote(proposedLeader, proposedZxid,
                                             logicalclock.get(), proposedEpoch))) {
@@ -918,6 +952,7 @@ public class FastLeaderElection implements Election {
                                  * This predicate is true once we don't read any new
                                  * relevant message from the reception queue
                                  */
+                                // 队列中所有的投票都已处理完，则选举出Leader，并判断是否属于自己
                                 if (n == null) {
                                     self.setPeerState((proposedLeader == self.getId()) ?
                                             ServerState.LEADING : learningState());
@@ -931,10 +966,12 @@ public class FastLeaderElection implements Election {
                                 }
                             }
                             break;
+                        // 观察者是不参与Leader选举的
                         case OBSERVING:
                             LOG.debug("Notification from observer: " + n.sid);
                             break;
                         case FOLLOWING:
+                        // 当已经收到LEADING和FOLLOWING表示已经票选出Leader，然后投最后一票给Leader，结束投票
                         case LEADING:
                             /*
                              * Consider all notifications from the same epoch
