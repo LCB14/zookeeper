@@ -96,10 +96,13 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
      */
     private static boolean failCreate = false;
 
+    // 已提交的请求队列
     LinkedBlockingQueue<Request> submittedRequests = new LinkedBlockingQueue<Request>();
 
+    // 下个处理器
     RequestProcessor nextProcessor;
 
+    // zk服务器
     ZooKeeperServer zks;
 
     public PrepRequestProcessor(ZooKeeperServer zks,
@@ -326,9 +329,13 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
         switch (type) {
             case OpCode.create:
                 zks.sessionTracker.checkSession(request.sessionId, request.getOwner());
+
                 CreateRequest createRequest = (CreateRequest) record;
+                // 反序列化，将ByteBuffer转化为Record
                 if (deserialize)
                     ByteBufferInputStream.byteBuffer2Record(request.request, createRequest);
+
+                // 获取节点路径
                 String path = createRequest.getPath();
                 int lastSlash = path.lastIndexOf('/');
                 if (lastSlash == -1 || path.indexOf('\0') != -1 || failCreate) {
@@ -336,19 +343,30 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                             Long.toHexString(request.sessionId));
                     throw new KeeperException.BadArgumentsException(path);
                 }
+
+                // 移除重复的ACL项
                 List<ACL> listACL = removeDuplicates(createRequest.getAcl());
                 if (!fixupACL(request.authInfo, listACL)) {
                     throw new KeeperException.InvalidACLException(path);
                 }
+
+                // 提取节点的父节点路径
                 String parentPath = path.substring(0, lastSlash);
+                // 获取父节点的Record
                 ChangeRecord parentRecord = getRecordForPath(parentPath);
 
+                // 检查ACL列表
                 checkACL(zks, parentRecord.acl, ZooDefs.Perms.CREATE,
                         request.authInfo);
+
+                // 获取父节点的Record的子节点版本号
                 int parentCVersion = parentRecord.stat.getCversion();
+                // 获取创建模式
                 CreateMode createMode =
                         CreateMode.fromFlag(createRequest.getFlags());
+                // 顺序模式
                 if (createMode.isSequential()) {
+                    // 在路径后添加一串数字
                     path = path + String.format(Locale.ENGLISH, "%010d", parentCVersion);
                 }
                 validatePath(path, request.sessionId);
@@ -359,11 +377,15 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                 } catch (KeeperException.NoNodeException e) {
                     // ignore this one
                 }
+
+                // 父节点是否为临时节点
                 boolean ephemeralParent = parentRecord.stat.getEphemeralOwner() != 0;
                 if (ephemeralParent) {
                     throw new KeeperException.NoChildrenForEphemeralsException(path);
                 }
+                // 新的子节点版本号
                 int newCversion = parentRecord.stat.getCversion() + 1;
+                // 新生事务
                 request.txn = new CreateTxn(path, createRequest.getData(),
                         listACL,
                         createMode.isEphemeral(), newCversion);
@@ -371,10 +393,15 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                 if (createMode.isEphemeral()) {
                     s.setEphemeralOwner(request.sessionId);
                 }
+                // 拷贝
                 parentRecord = parentRecord.duplicate(request.hdr.getZxid());
+                // 子节点数量加1
                 parentRecord.childCount++;
+                // 设置新的子节点版本号
                 parentRecord.stat.setCversion(newCversion);
+                // 将parentRecord添加至outstandingChanges和outstandingChangesForPath中
                 addChangeRecord(parentRecord);
+                // 将新生成的ChangeRecord(包含了StatPersisted信息)添加至outstandingChanges和outstandingChangesForPath中
                 addChangeRecord(new ChangeRecord(request.hdr.getZxid(), path, s,
                         0, listACL));
                 break;
