@@ -721,8 +721,6 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         }
 
         /**
-         * 返回quorumPeers的只读视图，并给myQuorumAddr集群地址赋值
-         *
          * 这里getView()得到的是quorumPeers即为config文件里面配置的servers
          * 包含sid, hostname, port, electionPort, type
          *
@@ -842,6 +840,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
                 break;
             case 3:
                 qcm = createCnxnManager();
+                // 负责zk集群节点之间的通信连接
                 QuorumCnxManager.Listener listener = qcm.listener;
                 if (listener != null) {
                     listener.start();
