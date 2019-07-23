@@ -78,6 +78,7 @@ import org.apache.zookeeper.OpResult.ErrorResult;
 public class FinalRequestProcessor implements RequestProcessor {
     private static final Logger LOG = LoggerFactory.getLogger(FinalRequestProcessor.class);
 
+    // zks表示Zookeeper服务器，可以通过zks访问到Zookeeper内存数据库
     ZooKeeperServer zks;
 
     public FinalRequestProcessor(ZooKeeperServer zks) {

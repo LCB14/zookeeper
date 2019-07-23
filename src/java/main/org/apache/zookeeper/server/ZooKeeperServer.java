@@ -421,6 +421,10 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         // 设置请求处理器
         setupRequestProcessors();
 
+        /**
+         * JMX（Java Management Extensions，即Java管理扩展）是一个为应用程序、设备、系统等植入管理功能的框架。
+         * 通常使用JMX来监控系统的运行状态或管理系统的某些方面，比如清空缓存、重新加载配置文件等
+         */
         registerJMX();
 
         setState(State.RUNNING);
@@ -429,12 +433,28 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     protected void setupRequestProcessors() {
-        // 处理客户端的请求命令
+        /**
+         *  FinalRequestProcessor
+         *
+         *  是责任链中的最后一个请求处理器，负责把已经commit的写操作（事务）应用到内存数据库中去，
+         *  对于读操作则从本机中读取数据并返回给client。创建客户端请求的响应。
+         */
         RequestProcessor finalProcessor = new FinalRequestProcessor(this);
-        // 进行节点数据持久化
+
+        /**
+         * SyncRequestProcessor
+         *
+         * 进行节点数据持久化
+         */
         RequestProcessor syncProcessor = new SyncRequestProcessor(this,
                 finalProcessor);
         ((SyncRequestProcessor)syncProcessor).start();
+
+        /**
+         *  PrepRequestProcessor
+         *
+         *  这个处理器主要功能是对请求进行预处理， 将client向server请求二进制数据反序列化成sever中请求操作。
+         */
         firstProcessor = new PrepRequestProcessor(this, syncProcessor);
         ((PrepRequestProcessor)firstProcessor).start();
     }
