@@ -265,6 +265,9 @@ public class FastLeaderElection implements Election {
                          * an observer. If we ever have any other type of
                          * learner in the future, we'll have to change the
                          * way we check for observers.
+                         *
+                         * 如果该消息来自一个未知的发送者（自己没有维护这个发送者的sid，即配置文件中没有配置这个sid），
+                         * 就把自己当前的投票结果发送给对方。
                          */
                         if (!validVoter(response.sid)) {
                             Vote current = self.getCurrentVote();
@@ -350,6 +353,7 @@ public class FastLeaderElection implements Election {
                              */
 
                             if (self.getPeerState() == QuorumPeer.ServerState.LOOKING) {
+                                // 放入到recvqueue队列中，待处理
                                 recvqueue.offer(n);
 
                                 /*
@@ -441,7 +445,7 @@ public class FastLeaderElection implements Election {
                     try {
                         ToSend m = sendqueue.poll(3000, TimeUnit.MILLISECONDS);
                         if (m == null) continue;
-
+                        // 交给了QuorumCnxManager来处理消息的发送
                         process(m);
                     } catch (InterruptedException e) {
                         break;

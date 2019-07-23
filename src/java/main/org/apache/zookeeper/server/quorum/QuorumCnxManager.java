@@ -123,11 +123,19 @@ public class QuorumCnxManager {
     /*
      * Mapping from Peer to Thread number
      */
-    // 发送器集合。每个SenderWorker消息发送器，都对应一台远程ZooKeeper服务器，负责消息的发送，在这个集合中，key为SID
+    /**
+     *  发送器集合。每个SenderWorker消息发送器，都对应一台远程ZooKeeper服务器，负责消息的发送，在这个集合中，key为SID
+     */
     final ConcurrentHashMap<Long, SendWorker> senderWorkerMap;
-    // 每个SID需要发送的消息队列
+
+    /**
+     *  每个SID需要发送的消息队列
+     */
     final ConcurrentHashMap<Long, ArrayBlockingQueue<ByteBuffer>> queueSendMap;
-    // 最近发送过的消息。在这个集合中，为每个SID保留最近发送过的一个消息
+
+    /**
+     *  最近发送过的消息。在这个集合中，为每个SID保留最近发送过的一个消息
+     */
     final ConcurrentHashMap<Long, ByteBuffer> lastMessageSent;
 
     /*
@@ -803,6 +811,8 @@ public class QuorumCnxManager {
      * Thread to send messages. Instance waits on a queue, and send a message as
      * soon as there is one available. If connection breaks, then opens a new
      * one.
+     *
+     * 负责不断从全局的queueSendMap中读取自己所负责的sid对应的消息的列表，然后将消息发送给对应的sid。
      */
     class SendWorker extends ZooKeeperThread {
         Long sid;
@@ -958,6 +968,8 @@ public class QuorumCnxManager {
     /**
      * Thread to receive messages. Instance waits on a socket read. If the
      * channel breaks, then removes itself from the pool of receivers.
+     *
+     * 负责从与自己负责的sid建立的TCP连接中读取数据放入到recvQueue的末尾
      */
     class RecvWorker extends ZooKeeperThread {
         Long sid;
