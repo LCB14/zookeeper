@@ -635,12 +635,13 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         // 从快照同步数据到内存
         loadDataBase();
 
-        // 开启一个线程，接收客户端请求
+        // 开启一个线程负责接收客户端请求
         cnxnFactory.start();
 
-        // 负责领导选举前的准备工作
+        // 设置选举算法
         startLeaderElection();
 
+        // 开始选举
         super.start();
     }
 
@@ -706,14 +707,17 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         responder.running = false;
         responder.interrupt();
     }
+
     synchronized public void startLeaderElection() {
     	try {
+    	    // 当前节点为自己投票
     		currentVote = new Vote(myid, getLastLoggedZxid(), getCurrentEpoch());
     	} catch(IOException e) {
     		RuntimeException re = new RuntimeException(e.getMessage());
     		re.setStackTrace(e.getStackTrace());
     		throw re;
     	}
+
         for (QuorumServer p : getView().values()) {
             if (p.id == myid) {
                 myQuorumAddr = p.addr;
@@ -732,6 +736,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
                 throw new RuntimeException(e);
             }
         }
+        // 设置选举算法
         this.electionAlg = createElectionAlgorithm(electionType);
     }
     
