@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="644db599-15cf-4871-a862-6860e0081943" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/FastLeaderElection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/FastLeaderElection.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.eclipse/classes-main/" />
@@ -24,20 +24,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeerMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="695">
+            <state relative-caret-position="680">
               <caret line="172" column="24" selection-start-line="172" selection-start-column="24" selection-end-line="172" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="638" column="28" lean-forward="true" selection-start-line="638" selection-start-column="28" selection-end-line="638" selection-end-column="28" />
+            <state relative-caret-position="644">
+              <caret line="954" column="69" selection-start-line="954" selection-start-column="69" selection-end-line="954" selection-end-column="69" />
               <folding>
                 <element signature="e#15994#15995#0" expanded="true" />
                 <element signature="e#16042#16043#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/FastLeaderElection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="505">
+              <caret line="893" column="47" selection-start-line="893" selection-start-column="47" selection-end-line="893" selection-end-column="47" />
+              <folding>
+                <element signature="e#29615#29627#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,6 +84,8 @@
       <find>cnxnFactory</find>
       <find>logicalclock</find>
       <find>sendqueue</find>
+      <find>proposedLeader</find>
+      <find>recvset</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -104,8 +118,8 @@
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Leader.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Election.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumCnxManager.java" />
-        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/FastLeaderElection.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" />
+        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/FastLeaderElection.java" />
       </list>
     </option>
   </component>
@@ -1032,31 +1046,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="698" column="29" selection-start-line="698" selection-start-column="29" selection-end-line="698" selection-end-column="29" />
-          <folding>
-            <element signature="e#19132#19133#0" expanded="true" />
-            <element signature="e#19175#19176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Election.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/FastLeaderElection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4403">
-          <caret line="422" column="13" lean-forward="true" selection-start-line="422" selection-start-column="13" selection-end-line="422" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumCnxManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1345">
@@ -1068,13 +1057,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="269" column="11" selection-start-line="269" selection-start-column="11" selection-end-line="269" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="695">
-          <caret line="172" column="24" selection-start-line="172" selection-start-column="24" selection-end-line="172" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -1099,13 +1081,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="698" column="29" selection-start-line="698" selection-start-column="29" selection-end-line="698" selection-end-column="29" />
+          <folding>
+            <element signature="e#19132#19133#0" expanded="true" />
+            <element signature="e#19175#19176#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="172" column="24" selection-start-line="172" selection-start-column="24" selection-end-line="172" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="638" column="28" lean-forward="true" selection-start-line="638" selection-start-column="28" selection-end-line="638" selection-end-column="28" />
+        <state relative-caret-position="644">
+          <caret line="954" column="69" selection-start-line="954" selection-start-column="69" selection-end-line="954" selection-end-column="69" />
           <folding>
             <element signature="e#15994#15995#0" expanded="true" />
             <element signature="e#16042#16043#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Election.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/FastLeaderElection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="893" column="47" selection-start-line="893" selection-start-column="47" selection-end-line="893" selection-end-column="47" />
+          <folding>
+            <element signature="e#29615#29627#0" expanded="true" />
           </folding>
         </state>
       </provider>

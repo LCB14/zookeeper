@@ -815,6 +815,7 @@ public class FastLeaderElection implements Election {
             LOG.warn("Failed to register with JMX", e);
             self.jmxLeaderElectionBean = null;
         }
+
         if (self.start_fle == 0) {
             self.start_fle = Time.currentElapsedTime();
         }
@@ -885,7 +886,7 @@ public class FastLeaderElection implements Election {
                         // 拿别人的票跟自己对比，谁的更合理，就发出去更合理的选票(类似于冒泡排序算法，每次对比，都选比自己大/小的数)
                         case LOOKING:
                             /**
-                             * 表示投票轮次大于本节点记录的轮次，表示自己已经落后投票了，将自己的
+                             * 表示投票轮次大于本节点记录的轮次，表示当前节点已经落后投票了，将自己的
                              * 投票轮次设置为最新的，清空自己的票箱，这个票箱记录了集群中其他节点
                              * 的投票结果
                              */
