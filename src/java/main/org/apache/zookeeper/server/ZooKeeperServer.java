@@ -436,7 +436,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         /**
          *  FinalRequestProcessor
          *
-         *  是责任链中的最后一个请求处理器，负责把已经commit的写操作（事务）应用到内存数据库中去，
+         *  是处理器责任链中的最后一个请求处理器，负责把已经commit的写操作（事务）应用到内存数据库中去，
          *  对于读操作则从本机中读取数据并返回给client。创建客户端请求的响应。
          */
         RequestProcessor finalProcessor = new FinalRequestProcessor(this);
