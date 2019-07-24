@@ -14,5 +14,8 @@ public class Test {
         System.out.println(parentCVersion);
         path = path + String.format(Locale.ENGLISH, "%010d", parentCVersion);
         System.out.println(path);
+
+        int number = Integer.MAX_VALUE;
+        System.out.println(number + 1);
     }
 }
