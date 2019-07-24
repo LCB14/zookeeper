@@ -479,6 +479,7 @@ public class ClientCnxn {
             sessionState = event.getState();
 
             // materialize the watchers based on the event
+            // materialize根据事件类型返回对应的watcher
             WatcherSetEventPair pair = new WatcherSetEventPair(
                     watcher.materialize(event.getState(), event.getType(),
                             event.getPath()),
@@ -764,6 +765,7 @@ public class ClientCnxn {
                 }
                 return;
             }
+
             if (replyHdr.getXid() == -4) {
                 // -4 is the xid for AuthPacket               
                 if (replyHdr.getErr() == KeeperException.Code.AUTHFAILED.intValue()) {
@@ -777,6 +779,7 @@ public class ClientCnxn {
                 }
                 return;
             }
+
             /**
              *  如果客户端设置过watch，服务器返回的响应中xid的值将为-1
              *  在此处将会触发eventThread线程调用watch事件
