@@ -21,19 +21,24 @@ public class ZookeeperClientTest {
                 System.out.println("连接" + event);
             }
         });
+
         // 创建节点
 //        client.create("/data", "node data".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
+
+
         Stat stat = new Stat();
-        // 使用自定义watch监听器
+
+        // 1、使用自定义watch监听器
         String str = new String(client.getData("/data", new Watcher() {
             @Override
             public void process(WatchedEvent event) {
                 System.out.println("事件类型：" + event.getType());
             }
         }, stat));
+        System.out.println("节点内容：" + str);
 
-        // 使用默认的watch监听器
+        // 2、使用默认的watch监听器
         client.getData("/data", true, stat);
 
         // 使用回调
@@ -44,7 +49,6 @@ public class ZookeeperClientTest {
             }
         }, stat);
 
-        System.out.println("节点内容：" + str);
         System.in.read();
     }
 }

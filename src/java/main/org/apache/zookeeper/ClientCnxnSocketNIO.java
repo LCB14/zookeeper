@@ -60,10 +60,12 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
      */
     void doIO(List<Packet> pendingQueue, LinkedList<Packet> outgoingQueue, ClientCnxn cnxn)
             throws InterruptedException, IOException {
+
         SocketChannel sock = (SocketChannel) sockKey.channel();
         if (sock == null) {
             throw new IOException("Socket is null!");
         }
+
         // 读取服务端返回的数据
         if (sockKey.isReadable()) {
             int rc = sock.read(incomingBuffer);
@@ -169,6 +171,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
             if (outgoingQueue.isEmpty()) {
                 return null;
             }
+
             // If we've already starting sending the first packet, we better finish
             if (outgoingQueue.getFirst().bb != null
                     || !clientTunneledAuthenticationInProgress) {
@@ -364,6 +367,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
         synchronized (this) {
             selected = selector.selectedKeys();
         }
+
         // Everything below and until we get back to the select is
         // non blocking, so time is effectively a constant. That is
         // Why we just have to do this once, here
@@ -387,6 +391,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
             synchronized (outgoingQueue) {
                 if (findSendablePacket(outgoingQueue,
                         cnxn.sendThread.clientTunneledAuthenticationInProgress()) != null) {
+
                     enableWrite();
                 }
             }
