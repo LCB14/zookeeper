@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="644db599-15cf-4871-a862-6860e0081943" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/lcb/com/lcb/client/test/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.eclipse/classes-main/" />
@@ -77,11 +78,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="373" column="79" selection-start-line="373" selection-start-column="79" selection-end-line="373" selection-end-column="79" />
+            <state relative-caret-position="374">
+              <caret line="373" column="83" lean-forward="true" selection-start-line="373" selection-start-column="20" selection-end-line="373" selection-end-column="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/lcb/com/lcb/client/zookeeper/ZookeeperClientTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="17" selection-start-line="17" selection-end-line="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/lcb/com/lcb/client/test/Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="16" column="33" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="16" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -181,6 +203,7 @@
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServerMain.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/NIOServerCnxnFactory.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java" />
+        <option value="$PROJECT_DIR$/src/java/lcb/com/lcb/client/test/Test.java" />
       </list>
     </option>
   </component>
@@ -233,7 +256,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="lcb" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="zookeeper" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zookeeper" type="b2602c69:ProjectViewProjectNode" />
@@ -290,7 +313,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.QuorumPeerMain">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="CuratorClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.lcb.client.curator.CuratorClient" />
       <module name="ZooKeeper" />
@@ -308,6 +331,19 @@
       <option name="MAIN_CLASS_NAME" value="org.apache.zookeeper.server.quorum.QuorumPeerMain" />
       <module name="ZooKeeper" />
       <option name="PROGRAM_PARAMETERS" value="conf/zoo.cfg" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lcb.client.test.Test" />
+      <module name="ZooKeeper" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lcb.client.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -351,34 +387,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ZookeeperClientTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.lcb.client.zookeeper.ZookeeperClientTest" />
-      <module name="ZooKeeper" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.lcb.client.zookeeper.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.QuorumPeerMain" />
       <item itemvalue="Application.CuratorClient" />
       <item itemvalue="Application.ZkClientTest" />
       <item itemvalue="Application.ZooKeeperMain" />
-      <item itemvalue="Application.ZookeeperClientTest" />
       <item itemvalue="Application.ZKClientUpdateNodeTest" />
+      <item itemvalue="Application.Test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.ZooKeeperMain" />
         <item itemvalue="Application.CuratorClient" />
         <item itemvalue="Application.ZKClientUpdateNodeTest" />
         <item itemvalue="Application.ZkClientTest" />
-        <item itemvalue="Application.ZookeeperClientTest" />
       </list>
     </recent_temporary>
   </component>
@@ -413,15 +436,48 @@
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Capture Tool" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.1425031" visible="true" weight="0.15236051" />
+      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.14262295" weight="0.24821173" />
       <window_info id="Learn" order="6" weight="0.3297568" />
-      <window_info id="Structure" order="7" sideWeight="0.8574969" side_tool="true" visible="true" weight="0.15236051" />
+      <window_info id="Structure" order="7" sideWeight="0.85737705" side_tool="true" weight="0.15236051" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50214595" side_tool="true" weight="0.22428748" />
       <window_info anchor="bottom" id="Run with VisualVM" order="1" />
       <window_info anchor="bottom" id="Version Control" order="2" weight="0.32961586" />
       <window_info anchor="bottom" id="Messages" order="3" weight="0.32961586" />
       <window_info anchor="bottom" id="Debug with VisualVM" order="4" />
       <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49785408" weight="0.244114" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info anchor="bottom" id="Find" order="7" weight="0.32928064" />
+      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.41759604" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.35811648" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="12" weight="0.32928064" />
+      <window_info anchor="right" id="BPMNPalette" order="0" />
+      <window_info anchor="right" id="PlantUML" order="1" />
+      <window_info anchor="right" id="Palette" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="8" weight="0.24964234" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Designer" order="0" />
+      <window_info id="Image Layers" order="1" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.14262295" visible="true" weight="0.24821173" />
+      <window_info id="Learn" order="6" weight="0.3297568" />
+      <window_info id="Structure" order="7" sideWeight="0.85737705" side_tool="true" weight="0.15236051" />
+      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50214595" side_tool="true" weight="0.22428748" />
+      <window_info anchor="bottom" id="Run with VisualVM" order="1" />
+      <window_info anchor="bottom" id="Version Control" order="2" weight="0.32961586" />
+      <window_info anchor="bottom" id="Messages" order="3" weight="0.32961586" />
+      <window_info anchor="bottom" id="Debug with VisualVM" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.49785408" visible="true" weight="0.244114" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32928064" />
       <window_info anchor="bottom" id="Run" order="8" weight="0.4163569" />
@@ -439,7 +495,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="8" weight="0.24964234" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -766,12 +822,6 @@
           <properties />
           <option name="timeStamp" value="89" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java</url>
-          <line>373</line>
-          <properties />
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -789,13 +839,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bin/zkCli.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="29" column="31" lean-forward="true" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/client/HostProvider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="632">
@@ -878,16 +921,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
           <caret line="63" column="14" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lcb/com/lcb/client/zookeeper/ZookeeperClientTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1165,13 +1198,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="131" column="29" selection-start-line="131" selection-start-column="29" selection-end-line="131" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ServerCnxnFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -1204,13 +1230,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/proto/CreateRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/util/Locale.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -1220,8 +1239,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="373" column="79" selection-start-line="373" selection-start-column="79" selection-end-line="373" selection-end-column="79" />
+        <state relative-caret-position="374">
+          <caret line="373" column="83" lean-forward="true" selection-start-line="373" selection-start-column="20" selection-end-line="373" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="131" column="29" selection-start-line="131" selection-start-column="29" selection-end-line="131" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/proto/CreateRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/lcb/com/lcb/client/zookeeper/ZookeeperClientTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="17" selection-start-line="17" selection-end-line="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/lcb/com/lcb/client/test/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="16" selection-end-column="33" />
         </state>
       </provider>
     </entry>
