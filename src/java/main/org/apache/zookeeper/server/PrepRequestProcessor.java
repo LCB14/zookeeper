@@ -389,6 +389,7 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                 }
                 // 新的子节点版本号
                 int newCversion = parentRecord.stat.getCversion() + 1;
+
                 // 新生事务
                 request.txn = new CreateTxn(path, createRequest.getData(),
                         listACL,
