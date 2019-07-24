@@ -366,7 +366,11 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                         CreateMode.fromFlag(createRequest.getFlags());
                 // 顺序模式
                 if (createMode.isSequential()) {
-                    // 在路径后添加一串数字
+                    /**
+                     *  在路径后添加一串数字，构建顺序节点。
+                     *
+                     *  "%010d"表示输出10位整数，不够10位用0占位
+                     */
                     path = path + String.format(Locale.ENGLISH, "%010d", parentCVersion);
                 }
                 validatePath(path, request.sessionId);
