@@ -33,7 +33,7 @@ public class ZookeeperClientTest {
             }
         }, stat));
 
-        // 使用自定义watch监听器
+        // 使用默认的watch监听器
         client.getData("/data", true, stat);
 
         // 使用回调
