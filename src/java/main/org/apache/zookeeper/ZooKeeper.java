@@ -445,13 +445,12 @@ public class ZooKeeper {
         watchManager.defaultWatcher = watcher;
 
         /**
-         *  将地址包装成socket通信中的InetSocketAddress地址形式。
+         *  将地址包装成socket通信中要求的InetSocketAddress形式。
          *
          *  通过阅读源码可以发现，connectString字符串可以表示用多个逗号进行分割地址集合。
          */
         ConnectStringParser connectStringParser = new ConnectStringParser(
                 connectString);
-
         // 对地址进行解析并做乱序处理，保证服务器连接的负载均衡。
         HostProvider hostProvider = new StaticHostProvider(
                 connectStringParser.getServerAddresses());

@@ -1058,6 +1058,7 @@ public class ClientCnxn {
             clientCnxnSocket.introduce(this,sessionId);
             clientCnxnSocket.updateNow();
             clientCnxnSocket.updateLastSendAndHeard();
+
             int to;
             long lastPingRwServer = Time.currentElapsedTime();
             final int MAX_SEND_PING_INTERVAL = 10000; //10 seconds
