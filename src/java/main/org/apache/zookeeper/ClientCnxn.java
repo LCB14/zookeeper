@@ -837,6 +837,7 @@ public class ClientCnxn {
                 }
                 packet = pendingQueue.remove();
             }
+
             /*
              * Since requests are processed in order, we better get a response
              * to the first request!
