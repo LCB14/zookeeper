@@ -18,7 +18,7 @@ public class ZookeeperClientTest {
         ZooKeeper client = new ZooKeeper("localhost:2181", 5000, new Watcher() {
             @Override
             public void process(WatchedEvent event) {
-                System.out.println("连接" + event);
+                System.out.println("连接：" + event);
             }
         });
 
