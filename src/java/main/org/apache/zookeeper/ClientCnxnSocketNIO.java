@@ -117,7 +117,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     updateLastSend();
                     // If we already started writing p, p.bb will already exist
                     if (p.bb == null) {
-                        // 如果不是 连接事件，不是ping 事件，不是 认证时间
+                        // 如果不是连接事件，不是ping事件，不是认证事件
                         if ((p.requestHeader != null) &&
                                 (p.requestHeader.getType() != OpCode.ping) &&
                                 (p.requestHeader.getType() != OpCode.auth)) {
@@ -390,12 +390,13 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
         updateNow();
         for (SelectionKey k : selected) {
             SocketChannel sc = ((SocketChannel) k.channel());
+            // 通过位运算快速判断socket操作类型
             if ((k.readyOps() & SelectionKey.OP_CONNECT) != 0) {
                 if (sc.finishConnect()) {
                     updateLastSendAndHeard();
                     /**
                      *  连接成功了执行primeConnection()目的是什么？
-                     *  初始化连接事件
+                     *  初始化连接事件为：SelectionKey.OP_READ | SelectionKey.OP_WRITE)
                      */
                     sendThread.primeConnection();
                 }
