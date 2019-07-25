@@ -879,7 +879,7 @@ public class ClientCnxn {
                             + Long.toHexString(sessionId) + ", packet:: " + packet);
                 }
             } finally {
-                // 唤醒提交请求之后等待服务端响应的packet
+                // 从 Packet 中取出对应的 Watcher 并注册到 ZKWatchManager 中去
                 finishPacket(packet);
             }
         }

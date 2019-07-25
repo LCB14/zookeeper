@@ -2,16 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="644db599-15cf-4871-a862-6860e0081943" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$EndOfStreamException.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$EndOfStreamException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$EventThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$EventThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$RWServerFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$RWServerFoundException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$SendThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$SendThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$SessionExpiredException.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$SessionExpiredException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$SessionTimeoutException.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn$SessionTimeoutException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxnSocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxnSocket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxnSocketNIO.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ClientCnxnSocketNIO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" afterDir="false" />
     </list>
@@ -428,9 +418,9 @@
           <option name="timeStamp" value="205" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>100</line>
-          <option name="timeStamp" value="211" />
+          <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java</url>
+          <line>882</line>
+          <option name="timeStamp" value="219" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
