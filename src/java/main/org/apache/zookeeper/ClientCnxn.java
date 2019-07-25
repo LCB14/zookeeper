@@ -790,8 +790,8 @@ public class ClientCnxn {
             }
 
             /**
-             *  如果客户端设置过watch，服务器返回的响应中xid的值将为-1
-             *  在此处将会触发eventThread线程调用watch事件
+             *  如果客户端设置了watcher，服务器返回的响应中xid的值将为-1
+             *  在此处将会触发eventThread线程调用watcher事件
              */
             if (replyHdr.getXid() == -1) {
                 // -1 means notification
