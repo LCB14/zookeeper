@@ -82,7 +82,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     recvCount++;
                     readLength();
                 } else if (!initialized) {
-                    // 读取连接结果（很重要的方法)
+                    // 读取连接结果
                     readConnectResult();
                     // 设置Channel可读
                     enableRead();
@@ -97,7 +97,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     updateLastHeard();
                     initialized = true;
                 } else {
-                    // 读取服务端响应
+                    // 读取服务端响应（很关键的方法)
                     sendThread.readResponse(incomingBuffer);
                     lenBuffer.clear();
                     incomingBuffer = lenBuffer;
