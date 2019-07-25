@@ -68,6 +68,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
 
         // 读取服务端返回的数据
         if (sockKey.isReadable()) {
+            // 先从Channel读4个字节，代表头
             int rc = sock.read(incomingBuffer);
             if (rc < 0) {
                 throw new EndOfStreamException(
@@ -80,8 +81,10 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                 if (incomingBuffer == lenBuffer) {
                     recvCount++;
                     readLength();
-                } else if (!initialized) {// TODO initialized目的是什么？
+                } else if (!initialized) {// 初始化
+                    // 读取连接结果
                     readConnectResult();
+                    // 设置Channel可读
                     enableRead();
                     if (findSendablePacket(outgoingQueue,
                             cnxn.sendThread.clientTunneledAuthenticationInProgress()) != null) {
@@ -114,11 +117,13 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     updateLastSend();
                     // If we already started writing p, p.bb will already exist
                     if (p.bb == null) {
+                        // 如果不是 连接事件，不是ping 事件，不是 认证时间
                         if ((p.requestHeader != null) &&
                                 (p.requestHeader.getType() != OpCode.ping) &&
                                 (p.requestHeader.getType() != OpCode.auth)) {
                             p.requestHeader.setXid(cnxn.getXid());
                         }
+                        // 序列化
                         p.createBB();
                     }
                     // 将数据发送给服务端
@@ -129,6 +134,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                         sentCount++;
                         // 发送成功后，将发送请求从队列中移除。
                         outgoingQueue.removeFirstOccurrence(p);
+                        // 如果该事件不是连接事件，不是ping事件，不是认证事件， 则将他加入pending队列中
                         if (p.requestHeader != null
                                 && p.requestHeader.getType() != OpCode.ping
                                 && p.requestHeader.getType() != OpCode.auth) {
@@ -183,6 +189,13 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
             // This packet must be sent so that the SASL authentication process
             // can proceed, but all other packets should wait until
             // SASL authentication completes.
+            /**
+             * 因为Conn Packet需要发送到SASL authentication进行处理，
+             * 其他Packet都需要等待直到该处理完成
+             *
+             * Conn Packet必须第一个处理，所以找出它并且把它放到OutgoingQueue头,
+             * 也就是requestheader=null的那个
+             */
             ListIterator<Packet> iter = outgoingQueue.listIterator();
             while (iter.hasNext()) {
                 Packet p = iter.next();
@@ -289,7 +302,10 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
             throws IOException {
         sockKey = sock.register(selector, SelectionKey.OP_CONNECT);
         boolean immediateConnect = sock.connect(addr);
-        // todo 连接失败了执行primeConnection()目的是什么？
+        /**
+         *  连接成功了执行primeConnection()目的是什么？
+         *  初始化连接事件
+         */
         if (immediateConnect) {
             sendThread.primeConnection();
         }
@@ -377,8 +393,10 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
             if ((k.readyOps() & SelectionKey.OP_CONNECT) != 0) {
                 if (sc.finishConnect()) {
                     updateLastSendAndHeard();
-                    // todo 为什么连接成功了，还要调用primeConnection()?
-                    // todo primeConnection()主要负责什么功能？
+                    /**
+                     *  连接成功了执行primeConnection()目的是什么？
+                     *  初始化连接事件
+                     */
                     sendThread.primeConnection();
                 }
             } else if ((k.readyOps() & (SelectionKey.OP_READ | SelectionKey.OP_WRITE)) != 0) {
@@ -389,9 +407,10 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
 
         if (sendThread.getZkState().isConnected()) {
             synchronized (outgoingQueue) {
+                // 找到连接Packet并且将他放到队列头
                 if (findSendablePacket(outgoingQueue,
                         cnxn.sendThread.clientTunneledAuthenticationInProgress()) != null) {
-
+                    // 将要Channecl设置为可读
                     enableWrite();
                 }
             }

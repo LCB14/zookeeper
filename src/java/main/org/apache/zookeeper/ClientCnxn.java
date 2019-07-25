@@ -300,9 +300,11 @@ public class ClientCnxn {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 BinaryOutputArchive boa = BinaryOutputArchive.getArchive(baos);
                 boa.writeInt(-1, "len"); // We'll fill this in later
+                // 设置协议头
                 if (requestHeader != null) {
                     requestHeader.serialize(boa, "header");
                 }
+                // 设置协议体
                 if (request instanceof ConnectRequest) {
                     request.serialize(boa, "connect");
                     // append "am-I-allowed-to-be-readonly" flag
@@ -311,8 +313,11 @@ public class ClientCnxn {
                     request.serialize(boa, "request");
                 }
                 baos.close();
+                // 生成ByteBuffer
                 this.bb = ByteBuffer.wrap(baos.toByteArray());
+                // 将bytebuffer的前4个字节修改成真正的长度，总长度减去一个int的长度头
                 this.bb.putInt(this.bb.capacity() - 4);
+                // 准备给后续读让buffer position = 0
                 this.bb.rewind();
             } catch (IOException e) {
                 LOG.warn("Ignoring unexpected exception", e);
@@ -973,6 +978,7 @@ public class ClientCnxn {
                 outgoingQueue.addFirst(new Packet(null, null, conReq,
                         null, null, readOnly));
             }
+            // 确保读写事件都监听，也就是设置成可读可写
             clientCnxnSocket.enableReadWriteOnly();
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Session establishment request sent on "
@@ -1081,7 +1087,7 @@ public class ClientCnxn {
                     // 判断客户端是否已经和服务端建立socket连接，如果没有需要先建立socket连接
                     if (!clientCnxnSocket.isConnected()) {
                         if (!isFirstConnect) {
-                            // todo 为什么不是第一次连接还需要睡眠一会呢？
+                            // todo 为什么不是第一次连接还需要睡眠1秒呢？
                             try {
                                 Thread.sleep(r.nextInt(1000));
                             } catch (InterruptedException e) {
