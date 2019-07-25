@@ -978,8 +978,10 @@ public class ClientCnxn {
                 outgoingQueue.addFirst(new Packet(null, null, conReq,
                         null, null, readOnly));
             }
+
             // 确保读写事件都监听，也就是设置成可读可写
             clientCnxnSocket.enableReadWriteOnly();
+
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Session establishment request sent on "
                         + clientCnxnSocket.getRemoteSocketAddress());
@@ -1145,8 +1147,11 @@ public class ClientCnxn {
                                         authState, null));
                             }
                         }
-                        // getIdleRecv()方法获取当前距离上一次读取数据的时间
-                        // 判断读取数据是否超时
+
+                        /**
+                         *  getIdleRecv()方法获取当前距离上一次读取数据的时间
+                         *  判断读取数据是否超时
+                         */
                         to = readTimeout - clientCnxnSocket.getIdleRecv();
                     } else {
                         // 判断连接是否超时
