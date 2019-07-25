@@ -82,8 +82,12 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     recvCount++;
                     readLength();
                 } else if (!initialized) {// 初始化
-                    // 读取连接结果
+                    /**
+                     *  读取连接结果（很重要的方法)
+                     *  watcher事件就靠该方法触发了
+                     */
                     readConnectResult();
+
                     // 设置Channel可读
                     enableRead();
                     if (findSendablePacket(outgoingQueue,
@@ -162,6 +166,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     // TCP stack may choose to abort with RST, in which case the
                     // client would never receive the session expired event.  See
                     // http://docs.oracle.com/javase/6/docs/technotes/guides/net/articles/connection_release.html
+                    // 变更事件类型为读事件
                     disableWrite();
                 } else {
                     // Just in case

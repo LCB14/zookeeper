@@ -484,7 +484,7 @@ public class ClientCnxn {
             sessionState = event.getState();
 
             // materialize the watchers based on the event
-            // materialize根据事件类型返回对应的watcher
+            // materialize()方法会根据事件类型返回对应的watcher
             WatcherSetEventPair pair = new WatcherSetEventPair(
                     watcher.materialize(event.getState(), event.getType(),
                             event.getPath()),
