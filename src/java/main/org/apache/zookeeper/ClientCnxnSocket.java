@@ -125,6 +125,7 @@ abstract class ClientCnxnSocket {
             LOG.trace("readConnectResult " + incomingBuffer.remaining() + " "
                     + buf.toString());
         }
+
         ByteBufferInputStream bbis = new ByteBufferInputStream(incomingBuffer);
         BinaryInputArchive bbia = BinaryInputArchive.getArchive(bbis);
         ConnectResponse conRsp = new ConnectResponse();

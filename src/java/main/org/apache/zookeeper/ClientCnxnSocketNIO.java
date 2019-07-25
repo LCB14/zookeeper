@@ -68,7 +68,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
 
         // 读取服务端返回的数据
         if (sockKey.isReadable()) {
-            // 先从Channel读4个字节，代表头
+            // 先从Channel读4个字节，代表响应头
             int rc = sock.read(incomingBuffer);
             if (rc < 0) {
                 throw new EndOfStreamException(
@@ -81,13 +81,9 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                 if (incomingBuffer == lenBuffer) {
                     recvCount++;
                     readLength();
-                } else if (!initialized) {// 初始化
-                    /**
-                     *  读取连接结果（很重要的方法)
-                     *  watcher事件就靠该方法触发了
-                     */
+                } else if (!initialized) {
+                    // 读取连接结果（很重要的方法)
                     readConnectResult();
-
                     // 设置Channel可读
                     enableRead();
                     if (findSendablePacket(outgoingQueue,

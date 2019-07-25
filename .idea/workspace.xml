@@ -4,6 +4,8 @@
     <list default="true" id="644db599-15cf-4871-a862-6860e0081943" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -284,7 +286,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java</url>
-          <line>842</line>
+          <line>846</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -319,7 +321,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java</url>
-          <line>1061</line>
+          <line>1065</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -329,12 +331,12 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java</url>
-          <line>1054</line>
+          <line>1058</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>322</line>
+          <line>318</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -374,12 +376,12 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java</url>
-          <line>878</line>
+          <line>882</line>
           <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java</url>
-          <line>662</line>
+          <line>666</line>
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -389,38 +391,43 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>308</line>
+          <line>304</line>
           <option name="timeStamp" value="116" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>313</line>
+          <line>309</line>
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java</url>
-          <line>1203</line>
+          <line>1207</line>
           <option name="timeStamp" value="178" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>410</line>
+          <line>406</line>
           <option name="timeStamp" value="190" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java</url>
-          <line>522</line>
+          <line>526</line>
           <option name="timeStamp" value="192" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
-          <line>104</line>
+          <line>100</line>
           <option name="timeStamp" value="202" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java</url>
-          <line>821</line>
+          <line>825</line>
           <option name="timeStamp" value="203" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="205" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

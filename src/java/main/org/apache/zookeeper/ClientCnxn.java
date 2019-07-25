@@ -516,6 +516,10 @@ public class ClientCnxn {
                 while (true) {
                     // 取出之前添加到队列中的watch事件
                     Object event = waitingEvents.take();
+                    /**
+                     *  当客户端和服务端disconnect或connect timeout时
+                     *  会向队列添加eventOfDeath事件
+                     */
                     if (event == eventOfDeath) {
                         wasKilled = true;
                     } else {
