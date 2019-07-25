@@ -777,6 +777,12 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
             touch(si.cnxn);
             boolean validpacket = Request.isValid(si.type);
             if (validpacket) {
+                /**
+                 * zk单机模式下会依次经过如下三个处理器进行处理：
+                 * 1、PrepRequestProcessor
+                 * 2、SyncRequestProcessor
+                 * 3、FinalRequestProcessor
+                 */
                 firstProcessor.processRequest(si);
                 if (si.cnxn != null) {
                     incInProcess();

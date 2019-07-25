@@ -80,7 +80,10 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
     @Override
     public void configure(InetSocketAddress addr, int maxcc) throws IOException {
         configureSaslLogin();
-        // 这里传入的this->NIOServerCnxnFactory实例
+        /**
+         *  这里传入的this->NIOServerCnxnFactory实例
+         *  因此调用start时启动的是NIOServerCnxnFactory的run方法
+         */
         thread = new ZooKeeperThread(this, "NIOServerCxn.Factory:" + addr);
         thread.setDaemon(true);
         maxClientCnxns = maxcc;
