@@ -1529,7 +1529,7 @@ public class ClientCnxn {
                 if (h.getType() == OpCode.closeSession) {
                     closing = true;
                 }
-                // 将请求信息包装成packet，并添加队列等待后续处理。
+                // 将请求信息包装成packet，并添加到队列等待后续处理。
                 outgoingQueue.add(packet);
             }
         }
