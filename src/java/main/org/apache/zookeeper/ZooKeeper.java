@@ -443,6 +443,7 @@ public class ZooKeeper {
         LOG.info("Initiating client connection, connectString=" + connectString
                 + " sessionTimeout=" + sessionTimeout + " watcher=" + watcher);
 
+        // 对watcher进行包装 -> ClientWatchManager
         watchManager.defaultWatcher = watcher;
 
         /**
