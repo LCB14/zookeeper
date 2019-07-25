@@ -519,7 +519,7 @@ public class ClientCnxn {
                     if (event == eventOfDeath) {
                         wasKilled = true;
                     } else {
-                        // 服务端成功响应，需要处理之前添加的watch事件
+                        // 处理之前添加的watch事件
                         processEvent(event);
                     }
                     if (wasKilled)
