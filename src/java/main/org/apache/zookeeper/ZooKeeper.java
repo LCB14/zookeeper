@@ -452,6 +452,7 @@ public class ZooKeeper {
          */
         ConnectStringParser connectStringParser = new ConnectStringParser(
                 connectString);
+
         // 对地址进行解析并做乱序处理，保证服务器连接的负载均衡。
         HostProvider hostProvider = new StaticHostProvider(
                 connectStringParser.getServerAddresses());
