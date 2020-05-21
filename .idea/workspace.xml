@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1ef2e169-d8b7-40fa-9d9d-68180a07e72a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ant.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/markdown-doclet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/curator_client_4_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/zkclient_0_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.revision/revision.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.revision/revision.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZooKeeper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ZooKeeper.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/org/apache/zookeeper/version/Info.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/org/apache/zookeeper/version/Info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/proto/RequestHeader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/proto/RequestHeader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/version/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/version/Info.java" afterDir="false" />
-    </list>
+    <list default="true" id="af6b317a-42cd-4862-87f7-c695f0a404d0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,57 +15,23 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1cAlkVlbAFnQGOw4jx7kfEhIVmW" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
+  <component name="ProjectId" id="1cDJAmWHY9EwBgiaEBDNk6Dj9Za" />
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1ef2e169-d8b7-40fa-9d9d-68180a07e72a" name="Default Changelist" comment="" />
-      <created>1589979421261</created>
+      <changelist id="af6b317a-42cd-4862-87f7-c695f0a404d0" name="Default Changelist" comment="" />
+      <created>1590057089132</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1589979421261</updated>
-      <workItem from="1589979427930" duration="61000" />
-      <workItem from="1590028117263" duration="855000" />
+      <updated>1590057089132</updated>
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="440" y="-875" width="822" height="669" key="#Project_Structure" timestamp="1590028236577">
-      <screen x="-184" y="-1080" width="2048" height="1080" />
-    </state>
-    <state x="440" y="-875" width="822" height="669" key="#Project_Structure/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590028236577" />
-    <state x="304" y="-878" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590028381577">
-      <screen x="-184" y="-1080" width="2048" height="1080" />
-    </state>
-    <state x="304" y="-878" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590028381577" />
-    <state x="-84" y="-980" width="1848" height="880" key="DiffContextDialog" timestamp="1590028940608">
-      <screen x="-184" y="-1080" width="2048" height="1080" />
-    </state>
-    <state x="-84" y="-980" width="1848" height="880" key="DiffContextDialog/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590028940608" />
-    <state x="349" y="-901" key="SettingsEditor" timestamp="1590028712181">
-      <screen x="-184" y="-1080" width="2048" height="1080" />
-    </state>
-    <state x="349" y="-901" key="SettingsEditor/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590028712181" />
   </component>
 </project>
