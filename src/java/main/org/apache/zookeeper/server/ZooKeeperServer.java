@@ -1119,12 +1119,13 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         ProcessTxnResult rc;
         int opCode = hdr.getType();
         long sessionId = hdr.getClientId();
+
         rc = getZKDatabase().processTxn(hdr, txn);
+
         if (opCode == OpCode.createSession) {
             if (txn instanceof CreateSessionTxn) {
                 CreateSessionTxn cst = (CreateSessionTxn) txn;
-                sessionTracker.addSession(sessionId, cst
-                        .getTimeOut());
+                sessionTracker.addSession(sessionId, cst.getTimeOut());
             } else {
                 LOG.warn("*****>>>>> Got "
                         + txn.getClass() + " "
