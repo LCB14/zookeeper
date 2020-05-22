@@ -102,9 +102,13 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
 
     public static final int DEFAULT_TICK_TIME = 3000;
     protected int tickTime = DEFAULT_TICK_TIME;
-    /** value of -1 indicates unset, use default */
+    /**
+     * value of -1 indicates unset, use default
+     */
     protected int minSessionTimeout = -1;
-    /** value of -1 indicates unset, use default */
+    /**
+     * value of -1 indicates unset, use default
+     */
     protected int maxSessionTimeout = -1;
     protected SessionTracker sessionTracker;
     private FileTxnSnapLog txnLogFactory = null;
@@ -142,7 +146,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
 
     /**
      * Creates a ZooKeeperServer instance. Nothing is setup, use the setX
-     * methods to prepare the instance (eg datadir, datalogdir, ticktime, 
+     * methods to prepare the instance (eg datadir, datalogdir, ticktime,
      * builder, etc...)
      *
      * @throws IOException
@@ -179,10 +183,11 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     /**
-     * creates a zookeeperserver instance. 
+     * creates a zookeeperserver instance.
+     *
      * @param txnLogFactory the file transaction snapshot logging class
-     * @param tickTime the ticktime for the server
-     * @param treeBuilder the datatree builder
+     * @param tickTime      the ticktime for the server
+     * @param treeBuilder   the datatree builder
      * @throws IOException
      */
     public ZooKeeperServer(FileTxnSnapLog txnLogFactory, int tickTime,
@@ -240,6 +245,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
 
     /**
      * get the zookeeper database for this server
+     *
      * @return the zookeeper database for this server
      */
     public ZKDatabase getZKDatabase() {
@@ -248,6 +254,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
 
     /**
      * set the zkdatabase for this zookeeper server
+     *
      * @param zkDb
      */
     public void setZKDatabase(ZKDatabase zkDb) {
@@ -255,7 +262,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     /**
-     *  Restore sessions and data
+     * Restore sessions and data
      */
     public void loadData() throws IOException, InterruptedException {
         /*
@@ -503,7 +510,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
      * is already shutdown or not.
      *
      * @return true if the server is running or server hits an error, false
-     *         otherwise.
+     * otherwise.
      */
     protected boolean canShutdown() {
         return state == State.RUNNING || state == State.ERROR;
@@ -519,6 +526,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
 
     /**
      * Shut down the server instance
+     *
      * @param fullyShutDown true if another server using the same database will not replace this one in the same process
      */
     public synchronized void shutdown(boolean fullyShutDown) {
@@ -654,7 +662,8 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
 
     /**
      * set the owner of this session as owner
-     * @param id the session id
+     *
+     * @param id    the session id
      * @param owner the owner of the session
      * @throws SessionExpiredException
      */
@@ -834,7 +843,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     /**
-     * return the last proceesed id from the 
+     * return the last proceesed id from the
      * datatree
      */
     public long getLastProcessedZxid() {
@@ -843,7 +852,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
 
     /**
      * return the outstanding requests
-     * in the queue, which havent been 
+     * in the queue, which havent been
      * processed yet
      */
     public long getOutstandingRequests() {
@@ -851,10 +860,11 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     /**
-     * trunccate the log to get in sync with others 
+     * trunccate the log to get in sync with others
      * if in a quorum
+     *
      * @param zxid the zxid that it needs to get in sync
-     * with others
+     *             with others
      * @throws IOException
      */
     public void truncateLog(long zxid) throws IOException {
@@ -912,6 +922,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
      * return the total number of client connections that are alive
      * to this server
      */
+    @Override
     public int getNumAliveConnections() {
         return serverCnxnFactory.getNumAliveConnections();
     }
@@ -926,7 +937,9 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
                     + " client's lastZxid is 0x"
                     + Long.toHexString(connReq.getLastZxidSeen()));
         }
+
         boolean readOnly = false;
+
         try {
             readOnly = bia.readBool("readOnly");
             cnxn.isOldClient = false;
@@ -937,12 +950,14 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
                     + cnxn.getRemoteSocketAddress()
                     + "; will be dropped if server is in r-o mode");
         }
+
         if (readOnly == false && this instanceof ReadOnlyZooKeeperServer) {
             String msg = "Refusing session request for not-read-only client "
                     + cnxn.getRemoteSocketAddress();
             LOG.info(msg);
             throw new CloseRequestException(msg);
         }
+
         if (connReq.getLastZxidSeen() > zkDb.dataTree.lastProcessedZxid) {
             String msg = "Refusing session request for client "
                     + cnxn.getRemoteSocketAddress()
@@ -955,6 +970,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
             LOG.info(msg);
             throw new CloseRequestException(msg);
         }
+
         int sessionTimeout = connReq.getTimeOut();
         byte passwd[] = connReq.getPasswd();
         int minSessionTimeout = getMinSessionTimeout();

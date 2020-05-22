@@ -209,7 +209,7 @@ public class NIOServerCnxn extends ServerCnxn {
             // 统计服务端接收数据包的数量
             packetReceived();
             incomingBuffer.flip();
-            // 目前还看不懂！！
+            // 客户端与服务端建立连接后进行读取操作之前，还需要通过readConnectRequest方法对连接进行初始化
             if (!initialized) {
                 readConnectRequest();
             } else {
@@ -401,6 +401,7 @@ public class NIOServerCnxn extends ServerCnxn {
         zkServer.processPacket(this, incomingBuffer);
     }
 
+    @Override
     protected void incrOutstandingRequests(RequestHeader h) {
         if (h.getXid() >= 0) {
             synchronized (this) {
