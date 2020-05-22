@@ -204,6 +204,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
         }
     }
 
+    @Override
     public void run() {
         while (!ss.socket().isClosed()) {
             try {
@@ -231,6 +232,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
                             sc.configureBlocking(false);
                             SelectionKey sk = sc.register(selector,
                                     SelectionKey.OP_READ);
+                            // NIOServerCnxn 组件封装了服务端针对客户端所有请求的操作
                             NIOServerCnxn cnxn = createConnection(sc, sk);
                             sk.attach(cnxn);
                             addCnxn(cnxn);
