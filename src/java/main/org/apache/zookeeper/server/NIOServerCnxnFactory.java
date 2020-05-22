@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -46,7 +46,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
          */
         try {
             Selector.open().close();
-        } catch(IOException ie) {
+        } catch (IOException ie) {
             LOG.error("Selector failed to open", ie);
         }
     }
@@ -59,11 +59,11 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
      * We use this buffer to do efficient socket I/O. Since there is a single
      * sender thread per NIOServerCnxn instance, we can use a member variable to
      * only allocate it once.
-    */
+     */
     final ByteBuffer directBuffer = ByteBuffer.allocateDirect(64 * 1024);
 
     final HashMap<InetAddress, Set<NIOServerCnxn>> ipMap =
-        new HashMap<InetAddress, Set<NIOServerCnxn>>( );
+            new HashMap<InetAddress, Set<NIOServerCnxn>>();
 
     int maxClientCnxns = 60;
 
@@ -77,6 +77,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
     }
 
     Thread thread;
+
     @Override
     public void configure(InetSocketAddress addr, int maxcc) throws IOException {
         configureSaslLogin();
@@ -106,7 +107,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
     }
 
     @Override
-    public void  start() {
+    public void start() {
         // ensure thread is started once and only once
         if (thread.getState() == Thread.State.NEW) {
             thread.start();
@@ -117,31 +118,33 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
     public void startup(ZooKeeperServer zks) throws IOException,
             InterruptedException {
 
-        // 开启线程读取客户端发送的请求 => this.start();
+        // 开启线程处理客户端发送过来的请求 => this.start();
         start();
 
+        // 保存ZooKeeperServer实例信息
         setZooKeeperServer(zks);
 
         // 同步zk快照数据到内存
         zks.startdata();
 
+        // 设置请求处理器
         zks.startup();
     }
 
     @Override
-    public InetSocketAddress getLocalAddress(){
-        return (InetSocketAddress)ss.socket().getLocalSocketAddress();
+    public InetSocketAddress getLocalAddress() {
+        return (InetSocketAddress) ss.socket().getLocalSocketAddress();
     }
 
     @Override
-    public int getLocalPort(){
+    public int getLocalPort() {
         return ss.socket().getLocalPort();
     }
 
     private void addCnxn(NIOServerCnxn cnxn) {
         synchronized (cnxns) {
             cnxns.add(cnxn);
-            synchronized (ipMap){
+            synchronized (ipMap) {
                 InetAddress addr = cnxn.sock.socket().getInetAddress();
                 Set<NIOServerCnxn> s = ipMap.get(addr);
                 if (s == null) {
@@ -152,7 +155,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
                     // to 2 to avoid rehash when the first entry is added
                     s = new HashSet<NIOServerCnxn>(2);
                     s.add(cnxn);
-                    ipMap.put(addr,s);
+                    ipMap.put(addr, s);
                 } else {
                     s.add(cnxn);
                 }
@@ -161,7 +164,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
     }
 
     public void removeCnxn(NIOServerCnxn cnxn) {
-        synchronized(cnxns) {
+        synchronized (cnxns) {
             // Remove the related session from the sessionMap.
             long sessionId = cnxn.getSessionId();
             if (sessionId != 0) {
@@ -184,7 +187,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
     }
 
     protected NIOServerCnxn createConnection(SocketChannel sock,
-            SelectionKey sk) throws IOException {
+                                             SelectionKey sk) throws IOException {
         return new NIOServerCnxn(zkServer, sock, sk, this);
     }
 
@@ -216,13 +219,13 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
                                 .channel()).accept();
                         InetAddress ia = sc.socket().getInetAddress();
                         int cnxncount = getClientCnxnCount(ia);
-                        if (maxClientCnxns > 0 && cnxncount >= maxClientCnxns){
+                        if (maxClientCnxns > 0 && cnxncount >= maxClientCnxns) {
                             LOG.warn("Too many connections from " + ia
-                                     + " - max is " + maxClientCnxns );
+                                    + " - max is " + maxClientCnxns);
                             sc.close();
                         } else {
                             LOG.info("Accepted socket connection from "
-                                     + sc.socket().getRemoteSocketAddress());
+                                    + sc.socket().getRemoteSocketAddress());
                             sc.configureBlocking(false);
                             SelectionKey sk = sc.register(selector,
                                     SelectionKey.OP_READ);
@@ -236,7 +239,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
                     } else {
                         if (LOG.isDebugEnabled()) {
                             LOG.debug("Unexpected ops in select "
-                                      + k.readyOps());
+                                    + k.readyOps());
                         }
                     }
                 }
@@ -261,16 +264,16 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
         selector.wakeup();
         HashSet<NIOServerCnxn> cnxns;
         synchronized (this.cnxns) {
-            cnxns = (HashSet<NIOServerCnxn>)this.cnxns.clone();
+            cnxns = (HashSet<NIOServerCnxn>) this.cnxns.clone();
         }
         // got to clear all the connections that we have in the selector
-        for (NIOServerCnxn cnxn: cnxns) {
+        for (NIOServerCnxn cnxn : cnxns) {
             try {
                 // don't hold this.cnxns lock as deadlock may occur
                 cnxn.close();
             } catch (Exception e) {
                 LOG.warn("Ignoring exception closing cnxn sessionid 0x"
-                         + Long.toHexString(cnxn.sessionId), e);
+                        + Long.toHexString(cnxn.sessionId), e);
             }
         }
     }

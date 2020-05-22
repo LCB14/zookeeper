@@ -87,6 +87,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/java/generated" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/java/test" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/java/systest" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/java/lcb" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -729,5 +730,9 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="zkclient-0.11" level="project" />
+    <orderEntry type="library" name="curator-client-4.2.0" level="project" />
+    <orderEntry type="library" name="curator-framework-4.2.0" level="project" />
+    <orderEntry type="library" name="curator-recipes-4.2.0" level="project" />
   </component>
 </module>

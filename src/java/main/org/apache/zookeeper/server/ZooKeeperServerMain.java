@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,10 +37,10 @@ import org.apache.zookeeper.server.quorum.QuorumPeerConfig.ConfigException;
 @InterfaceAudience.Public
 public class ZooKeeperServerMain {
     private static final Logger LOG =
-        LoggerFactory.getLogger(ZooKeeperServerMain.class);
+            LoggerFactory.getLogger(ZooKeeperServerMain.class);
 
     private static final String USAGE =
-        "Usage: ZooKeeperServerMain configfile | port datadir [ticktime] [maxcnxns]";
+            "Usage: ZooKeeperServerMain configfile | port datadir [ticktime] [maxcnxns]";
 
     private ServerCnxnFactory cnxnFactory;
 
@@ -71,14 +71,18 @@ public class ZooKeeperServerMain {
     }
 
     protected void initializeAndRun(String[] args)
-        throws ConfigException, IOException
-    {
+            throws ConfigException, IOException {
         try {
             ManagedUtil.registerLog4jMBeans();
         } catch (JMException e) {
             LOG.warn("Unable to register log4j JMX control", e);
         }
 
+        /**
+         *  QuorumPeerConfig表示集群模式下的配置信息，ServerConfig表示单机模式下的配置信息
+         *  底层真正用到的解析方法还是QuorumPeerConfig类中的方法，等于在单机模式下会把配置信息
+         *  分别实例化到QuorumPeerConfig和ServerConfig 中一份
+         */
         ServerConfig config = new ServerConfig();
         if (args.length == 1) {
             config.parse(args[0]);
@@ -91,11 +95,13 @@ public class ZooKeeperServerMain {
 
     /**
      * Run from a ServerConfig.
+     *
      * @param config ServerConfig to use.
      * @throws IOException
      */
     public void runFromConfig(ServerConfig config) throws IOException {
         LOG.info("Starting server");
+        // FileTxnSnapLog : 存储日志和快照信息的工具类
         FileTxnSnapLog txnLog = null;
         try {
             // Note that this thread isn't going to be doing anything else,
@@ -118,13 +124,10 @@ public class ZooKeeperServerMain {
             zkServer.setMinSessionTimeout(config.minSessionTimeout);
             zkServer.setMaxSessionTimeout(config.maxSessionTimeout);
 
-            /**
-             *  创建socket工厂
-             *  可以使用zk默认的NIO也可以配置netty来负责和客户端进行网络通信
-             */
+            // 根据配置信息，选择是基于NIO还是Netty(默认是NIO)
             cnxnFactory = ServerCnxnFactory.createFactory();
 
-            // 设置socket信息
+            // 设置ServerSocketChannel信息，绑定selector
             cnxnFactory.configure(config.getClientPortAddress(),
                     config.getMaxClientCnxns());
 
