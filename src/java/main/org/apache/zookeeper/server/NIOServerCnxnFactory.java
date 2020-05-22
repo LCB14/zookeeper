@@ -97,11 +97,13 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
     }
 
     /** {@inheritDoc} */
+    @Override
     public int getMaxClientCnxnsPerHost() {
         return maxClientCnxns;
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setMaxClientCnxnsPerHost(int max) {
         maxClientCnxns = max;
     }
@@ -121,7 +123,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
         // 开启线程处理客户端发送过来的请求 => this.start();
         start();
 
-        // 保存ZooKeeperServer实例信息
+        // 保存ZooKeeperServer实例信息到ServerCnxnFactory属性中
         setZooKeeperServer(zks);
 
         // 同步zk快照数据到内存

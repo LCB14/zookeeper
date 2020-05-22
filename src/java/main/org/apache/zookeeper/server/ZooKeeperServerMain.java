@@ -101,7 +101,6 @@ public class ZooKeeperServerMain {
      */
     public void runFromConfig(ServerConfig config) throws IOException {
         LOG.info("Starting server");
-        // FileTxnSnapLog : 存储日志和快照信息的工具类
         FileTxnSnapLog txnLog = null;
         try {
             // Note that this thread isn't going to be doing anything else,
@@ -115,6 +114,7 @@ public class ZooKeeperServerMain {
             zkServer.registerServerShutdownHandler(
                     new ZooKeeperServerShutdownHandler(shutdownLatch));
 
+            // FileTxnSnapLog : 存储日志和快照信息的工具类
             txnLog = new FileTxnSnapLog(new File(config.dataLogDir), new File(
                     config.dataDir));
             txnLog.setServerStats(zkServer.serverStats());
@@ -131,7 +131,7 @@ public class ZooKeeperServerMain {
             cnxnFactory.configure(config.getClientPortAddress(),
                     config.getMaxClientCnxns());
 
-            // 启动线程
+            // 启动zookeeper服务端
             cnxnFactory.startup(zkServer);
 
             // Watch status of ZooKeeper server. It will do a graceful shutdown

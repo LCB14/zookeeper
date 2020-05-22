@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -53,7 +53,7 @@ public abstract class ServerCnxn implements Stats, Watcher {
     // This is just an arbitrary object to represent requests issued by
     // (aka owned by) this class
     final public static Object me = new Object();
-    
+
     protected ArrayList<Id> authInfo = new ArrayList<Id>();
 
     /**
@@ -68,7 +68,7 @@ public abstract class ServerCnxn implements Stats, Watcher {
     abstract void close();
 
     public abstract void sendResponse(ReplyHeader h, Record r, String tag)
-        throws IOException;
+            throws IOException;
 
     /* notify the client the session is closing and close/cleanup socket */
     abstract void sendCloseSession();
@@ -134,97 +134,97 @@ public abstract class ServerCnxn implements Stats, Watcher {
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int confCmd =
-        ByteBuffer.wrap("conf".getBytes()).getInt();
+            ByteBuffer.wrap("conf".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int consCmd =
-        ByteBuffer.wrap("cons".getBytes()).getInt();
+            ByteBuffer.wrap("cons".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int crstCmd =
-        ByteBuffer.wrap("crst".getBytes()).getInt();
+            ByteBuffer.wrap("crst".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int dumpCmd =
-        ByteBuffer.wrap("dump".getBytes()).getInt();
+            ByteBuffer.wrap("dump".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int enviCmd =
-        ByteBuffer.wrap("envi".getBytes()).getInt();
+            ByteBuffer.wrap("envi".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int getTraceMaskCmd =
-        ByteBuffer.wrap("gtmk".getBytes()).getInt();
+            ByteBuffer.wrap("gtmk".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int ruokCmd =
-        ByteBuffer.wrap("ruok".getBytes()).getInt();
+            ByteBuffer.wrap("ruok".getBytes()).getInt();
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int setTraceMaskCmd =
-        ByteBuffer.wrap("stmk".getBytes()).getInt();
+            ByteBuffer.wrap("stmk".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int srvrCmd =
-        ByteBuffer.wrap("srvr".getBytes()).getInt();
+            ByteBuffer.wrap("srvr".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int srstCmd =
-        ByteBuffer.wrap("srst".getBytes()).getInt();
+            ByteBuffer.wrap("srst".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int statCmd =
-        ByteBuffer.wrap("stat".getBytes()).getInt();
+            ByteBuffer.wrap("stat".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int wchcCmd =
-        ByteBuffer.wrap("wchc".getBytes()).getInt();
+            ByteBuffer.wrap("wchc".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int wchpCmd =
-        ByteBuffer.wrap("wchp".getBytes()).getInt();
+            ByteBuffer.wrap("wchp".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
      * Zk Admin</a>. this link is for all the commands.
      */
     protected final static int wchsCmd =
-        ByteBuffer.wrap("wchs".getBytes()).getInt();
+            ByteBuffer.wrap("wchs".getBytes()).getInt();
 
     /*
      * See <a href="{@docRoot}/../../../docs/zookeeperAdmin.html#sc_zkCommands">
@@ -363,7 +363,7 @@ public abstract class ServerCnxn implements Stats, Watcher {
     }
 
     protected abstract ServerStats serverStats();
-    
+
     protected final Date established = new Date();
 
     protected final AtomicLong packetsReceived = new AtomicLong();
@@ -398,7 +398,7 @@ public abstract class ServerCnxn implements Stats, Watcher {
     protected long incrPacketsReceived() {
         return packetsReceived.incrementAndGet();
     }
-    
+
     protected void incrOutstandingRequests(RequestHeader h) {
     }
 
@@ -407,8 +407,7 @@ public abstract class ServerCnxn implements Stats, Watcher {
     }
 
     protected synchronized void updateStatsForResponse(long cxid, long zxid,
-            String op, long start, long end)
-    {
+                                                       String op, long start, long end) {
         // don't overwrite with "special" xids - we're interested
         // in the clients last real operation
         if (cxid >= 0) {
@@ -430,7 +429,7 @@ public abstract class ServerCnxn implements Stats, Watcher {
     }
 
     public Date getEstablished() {
-        return (Date)established.clone();
+        return (Date) established.clone();
     }
 
     public abstract long getOutstandingRequests();
@@ -491,8 +490,9 @@ public abstract class ServerCnxn implements Stats, Watcher {
     }
 
     public abstract InetSocketAddress getRemoteSocketAddress();
+
     public abstract int getInterestOps();
-    
+
     /**
      * Print information about the connection.
      * @param brief iff true prints brief details, otw full detail
