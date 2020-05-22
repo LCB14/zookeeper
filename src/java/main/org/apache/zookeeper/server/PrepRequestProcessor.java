@@ -115,6 +115,7 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
 
     /**
      * method for tests to set failCreate
+     *
      * @param b
      */
     public static void setFailCreate(boolean b) {
@@ -187,13 +188,13 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
 
     /**
      * Grab current pending change records for each op in a multi-op.
-     *
+     * <p>
      * This is used inside MultiOp error code path to rollback in the event
      * of a failed multi-op.
      *
      * @param multiRequest
      * @return a map that contains previously existed records that probably need to be
-     *         rolled back in any failure.
+     * rolled back in any failure.
      */
     HashMap<String, ChangeRecord> getPendingChanges(MultiTransactionRecord multiRequest) {
         HashMap<String, ChangeRecord> pendingChangeRecords = new HashMap<String, ChangeRecord>();
@@ -231,7 +232,7 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
 
     /**
      * Rollback pending changes records from a failed multi-op.
-     *
+     * <p>
      * If a multi-op fails, we can't leave any invalid change records we created
      * around. We also need to restore their prior value (if any) if their prior
      * value is still valid.
@@ -735,7 +736,7 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
      * depend on the requestor's authentication information.
      *
      * @param authInfo list of ACL IDs associated with the client connection
-     * @param acl list of ACLs being assigned to the node (create or setACL operation)
+     * @param acl      list of ACLs being assigned to the node (create or setACL operation)
      * @return
      */
     private boolean fixupACL(List<Id> authInfo, List<ACL> acl) {
@@ -794,11 +795,13 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
         return acl.size() > 0;
     }
 
+    @Override
     public void processRequest(Request request) {
         // request.addRQRec(">prep="+zks.outstandingChanges.size());
         submittedRequests.add(request);
     }
 
+    @Override
     public void shutdown() {
         LOG.info("Shutting down");
         submittedRequests.clear();
