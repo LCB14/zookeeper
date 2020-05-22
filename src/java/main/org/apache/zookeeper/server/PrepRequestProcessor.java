@@ -126,7 +126,10 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
     public void run() {
         try {
             while (true) {
-                // 取出之前添加的请求
+                /**
+                 * 取出之前添加的请求
+                 * @see PrepRequestProcessor#processRequest(org.apache.zookeeper.server.Request)
+                 */
                 Request request = submittedRequests.take();
                 long traceMask = ZooTrace.CLIENT_REQUEST_TRACE_MASK;
                 if (request.type == OpCode.ping) {
@@ -798,6 +801,11 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
     @Override
     public void processRequest(Request request) {
         // request.addRQRec(">prep="+zks.outstandingChanges.size());
+        /**
+         * 请求添加到阻代理后啥时间处理呢？
+         * @see ZooKeeperServer#setupRequestProcessors()
+         * 处理器本身就是一个线程实例，创建时即开启了
+         */
         submittedRequests.add(request);
     }
 
