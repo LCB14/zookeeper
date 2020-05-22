@@ -206,11 +206,14 @@ public class NIOServerCnxn extends ServerCnxn {
 
         // have we read length bytes?
         if (incomingBuffer.remaining() == 0) {
+            // 统计服务端接收数据包的数量
             packetReceived();
             incomingBuffer.flip();
+            // 目前还看不懂！！
             if (!initialized) {
                 readConnectRequest();
             } else {
+                // 处理客户端发送过来的各种命令
                 readRequest();
             }
             lenBuffer.clear();
@@ -264,6 +267,7 @@ public class NIOServerCnxn extends ServerCnxn {
                         // continuation
                         isPayload = true;
                     }
+
                     if (isPayload) { // not the case for 4letterword
                         readPayload();
                     } else {

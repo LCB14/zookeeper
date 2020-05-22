@@ -33,6 +33,7 @@ public class MockNIOServerCnxn extends NIOServerCnxn {
     /**
      * Handles read/write IO on connection.
      */
+    @Override
     public void doIO(SelectionKey k) throws InterruptedException {
         super.doIO(k);
     }
