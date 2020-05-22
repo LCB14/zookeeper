@@ -716,6 +716,7 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
             }
         }
         request.zxid = zks.getZxid();
+        // 调用当前请求处理器的下一个请求处理器
         nextProcessor.processRequest(request);
     }
 

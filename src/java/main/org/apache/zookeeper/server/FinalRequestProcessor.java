@@ -71,7 +71,7 @@ import org.apache.zookeeper.OpResult.ErrorResult;
  * request and services any queries. It is always at the end of a
  * RequestProcessor chain (hence the name), so it does not have a nextProcessor
  * member.
- *
+ * <p>
  * This RequestProcessor counts on ZooKeeperServer to populate the
  * outstandingRequests member of ZooKeeperServer.
  */
