@@ -404,6 +404,7 @@ public class ClientCnxn {
         readTimeout = sessionTimeout * 2 / 3;
         readOnly = canBeReadOnly;
 
+        // 开启两个线程分别处理与服务端的连接请求和读写请求
         sendThread = new SendThread(clientCnxnSocket);
         eventThread = new EventThread();
 
@@ -1137,7 +1138,7 @@ public class ClientCnxn {
                             serverAddress = hostProvider.next(1000);
                         }
 
-                        // 重点 -- 建立socket连接并调整state状态
+                        // 重点 -- 建立socket连接并调整state状态✨
                         startConnect(serverAddress);
                         clientCnxnSocket.updateLastSendAndHeard();
                     }
@@ -1227,7 +1228,7 @@ public class ClientCnxn {
                         to = Math.min(to, pingRwTimeout - idlePingRwServer);
                     }
 
-                    // 从请求队列中取出数据进行发送
+                    // 从请求队列中取出数据进行发送 -- 重点✨
                     clientCnxnSocket.doTransport(to, pendingQueue, outgoingQueue, ClientCnxn.this);
                 } catch (Throwable e) {
                     if (closing) {
@@ -1269,8 +1270,11 @@ public class ClientCnxn {
                     }
                 }
             }
+
             cleanup();
+
             clientCnxnSocket.close();
+
             if (state.isAlive()) {
                 eventThread.queueEvent(new WatchedEvent(Event.EventType.None,
                         Event.KeeperState.Disconnected, null));
