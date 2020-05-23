@@ -1094,10 +1094,9 @@ public class ClientCnxn {
             // 进入循环的条件客户端状态不能是CLOSED或AUTH_FAILED
             while (state.isAlive()) {
                 try {
-                    // 判断客户端是否已经和服务端建立socket连接，如果没有需要先建立socket连接
+                    // 判断客户端是否已经和服务端建立socket连接，判断条件是SelectionKey是否为null
                     if (!clientCnxnSocket.isConnected()) {
                         if (!isFirstConnect) {
-                            // todo 为什么不是第一次连接还需要睡眠1秒呢？
                             try {
                                 Thread.sleep(r.nextInt(1000));
                             } catch (InterruptedException e) {

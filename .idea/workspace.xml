@@ -4,12 +4,6 @@
     <list default="true" id="e0e4761a-a9c0-4dd2-8cc8-72ca1d47d745" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeperMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeperMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/client/ConnectStringParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/client/ConnectStringParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/client/StaticHostProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/client/StaticHostProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/TestableZooKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/TestableZooKeeper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +128,7 @@
       <updated>1590057409081</updated>
       <workItem from="1590057415741" duration="11257000" />
       <workItem from="1590114653656" duration="12849000" />
-      <workItem from="1590134331335" duration="21888000" />
+      <workItem from="1590134331335" duration="23042000" />
     </task>
     <servers />
   </component>
