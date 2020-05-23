@@ -392,6 +392,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
         // non blocking, so time is effectively a constant. That is
         // Why we just have to do this once, here
         updateNow();
+
         for (SelectionKey k : selected) {
             SocketChannel sc = ((SocketChannel) k.channel());
             // 通过位运算快速判断socket操作类型
@@ -416,7 +417,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                 // 找到连接Packet并且将他放到队列头
                 if (findSendablePacket(outgoingQueue,
                         cnxn.sendThread.clientTunneledAuthenticationInProgress()) != null) {
-                    // 将要Channecl设置为可读
+                    // 将Channecl设置为只可以写
                     enableWrite();
                 }
             }

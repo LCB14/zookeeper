@@ -1228,7 +1228,10 @@ public class ClientCnxn {
                         to = Math.min(to, pingRwTimeout - idlePingRwServer);
                     }
 
-                    // 从请求队列中取出数据进行发送 -- 重点✨
+                    /**
+                     * 从请求队列中取出数据进行发送 -- 重点✨
+                     * @see ClientCnxnSocketNIO#doTransport(int, java.util.List, java.util.LinkedList, org.apache.zookeeper.ClientCnxn)
+                     */
                     clientCnxnSocket.doTransport(to, pendingQueue, outgoingQueue, ClientCnxn.this);
                 } catch (Throwable e) {
                     if (closing) {
