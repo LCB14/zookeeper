@@ -781,6 +781,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
                 }
             }
         }
+
         try {
             touch(si.cnxn);
             boolean validpacket = Request.isValid(si.type);
@@ -1070,6 +1071,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
                 Request si = new Request(cnxn, cnxn.getSessionId(), h.getXid(),
                         h.getType(), incomingBuffer, cnxn.getAuthInfo());
                 si.setOwner(ServerCnxn.me);
+                // 提交请求到相应的处理器
                 submitRequest(si);
             }
         }

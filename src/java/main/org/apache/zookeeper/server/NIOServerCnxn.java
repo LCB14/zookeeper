@@ -213,7 +213,7 @@ public class NIOServerCnxn extends ServerCnxn {
             if (!initialized) {
                 readConnectRequest();
             } else {
-                // 处理客户端发送过来的各种命令
+                // 处理客户端发送过来的请求
                 readRequest();
             }
             lenBuffer.clear();

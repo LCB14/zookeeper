@@ -96,10 +96,10 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
      */
     private static boolean failCreate = false;
 
-    // 已提交的请求队列
+    // 存放待处理请求
     LinkedBlockingQueue<Request> submittedRequests = new LinkedBlockingQueue<Request>();
 
-    // 下个处理器
+    // 下个请求处理器
     RequestProcessor nextProcessor;
 
     // zk服务器
@@ -336,8 +336,9 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
 
                 CreateRequest createRequest = (CreateRequest) record;
                 // 反序列化，将ByteBuffer转化为Record
-                if (deserialize)
+                if (deserialize) {
                     ByteBufferInputStream.byteBuffer2Record(request.request, createRequest);
+                }
 
                 // 获取节点路径
                 String path = createRequest.getPath();
@@ -354,9 +355,12 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                     throw new KeeperException.InvalidACLException(path);
                 }
 
-                // 提取节点的父节点路径
+                /**
+                 * 获取父节点的Record
+                 * 思考：为什么还要获取父节点的信息，如果需要做数据变更为何不直接获取DataTree实例直接修改呢？
+                 * 这样做主要是为了保证数据一致性
+                 */
                 String parentPath = path.substring(0, lastSlash);
-                // 获取父节点的Record
                 ChangeRecord parentRecord = getRecordForPath(parentPath);
 
                 // 检查ACL列表
