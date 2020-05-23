@@ -1138,7 +1138,7 @@ public class ClientCnxn {
                             serverAddress = hostProvider.next(1000);
                         }
 
-                        // 重点 -- 建立socket连接并调整state状态✨
+                        // 重点 -- 与服务端建立socket连接✨
                         startConnect(serverAddress);
                         clientCnxnSocket.updateLastSendAndHeard();
                     }
@@ -1229,7 +1229,7 @@ public class ClientCnxn {
                     }
 
                     /**
-                     * 从请求队列中取出数据进行发送 -- 重点✨
+                     * 与服务进行通信 -- 重点✨
                      * @see ClientCnxnSocketNIO#doTransport(int, java.util.List, java.util.LinkedList, org.apache.zookeeper.ClientCnxn)
                      */
                     clientCnxnSocket.doTransport(to, pendingQueue, outgoingQueue, ClientCnxn.this);
