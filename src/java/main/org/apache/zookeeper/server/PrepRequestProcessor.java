@@ -369,10 +369,10 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
 
                 // 获取父节点的Record的子节点版本号
                 int parentCVersion = parentRecord.stat.getCversion();
-                // 获取创建模式
+                // 获取创建节点的类型（临时节点还是顺序节点等）
                 CreateMode createMode =
                         CreateMode.fromFlag(createRequest.getFlags());
-                // 顺序模式
+                // 表示节点类型为顺序节点
                 if (createMode.isSequential()) {
                     /**
                      *  在路径后添加一串数字，构建顺序节点。
@@ -412,9 +412,12 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                 parentRecord.childCount++;
                 // 设置新的子节点版本号
                 parentRecord.stat.setCversion(newCversion);
-                // 将parentRecord添加至outstandingChanges和outstandingChangesForPath中
+
                 addChangeRecord(parentRecord);
-                // 将新生成的ChangeRecord(包含了StatPersisted信息)添加至outstandingChanges和outstandingChangesForPath中
+                /**
+                 * 将parentRecord添加至outstandingChanges和outstandingChangesForPath中
+                 * 方便下次请求（相同父路径）直接从ChangeRecord中获取
+                 */
                 addChangeRecord(new ChangeRecord(request.hdr.getZxid(), path, s,
                         0, listACL));
                 break;
@@ -572,6 +575,7 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
     protected void pRequest(Request request) throws RequestProcessorException {
         // LOG.info("Prep>>> cxid = " + request.cxid + " type = " +
         // request.type + " id = 0x" + Long.toHexString(request.sessionId));
+        // 初始化之前清空日志头和日志内容
         request.hdr = null;
         request.txn = null;
 
