@@ -451,6 +451,8 @@ public class ZooKeeper {
          *  进行socket连接前的初始化
          *  getClientCnxnSocket() -- 返回一个NIO实例
          *  创建处理线程
+         *
+         * @see ClientCnxn#ClientCnxn(java.lang.String, org.apache.zookeeper.client.HostProvider, int, org.apache.zookeeper.ZooKeeper, org.apache.zookeeper.ClientWatchManager, org.apache.zookeeper.ClientCnxnSocket, long, byte[], boolean)
          */
         cnxn = new ClientCnxn(connectStringParser.getChrootPath(),
                 hostProvider, sessionTimeout, this, watchManager,

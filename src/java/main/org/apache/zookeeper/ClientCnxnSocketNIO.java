@@ -307,7 +307,8 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
         boolean immediateConnect = sock.connect(addr);
         /**
          *  连接成功了执行primeConnection()目的是什么？
-         *  初始化连接事件
+         *  初始化连接事件即发送ConnectRequest请求，和服务器同步一下配置信息
+         *  比如timeout参数客户端设置的是5000，服务端设置的2000得有个标准吧
          */
         if (immediateConnect) {
             sendThread.primeConnection();

@@ -61,6 +61,7 @@ import org.apache.zookeeper.ZooDefs.OpCode;
 import org.apache.zookeeper.ZooKeeper.States;
 import org.apache.zookeeper.ZooKeeper.WatchRegistration;
 import org.apache.zookeeper.client.HostProvider;
+import org.apache.zookeeper.client.StaticHostProvider;
 import org.apache.zookeeper.client.ZooKeeperSaslClient;
 import org.apache.zookeeper.common.Time;
 import org.apache.zookeeper.proto.AuthPacket;
@@ -925,9 +926,11 @@ public class ClientCnxn {
                 // TODO: here we have the only remaining use of zooKeeper in
                 // this class. It's to be eliminated!
                 if (!disableAutoWatchReset) {
-                    List<String> dataWatches = zooKeeper.getDataWatches();
-                    List<String> existWatches = zooKeeper.getExistWatches();
-                    List<String> childWatches = zooKeeper.getChildWatches();
+                    // 获取各种类型的是事件监听器
+                    List<String> dataWatches = zooKeeper.getDataWatches();// 节点数据变更监听器
+                    List<String> existWatches = zooKeeper.getExistWatches();// 节点删除或添加监听器
+                    List<String> childWatches = zooKeeper.getChildWatches();// 创建子节点监听器
+
                     if (!dataWatches.isEmpty()
                             || !existWatches.isEmpty() || !childWatches.isEmpty()) {
 
@@ -1031,6 +1034,12 @@ public class ClientCnxn {
         private void startConnect(InetSocketAddress addr) throws IOException {
             // initializing it for new connection
             saslLoginFailed = false;
+            /**
+             * 实例化SendThread时不是已经初始化为States.CONNECTING了吗？
+             * 这里又初始化一次相同的值是何目的？
+             *
+             * @see SendThread#SendThread(org.apache.zookeeper.ClientCnxnSocket)
+             */
             state = States.CONNECTING;
 
             setName(getName().replaceAll("\\(.*\\)",
@@ -1057,6 +1066,9 @@ public class ClientCnxn {
             }
             logStartConnect(addr);
 
+            /**
+             * @see org.apache.zookeeper.ClientCnxnSocketNIO#connect(java.net.InetSocketAddress)
+             */
             clientCnxnSocket.connect(addr);
         }
 
@@ -1096,6 +1108,7 @@ public class ClientCnxn {
                 try {
                     // 判断客户端是否已经和服务端建立socket连接，判断条件是SelectionKey是否为null
                     if (!clientCnxnSocket.isConnected()) {
+
                         if (!isFirstConnect) {
                             try {
                                 Thread.sleep(r.nextInt(1000));
@@ -1103,10 +1116,12 @@ public class ClientCnxn {
                                 LOG.warn("Unexpected exception", e);
                             }
                         }
+
                         // don't re-establish connection if we are closing
                         if (closing || !state.isAlive()) {
                             break;
                         }
+
                         if (rwServerAddress != null) {
                             serverAddress = rwServerAddress;
                             rwServerAddress = null;
@@ -1114,9 +1129,12 @@ public class ClientCnxn {
                             /**
                              *  该方法可以保证，上次连接异常的地址在重试的时候会被其它备份地址替换
                              *  而不是继续使用本次连接异常的地址
+                             *
+                             * @see StaticHostProvider#next(long)
                              */
                             serverAddress = hostProvider.next(1000);
                         }
+
                         // 建立socket连接并调整state状态
                         startConnect(serverAddress);
                         clientCnxnSocket.updateLastSendAndHeard();

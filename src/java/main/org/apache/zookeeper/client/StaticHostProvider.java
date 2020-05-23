@@ -33,11 +33,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Most simple HostProvider, resolves on every next() call.
- *
+ * <p>
  * Please be aware that although this class doesn't do any DNS caching, there're multiple levels of caching already
  * present across the stack like in JVM, OS level, hardware, etc. The best we could do here is to get the most recent
  * address from the underlying system which is considered up-to-date.
- *
  */
 @InterfaceAudience.Public
 public final class StaticHostProvider implements HostProvider {
@@ -59,10 +58,8 @@ public final class StaticHostProvider implements HostProvider {
     /**
      * Constructs a SimpleHostSet.
      *
-     * @param serverAddresses
-     *            possibly unresolved ZooKeeper server addresses
-     * @throws IllegalArgumentException
-     *             if serverAddresses is empty or resolves to an empty list
+     * @param serverAddresses possibly unresolved ZooKeeper server addresses
+     * @throws IllegalArgumentException if serverAddresses is empty or resolves to an empty list
      */
     public StaticHostProvider(Collection<InetSocketAddress> serverAddresses) {
         this.resolver = new Resolver() {
@@ -79,12 +76,9 @@ public final class StaticHostProvider implements HostProvider {
      * Introduced for testing purposes. getAllByName() is a static method of InetAddress, therefore cannot be easily mocked.
      * By abstraction of Resolver interface we can easily inject a mocked implementation in tests.
      *
-     * @param serverAddresses
-     *            possibly unresolved ZooKeeper server addresses
-     * @param resolver
-     *            custom resolver implementation
-     * @throws IllegalArgumentException
-     *             if serverAddresses is empty or resolves to an empty list
+     * @param serverAddresses possibly unresolved ZooKeeper server addresses
+     * @param resolver        custom resolver implementation
+     * @throws IllegalArgumentException if serverAddresses is empty or resolves to an empty list
      */
     public StaticHostProvider(Collection<InetSocketAddress> serverAddresses, Resolver resolver) {
         this.resolver = resolver;
@@ -108,7 +102,7 @@ public final class StaticHostProvider implements HostProvider {
     /**
      * Evaluate to a hostname if one is available and otherwise it returns the
      * string representation of the IP address.
-     *
+     * <p>
      * In Java 7, we have a method getHostString, but earlier versions do not support it.
      * This method is to provide a replacement for InetSocketAddress.getHostString().
      *
@@ -142,10 +136,12 @@ public final class StaticHostProvider implements HostProvider {
         return hostString;
     }
 
+    @Override
     public int size() {
         return serverAddresses.size();
     }
 
+    @Override
     public InetSocketAddress next(long spinDelay) {
         currentIndex = ++currentIndex % serverAddresses.size();
         if (currentIndex == lastIndex && spinDelay > 0) {
