@@ -96,12 +96,14 @@ public class TestableZooKeeper extends ZooKeeper {
         }
     }
     
+    @Override
     public boolean testableWaitForShutdown(int wait)
         throws InterruptedException
     {
         return super.testableWaitForShutdown(wait);
     }
 
+    @Override
     public SocketAddress testableLocalSocketAddress() {
         return super.testableLocalSocketAddress();
     }

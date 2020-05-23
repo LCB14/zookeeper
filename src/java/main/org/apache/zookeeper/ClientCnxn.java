@@ -88,7 +88,6 @@ import org.slf4j.LoggerFactory;
  * This class manages the socket i/o for the client. ClientCnxn maintains a list
  * of available servers to connect to and "transparently" switches servers it is
  * connected to as needed.
- *
  */
 public class ClientCnxn {
     private static final Logger LOG = LoggerFactory.getLogger(ClientCnxn.class);
@@ -106,10 +105,12 @@ public class ClientCnxn {
      */
     private static final int SET_WATCHES_MAX_LENGTH = 128 * 1024;
 
-    /** This controls whether automatic watch resetting is enabled.
+    /**
+     * This controls whether automatic watch resetting is enabled.
      * Clients automatically reset watches during session reconnect, this
      * option allows the client to turn off this behavior by setting
-     * the environment variable "zookeeper.disableAutoWatchReset" to "true" */
+     * the environment variable "zookeeper.disableAutoWatchReset" to "true"
+     */
     private static boolean disableAutoWatchReset;
 
     static {
@@ -260,9 +261,13 @@ public class ClientCnxn {
 
         ByteBuffer bb;
 
-        /** Client's view of the path (may differ due to chroot) **/
+        /**
+         * Client's view of the path (may differ due to chroot)
+         **/
         String clientPath;
-        /** Servers's view of the path (may differ due to chroot) **/
+        /**
+         * Servers's view of the path (may differ due to chroot)
+         **/
         String serverPath;
 
         boolean finished;
@@ -275,7 +280,9 @@ public class ClientCnxn {
 
         public boolean readOnly;
 
-        /** Convenience ctor */
+        /**
+         * Convenience ctor
+         */
         Packet(RequestHeader requestHeader, ReplyHeader replyHeader,
                Record request, Record response,
                WatchRegistration watchRegistration) {
@@ -347,19 +354,14 @@ public class ClientCnxn {
      * established until needed. The start() instance method must be called
      * subsequent to construction.
      *
-     * @param chrootPath - the chroot of this client. Should be removed from this Class in ZOOKEEPER-838
-     * @param hostProvider
-     *                the list of ZooKeeper servers to connect to
-     * @param sessionTimeout
-     *                the timeout for connections.
-     * @param zooKeeper
-     *                the zookeeper object that this connection is related to.
-     * @param watcher watcher for this connection
-     * @param clientCnxnSocket
-     *                the socket implementation used (e.g. NIO/Netty)
-     * @param canBeReadOnly
-     *                whether the connection is allowed to go to read-only
-     *                mode in case of partitioning
+     * @param chrootPath       - the chroot of this client. Should be removed from this Class in ZOOKEEPER-838
+     * @param hostProvider     the list of ZooKeeper servers to connect to
+     * @param sessionTimeout   the timeout for connections.
+     * @param zooKeeper        the zookeeper object that this connection is related to.
+     * @param watcher          watcher for this connection
+     * @param clientCnxnSocket the socket implementation used (e.g. NIO/Netty)
+     * @param canBeReadOnly    whether the connection is allowed to go to read-only
+     *                         mode in case of partitioning
      * @throws IOException
      */
     public ClientCnxn(String chrootPath, HostProvider hostProvider, int sessionTimeout, ZooKeeper zooKeeper,
@@ -374,21 +376,16 @@ public class ClientCnxn {
      * established until needed. The start() instance method must be called
      * subsequent to construction.
      *
-     * @param chrootPath - the chroot of this client. Should be removed from this Class in ZOOKEEPER-838
-     * @param hostProvider
-     *                the list of ZooKeeper servers to connect to
-     * @param sessionTimeout
-     *                the timeout for connections.
-     * @param zooKeeper
-     *                the zookeeper object that this connection is related to.
-     * @param watcher watcher for this connection
-     * @param clientCnxnSocket
-     *                the socket implementation used (e.g. NIO/Netty)
-     * @param sessionId session id if re-establishing session
-     * @param sessionPasswd session passwd if re-establishing session
-     * @param canBeReadOnly
-     *                whether the connection is allowed to go to read-only
-     *                mode in case of partitioning
+     * @param chrootPath       - the chroot of this client. Should be removed from this Class in ZOOKEEPER-838
+     * @param hostProvider     the list of ZooKeeper servers to connect to
+     * @param sessionTimeout   the timeout for connections.
+     * @param zooKeeper        the zookeeper object that this connection is related to.
+     * @param watcher          watcher for this connection
+     * @param clientCnxnSocket the socket implementation used (e.g. NIO/Netty)
+     * @param sessionId        session id if re-establishing session
+     * @param sessionPasswd    session passwd if re-establishing session
+     * @param canBeReadOnly    whether the connection is allowed to go to read-only
+     *                         mode in case of partitioning
      * @throws IOException
      */
     public ClientCnxn(String chrootPath, HostProvider hostProvider, int sessionTimeout, ZooKeeper zooKeeper,
@@ -413,6 +410,7 @@ public class ClientCnxn {
 
     /**
      * tests use this to check on reset of watches
+     *
      * @return if the auto reset of watches are disabled
      */
     public static boolean getDisableAutoResetWatch() {
@@ -421,6 +419,7 @@ public class ClientCnxn {
 
     /**
      * tests use this to set the auto reset
+     *
      * @param b the value to set disable watches to
      */
     public static void setDisableAutoResetWatch(boolean b) {
@@ -462,7 +461,8 @@ public class ClientCnxn {
         private final LinkedBlockingQueue<Object> waitingEvents =
                 new LinkedBlockingQueue<Object>();
 
-        /** This is really the queued session state until the event
+        /**
+         * This is really the queued session state until the event
          * thread actually processes the event and hands it to the watcher.
          * But for all intents and purposes this is the state.
          */
@@ -753,6 +753,7 @@ public class ClientCnxn {
 
         /**
          * 读取服务端响应，成功响应则移除之前放入pendingQueue的请求
+         *
          * @param incomingBuffer
          * @throws IOException
          */
@@ -1075,8 +1076,11 @@ public class ClientCnxn {
          */
         @Override
         public void run() {
+            // 保存SendThread实例信息
             clientCnxnSocket.introduce(this, sessionId);
+            // 初始化客户端发送及接收数据包时间
             clientCnxnSocket.updateNow();
+            // 设置客户端及发送及接收数据包时间（初始状态下二者的值是一致的）
             clientCnxnSocket.updateLastSendAndHeard();
 
             int to;

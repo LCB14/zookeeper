@@ -3,6 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e0e4761a-a9c0-4dd2-8cc8-72ca1d47d745" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeperMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeperMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/client/ConnectStringParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/client/ConnectStringParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/client/StaticHostProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/client/StaticHostProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/TestableZooKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/TestableZooKeeper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +54,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager" selected="Application.ZooKeeperServerMain">
+  <component name="RunManager" selected="Application.ZookeeperClientTest">
     <configuration name="CuratorClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.lcb.client.curator.CuratorClient" />
       <module name="ZooKeeper" />
@@ -127,7 +134,7 @@
       <updated>1590057409081</updated>
       <workItem from="1590057415741" duration="11257000" />
       <workItem from="1590114653656" duration="12849000" />
-      <workItem from="1590134331335" duration="16286000" />
+      <workItem from="1590134331335" duration="21888000" />
     </task>
     <servers />
   </component>
@@ -148,46 +155,54 @@
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state x="528" y="-805" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590134304319" />
+    <state x="603" y="-830" key="#xdebugger.evaluate" timestamp="1590226783347">
+      <screen x="-184" y="-1080" width="2048" height="1080" />
+    </state>
+    <state x="603" y="-830" key="#xdebugger.evaluate/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590226783347" />
     <state x="-84" y="-980" width="1848" height="880" key="DiffContextDialog" timestamp="1590206486511">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state x="-84" y="-980" width="1848" height="880" key="DiffContextDialog/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590206486511" />
-    <state width="2006" height="375" key="GridCell.Tab.0.bottom" timestamp="1590114635139">
+    <state width="2006" height="375" key="GridCell.Tab.0.bottom" timestamp="1590226823482">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state width="2006" height="375" key="GridCell.Tab.0.bottom/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590114635139" />
-    <state width="2006" height="332" key="GridCell.Tab.0.bottom/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590070958911" />
-    <state width="2006" height="375" key="GridCell.Tab.0.center" timestamp="1590114635137">
+    <state width="2006" height="375" key="GridCell.Tab.0.bottom/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590226823482" />
+    <state width="2006" height="375" key="GridCell.Tab.0.center" timestamp="1590226823480">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state width="2006" height="375" key="GridCell.Tab.0.center/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590114635137" />
-    <state width="2006" height="332" key="GridCell.Tab.0.center/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590070958908" />
-    <state width="2006" height="375" key="GridCell.Tab.0.left" timestamp="1590114635136">
+    <state width="2006" height="375" key="GridCell.Tab.0.center/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590226823480" />
+    <state width="2006" height="375" key="GridCell.Tab.0.left" timestamp="1590226823479">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state width="2006" height="375" key="GridCell.Tab.0.left/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590114635136" />
-    <state width="2006" height="332" key="GridCell.Tab.0.left/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590070958907" />
-    <state width="2006" height="375" key="GridCell.Tab.0.right" timestamp="1590114635138">
+    <state width="2006" height="375" key="GridCell.Tab.0.left/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590226823479" />
+    <state width="2006" height="375" key="GridCell.Tab.0.right" timestamp="1590226823481">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state width="2006" height="375" key="GridCell.Tab.0.right/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590114635138" />
-    <state width="2006" height="332" key="GridCell.Tab.0.right/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590070958909" />
-    <state width="2006" height="375" key="GridCell.Tab.1.bottom" timestamp="1590114635142">
+    <state width="2006" height="375" key="GridCell.Tab.0.right/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590226823481" />
+    <state width="2006" height="375" key="GridCell.Tab.1.bottom" timestamp="1590226823486">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state width="2006" height="375" key="GridCell.Tab.1.bottom/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590114635142" />
-    <state width="2006" height="375" key="GridCell.Tab.1.center" timestamp="1590114635141">
+    <state width="2006" height="375" key="GridCell.Tab.1.bottom/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590226823486" />
+    <state width="2006" height="375" key="GridCell.Tab.1.center" timestamp="1590226823484">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state width="2006" height="375" key="GridCell.Tab.1.center/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590114635141" />
-    <state width="2006" height="375" key="GridCell.Tab.1.left" timestamp="1590114635139">
+    <state width="2006" height="375" key="GridCell.Tab.1.center/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590226823484" />
+    <state width="2006" height="375" key="GridCell.Tab.1.left" timestamp="1590226823483">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state width="2006" height="375" key="GridCell.Tab.1.left/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590114635139" />
-    <state width="2006" height="375" key="GridCell.Tab.1.right" timestamp="1590114635141">
+    <state width="2006" height="375" key="GridCell.Tab.1.left/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590226823483" />
+    <state width="2006" height="375" key="GridCell.Tab.1.right" timestamp="1590226823485">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state width="2006" height="375" key="GridCell.Tab.1.right/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590114635141" />
+    <state width="2006" height="375" key="GridCell.Tab.1.right/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590226823485" />
     <state x="616" y="-822" key="RollbackChangesDialog" timestamp="1590075229636">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
@@ -200,10 +215,10 @@
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
     <state x="520" y="-783" width="639" height="486" key="find.popup/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590059841257" />
-    <state x="505" y="-839" width="670" height="676" key="search.everywhere.popup" timestamp="1590148519196">
+    <state x="505" y="-839" width="670" height="676" key="search.everywhere.popup" timestamp="1590219792165">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
-    <state x="505" y="-839" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590148519196" />
+    <state x="505" y="-839" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590219792165" />
     <state x="505" y="-839" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590114274278" />
   </component>
 </project>

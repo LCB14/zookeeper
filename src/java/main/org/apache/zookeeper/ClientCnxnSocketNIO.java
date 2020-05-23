@@ -281,6 +281,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
 
     /**
      * create a socket channel.
+     *
      * @return the created socket channel
      * @throws IOException
      */
@@ -295,6 +296,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
 
     /**
      * register with the selection and connect
+     *
      * @param sock the {@link SocketChannel}
      * @param addr the address of remote host
      * @throws IOException
@@ -335,7 +337,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
      * Returns the address to which the socket is connected.
      *
      * @return ip address of the remote side of the connection or null if not
-     *         connected
+     * connected
      */
     @Override
     SocketAddress getRemoteSocketAddress() {
@@ -354,7 +356,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
      * Returns the local address to which the socket is bound.
      *
      * @return ip address of the remote side of the connection or null if not
-     *         connected
+     * connected
      */
     @Override
     SocketAddress getLocalSocketAddress() {

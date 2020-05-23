@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -41,6 +41,7 @@ import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Id;
 import org.apache.zookeeper.data.Stat;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,41 +52,41 @@ import java.util.regex.Pattern;
 @InterfaceAudience.Public
 public class ZooKeeperMain {
     private static final Logger LOG = LoggerFactory.getLogger(ZooKeeperMain.class);
-    static final Map<String,String> commandMap = new HashMap<String,String>( );
+    static final Map<String, String> commandMap = new HashMap<String, String>();
 
     protected MyCommandOptions cl = new MyCommandOptions();
-    protected HashMap<Integer,String> history = new HashMap<Integer,String>( );
+    protected HashMap<Integer, String> history = new HashMap<Integer, String>();
     protected int commandCount = 0;
     protected boolean printWatches = true;
 
     protected ZooKeeper zk;
     protected String host = "";
 
-    public boolean getPrintWatches( ) {
+    public boolean getPrintWatches() {
         return printWatches;
     }
 
     static {
         commandMap.put("connect", "host:port");
-        commandMap.put("close","");
+        commandMap.put("close", "");
         commandMap.put("create", "[-s] [-e] path data acl");
-        commandMap.put("delete","path [version]");
-        commandMap.put("rmr","path");
-        commandMap.put("set","path data [version]");
-        commandMap.put("get","path [watch]");
-        commandMap.put("ls","path [watch]");
-        commandMap.put("ls2","path [watch]");
-        commandMap.put("getAcl","path");
-        commandMap.put("setAcl","path acl");
-        commandMap.put("stat","path [watch]");
-        commandMap.put("sync","path");
-        commandMap.put("setquota","-n|-b val path");
-        commandMap.put("listquota","path");
-        commandMap.put("delquota","[-n|-b] path");
-        commandMap.put("history","");
-        commandMap.put("redo","cmdno");
+        commandMap.put("delete", "path [version]");
+        commandMap.put("rmr", "path");
+        commandMap.put("set", "path data [version]");
+        commandMap.put("get", "path [watch]");
+        commandMap.put("ls", "path [watch]");
+        commandMap.put("ls2", "path [watch]");
+        commandMap.put("getAcl", "path");
+        commandMap.put("setAcl", "path acl");
+        commandMap.put("stat", "path [watch]");
+        commandMap.put("sync", "path");
+        commandMap.put("setquota", "-n|-b val path");
+        commandMap.put("listquota", "path");
+        commandMap.put("delquota", "[-n|-b] path");
+        commandMap.put("history", "");
+        commandMap.put("redo", "cmdno");
         commandMap.put("printwatches", "on|off");
-        commandMap.put("quit","");
+        commandMap.put("quit", "");
         commandMap.put("addauth", "scheme auth");
     }
 
@@ -109,24 +110,24 @@ public class ZooKeeperMain {
         int perm = 0;
         for (int i = 0; i < permString.length(); i++) {
             switch (permString.charAt(i)) {
-            case 'r':
-                perm |= ZooDefs.Perms.READ;
-                break;
-            case 'w':
-                perm |= ZooDefs.Perms.WRITE;
-                break;
-            case 'c':
-                perm |= ZooDefs.Perms.CREATE;
-                break;
-            case 'd':
-                perm |= ZooDefs.Perms.DELETE;
-                break;
-            case 'a':
-                perm |= ZooDefs.Perms.ADMIN;
-                break;
-            default:
-                System.err
-                .println("Unknown perm type: " + permString.charAt(i));
+                case 'r':
+                    perm |= ZooDefs.Perms.READ;
+                    break;
+                case 'w':
+                    perm |= ZooDefs.Perms.WRITE;
+                    break;
+                case 'c':
+                    perm |= ZooDefs.Perms.CREATE;
+                    break;
+                case 'd':
+                    perm |= ZooDefs.Perms.DELETE;
+                    break;
+                case 'a':
+                    perm |= ZooDefs.Perms.ADMIN;
+                    break;
+                default:
+                    System.err
+                            .println("Unknown perm type: " + permString.charAt(i));
             }
         }
         return perm;
@@ -142,7 +143,7 @@ public class ZooKeeperMain {
         System.err.println("dataVersion = " + stat.getVersion());
         System.err.println("aclVersion = " + stat.getAversion());
         System.err.println("ephemeralOwner = 0x"
-        		+ Long.toHexString(stat.getEphemeralOwner()));
+                + Long.toHexString(stat.getEphemeralOwner()));
         System.err.println("dataLength = " + stat.getDataLength());
         System.err.println("numChildren = " + stat.getNumChildren());
     }
@@ -153,30 +154,30 @@ public class ZooKeeperMain {
      */
     static class MyCommandOptions {
 
-        private Map<String,String> options = new HashMap<String,String>();
+        private Map<String, String> options = new HashMap<String, String>();
         private List<String> cmdArgs = null;
         private String command = null;
         public static final Pattern ARGS_PATTERN = Pattern.compile("\\s*([^\"\']\\S*|\"[^\"]*\"|'[^']*')\\s*");
         public static final Pattern QUOTED_PATTERN = Pattern.compile("^([\'\"])(.*)(\\1)$");
 
         public MyCommandOptions() {
-          options.put("server", "localhost:2181");
-          options.put("timeout", "30000");
+            options.put("server", "localhost:2181");
+            options.put("timeout", "30000");
         }
 
         public String getOption(String opt) {
             return options.get(opt);
         }
 
-        public String getCommand( ) {
+        public String getCommand() {
             return command;
         }
 
-        public String getCmdArgument( int index ) {
+        public String getCmdArgument(int index) {
             return cmdArgs.get(index);
         }
 
-        public int getNumArguments( ) {
+        public int getNumArguments() {
             return cmdArgs.size();
         }
 
@@ -204,7 +205,7 @@ public class ZooKeeperMain {
                     } else if (opt.equals("-r")) {
                         options.put("readonly", "true");
                     }
-                } catch (NoSuchElementException e){
+                } catch (NoSuchElementException e) {
                     System.err.println("Error: no argument found for option "
                             + opt);
                     return false;
@@ -212,8 +213,8 @@ public class ZooKeeperMain {
 
                 if (!opt.startsWith("-")) {
                     command = opt;
-                    cmdArgs = new ArrayList<String>( );
-                    cmdArgs.add( command );
+                    cmdArgs = new ArrayList<String>();
+                    cmdArgs.add(command);
                     while (it.hasNext()) {
                         cmdArgs.add(it.next());
                     }
@@ -228,7 +229,7 @@ public class ZooKeeperMain {
          * @param cmdstring string of form "cmd arg1 arg2..etc"
          * @return true if parsing succeeded.
          */
-        public boolean parseCommand( String cmdstring ) {
+        public boolean parseCommand(String cmdstring) {
             Matcher matcher = ARGS_PATTERN.matcher(cmdstring);
 
             List<String> args = new LinkedList<String>();
@@ -240,7 +241,7 @@ public class ZooKeeperMain {
                 }
                 args.add(value);
             }
-            if (args.isEmpty()){
+            if (args.isEmpty()) {
                 return false;
             }
             command = args.get(0);
@@ -257,7 +258,7 @@ public class ZooKeeperMain {
      */
 
 
-    protected void addToHistory(int i,String cmd) {
+    protected void addToHistory(int i, String cmd) {
         history.put(i, cmd);
     }
 
@@ -265,12 +266,12 @@ public class ZooKeeperMain {
         return new LinkedList<String>(commandMap.keySet());
     }
 
-    protected String getPrompt() {       
-        return "[zk: " + host + "("+zk.getState()+")" + " " + commandCount + "] ";
+    protected String getPrompt() {
+        return "[zk: " + host + "(" + zk.getState() + ")" + " " + commandCount + "] ";
     }
 
     public static void printMessage(String msg) {
-        System.out.println("\n"+msg);
+        System.out.println("\n" + msg);
     }
 
     protected void connectToZK(String newHost) throws InterruptedException, IOException {
@@ -280,13 +281,12 @@ public class ZooKeeperMain {
         host = newHost;
         boolean readOnly = cl.getOption("readonly") != null;
         zk = new ZooKeeper(host,
-                 Integer.parseInt(cl.getOption("timeout")),
-                 new MyWatcher(), readOnly);
+                Integer.parseInt(cl.getOption("timeout")),
+                new MyWatcher(), readOnly);
     }
-    
+
     public static void main(String args[])
-        throws KeeperException, IOException, InterruptedException
-    {
+            throws KeeperException, IOException, InterruptedException {
         // 建立和服务端的连接
         ZooKeeperMain main = new ZooKeeperMain(args);
 
@@ -308,7 +308,7 @@ public class ZooKeeperMain {
     }
 
     public ZooKeeperMain(ZooKeeper zk) {
-      this.zk = zk;
+        this.zk = zk;
     }
 
     @SuppressWarnings("unchecked")
@@ -322,22 +322,22 @@ public class ZooKeeperMain {
                 // jline.ConsoleReader -- java命令行实现类
                 Class<?> consoleC = Class.forName("jline.ConsoleReader");
                 Class<?> completorC =
-                    Class.forName("org.apache.zookeeper.JLineZNodeCompletor");
+                        Class.forName("org.apache.zookeeper.JLineZNodeCompletor");
 
                 System.out.println("JLine support is enabled");
 
                 Object console =
-                    consoleC.getConstructor().newInstance();
+                        consoleC.getConstructor().newInstance();
 
                 Object completor =
-                    completorC.getConstructor(ZooKeeper.class).newInstance(zk);
+                        completorC.getConstructor(ZooKeeper.class).newInstance(zk);
                 Method addCompletor = consoleC.getMethod("addCompletor",
                         Class.forName("jline.Completor"));
                 addCompletor.invoke(console, completor);
 
                 String line;
                 Method readLine = consoleC.getMethod("readLine", String.class);
-                while ((line = (String)readLine.invoke(console, getPrompt())) != null) {
+                while ((line = (String) readLine.invoke(console, getPrompt())) != null) {
                     // 执行用户命令行输入的命令
                     executeLine(line);
                 }
@@ -361,7 +361,7 @@ public class ZooKeeperMain {
             if (jlinemissing) {
                 System.out.println("JLine support is disabled");
                 BufferedReader br =
-                    new BufferedReader(new InputStreamReader(System.in));
+                        new BufferedReader(new InputStreamReader(System.in));
 
                 String line;
                 while ((line = br.readLine()) != null) {
@@ -375,20 +375,20 @@ public class ZooKeeperMain {
     }
 
     public void executeLine(String line)
-    throws InterruptedException, IOException, KeeperException {
-      if (!line.equals("")) {
-        cl.parseCommand(line);
-        addToHistory(commandCount,line);
-        // 进行命令处理
-        processCmd(cl);
-        commandCount++;
-      }
+            throws InterruptedException, IOException, KeeperException {
+        if (!line.equals("")) {
+            cl.parseCommand(line);
+            addToHistory(commandCount, line);
+            // 进行命令处理
+            processCmd(cl);
+            commandCount++;
+        }
     }
 
     private static DataCallback dataCallback = new DataCallback() {
 
         public void processResult(int rc, String path, Object ctx, byte[] data,
-                Stat stat) {
+                                  Stat stat) {
             System.out.println("rc = " + rc + " path = " + path + " data = "
                     + (data == null ? "null" : new String(data)) + " stat = ");
             printStat(stat);
@@ -408,8 +408,7 @@ public class ZooKeeperMain {
      * @throws InterruptedException
      */
     private static boolean trimProcQuotas(ZooKeeper zk, String path)
-        throws KeeperException, IOException, InterruptedException
-    {
+            throws KeeperException, IOException, InterruptedException {
         if (Quotas.quotaZookeeper.equals(path)) {
             return true;
         }
@@ -437,9 +436,8 @@ public class ZooKeeperMain {
      * @throws InterruptedException
      */
     public static boolean delQuota(ZooKeeper zk, String path,
-            boolean bytes, boolean numNodes)
-        throws KeeperException, IOException, InterruptedException
-    {
+                                   boolean bytes, boolean numNodes)
+            throws KeeperException, IOException, InterruptedException {
         String parentPath = Quotas.quotaZookeeper + path;
         String quotaPath = Quotas.quotaZookeeper + path + "/" + Quotas.limitNode;
         if (zk.exists(quotaPath, false) == null) {
@@ -449,7 +447,7 @@ public class ZooKeeperMain {
         byte[] data = null;
         try {
             data = zk.getData(quotaPath, false, new Stat());
-        } catch(KeeperException.NoNodeException ne) {
+        } catch (KeeperException.NoNodeException ne) {
             System.err.println("quota does not exist for " + path);
             return true;
         }
@@ -465,7 +463,7 @@ public class ZooKeeperMain {
             // one child
             List<String> children = zk.getChildren(parentPath, false);
             /// delete the direct children first
-            for (String child: children) {
+            for (String child : children) {
                 zk.delete(parentPath + "/" + child, -1);
             }
             // cut the tree till their is more than one child
@@ -475,28 +473,27 @@ public class ZooKeeperMain {
     }
 
     private static void checkIfParentQuota(ZooKeeper zk, String path)
-        throws InterruptedException, KeeperException
-    {
+            throws InterruptedException, KeeperException {
         final String[] splits = path.split("/");
         String quotaPath = Quotas.quotaZookeeper;
-        for (String str: splits) {
+        for (String str : splits) {
             if (str.length() == 0) {
                 // this should only be for the beginning of the path
                 // i.e. "/..." - split(path)[0] is empty string before first '/'
                 continue;
             }
             quotaPath += "/" + str;
-            List<String> children =  null;
+            List<String> children = null;
             try {
                 children = zk.getChildren(quotaPath, false);
-            } catch(KeeperException.NoNodeException ne) {
+            } catch (KeeperException.NoNodeException ne) {
                 LOG.debug("child removed during quota check", ne);
                 return;
             }
             if (children.size() == 0) {
                 return;
             }
-            for (String child: children) {
+            for (String child : children) {
                 if (Quotas.limitNode.equals(child)) {
                     throw new IllegalArgumentException(path + " has a parent "
                             + quotaPath + " which has a quota");
@@ -514,9 +511,8 @@ public class ZooKeeperMain {
      * @return true if its successful and false if not.
      */
     public static boolean createQuota(ZooKeeper zk, String path,
-            long bytes, int numNodes)
-        throws KeeperException, IOException, InterruptedException
-    {
+                                      long bytes, int numNodes)
+            throws KeeperException, IOException, InterruptedException {
         // check if the path exists. We cannot create
         // quota for a path that already exists in zookeeper
         // for now.
@@ -536,13 +532,13 @@ public class ZooKeeperMain {
         String realPath = Quotas.quotaZookeeper + path;
         try {
             List<String> children = zk.getChildren(realPath, false);
-            for (String child: children) {
+            for (String child : children) {
                 if (!child.startsWith("zookeeper_")) {
                     throw new IllegalArgumentException(path + " has child " +
                             child + " which has a quota");
                 }
             }
-        } catch(KeeperException.NoNodeException ne) {
+        } catch (KeeperException.NoNodeException ne) {
             // this is fine
         }
 
@@ -557,7 +553,7 @@ public class ZooKeeperMain {
                         CreateMode.PERSISTENT);
                 zk.create(Quotas.quotaZookeeper, null, Ids.OPEN_ACL_UNSAFE,
                         CreateMode.PERSISTENT);
-            } catch(KeeperException.NodeExistsException ne) {
+            } catch (KeeperException.NodeExistsException ne) {
                 // do nothing
             }
         }
@@ -567,13 +563,13 @@ public class ZooKeeperMain {
         String[] splits = path.split("/");
         StringBuilder sb = new StringBuilder();
         sb.append(quotaPath);
-        for (int i=1; i<splits.length; i++) {
+        for (int i = 1; i < splits.length; i++) {
             sb.append("/" + splits[i]);
             quotaPath = sb.toString();
             try {
-                zk.create(quotaPath, null, Ids.OPEN_ACL_UNSAFE ,
+                zk.create(quotaPath, null, Ids.OPEN_ACL_UNSAFE,
                         CreateMode.PERSISTENT);
-            } catch(KeeperException.NodeExistsException ne) {
+            } catch (KeeperException.NodeExistsException ne) {
                 //do nothing
             }
         }
@@ -590,8 +586,8 @@ public class ZooKeeperMain {
             stats.setCount(0);
             zk.create(statPath, stats.toString().getBytes(),
                     Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-        } catch(KeeperException.NodeExistsException ne) {
-            byte[] data = zk.getData(quotaPath, false , new Stat());
+        } catch (KeeperException.NodeExistsException ne) {
+            byte[] data = zk.getData(quotaPath, false, new Stat());
             StatsTrack strackC = new StatsTrack(new String(data));
             if (bytes != -1L) {
                 strackC.setBytes(bytes);
@@ -605,8 +601,7 @@ public class ZooKeeperMain {
     }
 
     protected boolean processCmd(MyCommandOptions co)
-        throws KeeperException, IOException, InterruptedException
-    {
+            throws KeeperException, IOException, InterruptedException {
         try {
             return processZKCmd(co);
         } catch (IllegalArgumentException e) {
@@ -622,21 +617,20 @@ public class ZooKeeperMain {
             System.err.println("Node not empty: " + e.getPath());
         } catch (KeeperException.NotReadOnlyException e) {
             System.err.println("Not a read-only call: " + e.getPath());
-        }catch (KeeperException.InvalidACLException  e) {
-            System.err.println("Acl is not valid : "+e.getPath());
-        }catch (KeeperException.NoAuthException  e) {
-            System.err.println("Authentication is not valid : "+e.getPath());
-        }catch (KeeperException.BadArgumentsException   e) {
-            System.err.println("Arguments are not valid : "+e.getPath());
-        }catch (KeeperException.BadVersionException e) {
-            System.err.println("version No is not valid : "+e.getPath());
+        } catch (KeeperException.InvalidACLException e) {
+            System.err.println("Acl is not valid : " + e.getPath());
+        } catch (KeeperException.NoAuthException e) {
+            System.err.println("Authentication is not valid : " + e.getPath());
+        } catch (KeeperException.BadArgumentsException e) {
+            System.err.println("Arguments are not valid : " + e.getPath());
+        } catch (KeeperException.BadVersionException e) {
+            System.err.println("version No is not valid : " + e.getPath());
         }
         return false;
     }
 
     protected boolean processZKCmd(MyCommandOptions co)
-        throws KeeperException, IOException, InterruptedException
-    {
+            throws KeeperException, IOException, InterruptedException {
         Stat stat = new Stat();
         String[] args = co.getArgArray();
         String cmd = co.getCommand();
@@ -649,7 +643,7 @@ public class ZooKeeperMain {
             usage();
             return false;
         }
-        
+
         boolean watch = args.length > 2;
         String path = null;
         List<ACL> acl = Ids.OPEN_ACL_UNSAFE;
@@ -661,19 +655,19 @@ public class ZooKeeperMain {
             System.exit(0);
         } else if (cmd.equals("redo") && args.length >= 2) {
             Integer i = Integer.decode(args[1]);
-            if (commandCount <= i || i < 0){ // don't allow redoing this redo
+            if (commandCount <= i || i < 0) { // don't allow redoing this redo
                 System.out.println("Command index out of range");
                 return false;
             }
             cl.parseCommand(history.get(i));
-            if (cl.getCommand().equals( "redo" )){
+            if (cl.getCommand().equals("redo")) {
                 System.out.println("No redoing redos");
                 return false;
             }
             history.put(commandCount, history.get(i));
-            processCmd( cl);
+            processCmd(cl);
         } else if (cmd.equals("history")) {
-            for (int i=commandCount - 10;i<=commandCount;++i) {
+            for (int i = commandCount - 10; i <= commandCount; ++i) {
                 if (i < 0) continue;
                 System.out.println(i + " - " + history.get(i));
             }
@@ -684,25 +678,25 @@ public class ZooKeeperMain {
                 printWatches = args[1].equals("on");
             }
         } else if (cmd.equals("connect")) {
-            if (args.length >=2) {
+            if (args.length >= 2) {
                 connectToZK(args[1]);
             } else {
                 connectToZK(host);
             }
         }
-        
+
         // Below commands all need a live connection
         if (zk == null || !zk.getState().isAlive()) {
             System.out.println("Not connected");
             return false;
         }
-        
+
         if (cmd.equals("create") && args.length >= 3) {
             int first = 0;
             CreateMode flags = CreateMode.PERSISTENT;
             if ((args[1].equals("-e") && args[2].equals("-s"))
                     || (args[1]).equals("-s") && (args[2].equals("-e"))) {
-                first+=2;
+                first += 2;
                 flags = CreateMode.EPHEMERAL_SEQUENTIAL;
             } else if (args[1].equals("-e")) {
                 first++;
@@ -712,10 +706,10 @@ public class ZooKeeperMain {
                 flags = CreateMode.PERSISTENT_SEQUENTIAL;
             }
             if (args.length == first + 4) {
-                acl = parseACLs(args[first+3]);
+                acl = parseACLs(args[first + 3]);
             }
             path = args[first + 1];
-            String newPath = zk.create(path, args[first+2].getBytes(), acl,
+            String newPath = zk.create(path, args[first + 2].getBytes(), acl,
                     flags);
             System.err.println("Created " + newPath);
         } else if (cmd.equals("delete") && args.length >= 2) {
@@ -735,7 +729,7 @@ public class ZooKeeperMain {
         } else if (cmd.equals("get") && args.length >= 2) {
             path = args[1];
             byte data[] = zk.getData(path, watch, stat);
-            data = (data == null)? "null".getBytes() : data;
+            data = (data == null) ? "null".getBytes() : data;
             System.out.println(new String(data));
             printStat(stat);
         } else if (cmd.equals("ls") && args.length >= 2) {
@@ -763,13 +757,13 @@ public class ZooKeeperMain {
             path = args[1];
             stat = zk.exists(path, watch);
             if (stat == null) {
-              throw new KeeperException.NoNodeException(path);
+                throw new KeeperException.NoNodeException(path);
             }
             printStat(stat);
         } else if (cmd.equals("listquota") && args.length >= 2) {
             path = args[1];
             String absolutePath = Quotas.quotaZookeeper + path + "/" + Quotas.limitNode;
-            byte[] data =  null;
+            byte[] data = null;
             try {
                 System.err.println("absolute path is " + absolutePath);
                 data = zk.getData(absolutePath, false, stat);
@@ -781,7 +775,7 @@ public class ZooKeeperMain {
                         Quotas.statNode, false, stat);
                 System.out.println("Output stat for " + path + " " +
                         new StatsTrack(new String(data)).toString());
-            } catch(KeeperException.NoNodeException ne) {
+            } catch (KeeperException.NoNodeException ne) {
                 System.err.println("quota for " + path + " does not exist.");
             }
         } else if (cmd.equals("setquota") && args.length >= 4) {
@@ -789,9 +783,9 @@ public class ZooKeeperMain {
             String val = args[2];
             path = args[3];
             System.err.println("Comment: the parts are " +
-                               "option " + option +
-                               " val " + val +
-                               " path " + path);
+                    "option " + option +
+                    " val " + val +
+                    " path " + path);
             if ("-b".equals(option)) {
                 // we are setting the bytes quota
                 createQuota(zk, path, Long.parseLong(val), -1);
@@ -823,11 +817,15 @@ public class ZooKeeperMain {
                 usage();
             }
         } else if (cmd.equals("close")) {
-                zk.close();
+            zk.close();
         } else if (cmd.equals("sync") && args.length >= 2) {
             path = args[1];
-            zk.sync(path, new AsyncCallback.VoidCallback() { public void processResult(int rc, String path, Object ctx) { System.out.println("Sync returned " + rc); } }, null );
-        } else if (cmd.equals("addauth") && args.length >=2 ) {
+            zk.sync(path, new AsyncCallback.VoidCallback() {
+                public void processResult(int rc, String path, Object ctx) {
+                    System.out.println("Sync returned " + rc);
+                }
+            }, null);
+        } else if (cmd.equals("addauth") && args.length >= 2) {
             byte[] b = null;
             if (args.length >= 3)
                 b = args[2].getBytes();
@@ -868,7 +866,7 @@ public class ZooKeeperMain {
             int lastColon = a.lastIndexOf(':');
             if (firstColon == -1 || lastColon == -1 || firstColon == lastColon) {
                 System.err
-                .println(a + " does not have the form scheme:id:perm");
+                        .println(a + " does not have the form scheme:id:perm");
                 continue;
             }
             ACL newAcl = new ACL();
