@@ -126,17 +126,22 @@ public class SyncRequestProcessor extends ZooKeeperCriticalThread implements Req
             while (true) {
                 Request si = null;
                 if (toFlush.isEmpty()) {
+                    // take 取不到会一直阻塞，直到有数据返回
                     si = queuedRequests.take();
                 } else {
+                    // poll 取不到会直接返回null
                     si = queuedRequests.poll();
                     if (si == null) {
+                        // 批量的把请求从内核缓存区同步到磁盘
                         flush(toFlush);
                         continue;
                     }
                 }
+
                 if (si == requestOfDeath) {
                     break;
                 }
+
                 if (si != null) {
                     // track the number of records written to the log
                     if (zks.getZKDatabase().append(si)) {
@@ -150,6 +155,7 @@ public class SyncRequestProcessor extends ZooKeeperCriticalThread implements Req
                                 LOG.warn("Too busy to snap, skipping");
                             } else {
                                 snapInProcess = new ZooKeeperThread("Snapshot Thread") {
+                                    @Override
                                     public void run() {
                                         try {
                                             zks.takeSnapshot();
