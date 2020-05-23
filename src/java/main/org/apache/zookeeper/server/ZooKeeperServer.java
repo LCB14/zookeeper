@@ -762,6 +762,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     public void submitRequest(Request si) {
+        // 需要等待请求处理器初始化并启动完毕
         if (firstProcessor == null) {
             synchronized (this) {
                 try {
