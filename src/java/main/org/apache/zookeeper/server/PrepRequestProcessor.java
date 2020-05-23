@@ -361,6 +361,7 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                  * 这样做主要是为了保证数据一致性
                  */
                 String parentPath = path.substring(0, lastSlash);
+                // 优先从outstandingChangesForPath中获取
                 ChangeRecord parentRecord = getRecordForPath(parentPath);
 
                 // 检查ACL列表
@@ -395,6 +396,7 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                 if (ephemeralParent) {
                     throw new KeeperException.NoChildrenForEphemeralsException(path);
                 }
+
                 // 新的子节点版本号
                 int newCversion = parentRecord.stat.getCversion() + 1;
 
@@ -402,6 +404,7 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                 request.txn = new CreateTxn(path, createRequest.getData(),
                         listACL,
                         createMode.isEphemeral(), newCversion);
+
                 StatPersisted s = new StatPersisted();
                 if (createMode.isEphemeral()) {
                     s.setEphemeralOwner(request.sessionId);
@@ -412,7 +415,6 @@ public class PrepRequestProcessor extends ZooKeeperCriticalThread implements
                 parentRecord.childCount++;
                 // 设置新的子节点版本号
                 parentRecord.stat.setCversion(newCversion);
-
                 addChangeRecord(parentRecord);
                 /**
                  * 将parentRecord添加至outstandingChanges和outstandingChangesForPath中
