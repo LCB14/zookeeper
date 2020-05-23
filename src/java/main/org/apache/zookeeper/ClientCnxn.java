@@ -987,7 +987,10 @@ public class ClientCnxn {
                         null, null, readOnly));
             }
 
-            // 确保读写事件都监听，也就是设置成可读可写
+            /**
+             * 设置通道感兴趣的事件
+             * @see org.apache.zookeeper.ClientCnxnSocketNIO#enableReadWriteOnly()
+             */
             clientCnxnSocket.enableReadWriteOnly();
 
             if (LOG.isDebugEnabled()) {
@@ -1103,12 +1106,11 @@ public class ClientCnxn {
 
             InetSocketAddress serverAddress = null;
 
-            // 进入循环的条件客户端状态不能是CLOSED或AUTH_FAILED
+            // 进入循环的条件是客户端状态不能是CLOSED或AUTH_FAILED
             while (state.isAlive()) {
                 try {
                     // 判断客户端是否已经和服务端建立socket连接，判断条件是SelectionKey是否为null
                     if (!clientCnxnSocket.isConnected()) {
-
                         if (!isFirstConnect) {
                             try {
                                 Thread.sleep(r.nextInt(1000));
@@ -1135,7 +1137,7 @@ public class ClientCnxn {
                             serverAddress = hostProvider.next(1000);
                         }
 
-                        // 建立socket连接并调整state状态
+                        // 重点 -- 建立socket连接并调整state状态
                         startConnect(serverAddress);
                         clientCnxnSocket.updateLastSendAndHeard();
                     }
