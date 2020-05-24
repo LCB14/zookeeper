@@ -1194,10 +1194,11 @@ public class ZooKeeper {
         h.setType(ZooDefs.OpCode.getData);
         GetDataRequest request = new GetDataRequest();
         request.setPath(serverPath);
-        // 标记Request
         request.setWatch(watcher != null);
+
         GetDataResponse response = new GetDataResponse();
-        // 提交请求到outgoingQueue等待sendThread线程进行发送
+
+        // 提交请求到outgoingQueue等待sendThread线程进行发送 -- 重点✨
         ReplyHeader r = cnxn.submitRequest(h, request, response, wcb);
         if (r.getErr() != 0) {
             throw KeeperException.create(KeeperException.Code.get(r.getErr()),
