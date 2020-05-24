@@ -1107,7 +1107,9 @@ public class ClientCnxn {
 
             InetSocketAddress serverAddress = null;
 
-            // 进入循环的条件是客户端状态不能是CLOSED或AUTH_FAILED
+            /**
+             * 这个state状态进行变更的地方在哪？
+             */
             while (state.isAlive()) {
                 try {
                     // 判断客户端是否已经和服务端建立socket连接，判断条件是SelectionKey是否为null
