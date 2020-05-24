@@ -401,7 +401,8 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     updateLastSendAndHeard();
                     /**
                      *  连接成功了执行primeConnection()目的是什么？
-                     *  发送ConnectRequest请求，初始化连接事件,并设置socket感兴趣事件类型为：SelectionKey.OP_READ | SelectionKey.OP_WRITE)
+                     *  向outgoingQueue队列中添加ConnectRequest请求用于初始化连接事件,并设置socket感兴趣事件类型为：
+                     *  SelectionKey.OP_READ | SelectionKey.OP_WRITE)
                      */
                     sendThread.primeConnection();
                 }
