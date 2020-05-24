@@ -322,7 +322,7 @@ public class InstanceManager implements AsyncCallback.ChildrenCallback, Watcher 
                 final Object eventObj = new Object();
                 synchronized(eventObj) {
                     // wait for the node to appear
-                    Stat eStat = zk.exists(reportsNode + '/' + name, new Watcher() {
+                    Stat eStat = zk.exists(reportsNode + '/' + name, false, new Watcher() {
                         public void process(WatchedEvent event) {
                             synchronized(eventObj) {
                                 eventObj.notifyAll();

@@ -81,12 +81,12 @@ public class ChrootTest extends ClientBase {
         try {
             // check get
             MyWatcher w1 = new MyWatcher("/ch1");
-            Assert.assertNotNull(zk1.exists("/ch1", w1));
+            Assert.assertNotNull(zk1.exists("/ch1", false, w1));
             MyWatcher w2 = new MyWatcher("/ch1/ch2");
-            Assert.assertNotNull(zk1.exists("/ch1/ch2", w2));
+            Assert.assertNotNull(zk1.exists("/ch1/ch2", false, w2));
 
             MyWatcher w3 = new MyWatcher("/ch2");
-            Assert.assertNotNull(zk2.exists("/ch2", w3));
+            Assert.assertNotNull(zk2.exists("/ch2", false, w3));
             
             // set watches on child
             MyWatcher w4 = new MyWatcher("/ch1");

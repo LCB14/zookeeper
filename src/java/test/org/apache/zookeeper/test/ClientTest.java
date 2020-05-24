@@ -228,7 +228,7 @@ public class ClientTest extends ClientBase {
                 Assert.assertNotNull(zk.getData("/foo-" + i, watchers[i], stat));
             }
             for (int i = 0; i < watchers.length; i++) {
-                Assert.assertNotNull(zk.exists("/foo-" + i, watchers[i]));
+                Assert.assertNotNull(zk.exists("/foo-" + i, false, watchers[i]));
             }
             // trigger the watches
             for (int i = 0; i < watchers.length; i++) {
@@ -254,7 +254,7 @@ public class ClientTest extends ClientBase {
             //
             for (int i = 0; i < watchers.length; i++) {
                 Assert.assertNotNull(zk.getData("/foo-" + i, watchers[i], stat));
-                Assert.assertNotNull(zk.exists("/foo-" + i, watchers[i]));
+                Assert.assertNotNull(zk.exists("/foo-" + i, false, watchers[i]));
             }
             // trigger the watches
             for (int i = 0; i < watchers.length; i++) {
@@ -279,7 +279,7 @@ public class ClientTest extends ClientBase {
             //
             for (int i = 0; i < watchers.length; i++) {
                 Assert.assertNotNull(zk.getData("/foo-" + i, watchers[i], stat));
-                Assert.assertNotNull(zk.exists("/foo-" + i, watchers2[i]));
+                Assert.assertNotNull(zk.exists("/foo-" + i, false, watchers2[i]));
             }
             // trigger the watches
             for (int i = 0; i < watchers.length; i++) {
@@ -373,7 +373,7 @@ public class ClientTest extends ClientBase {
 
             try {
                 if (withWatcherObj) {
-                    Assert.assertEquals(null, zk.exists("/frog", watcher));
+                    Assert.assertEquals(null, zk.exists("/frog", false, watcher));
                 } else {
                     Assert.assertEquals(null, zk.exists("/frog", true));
                 }
@@ -412,7 +412,7 @@ public class ClientTest extends ClientBase {
                 zk.setData("/pat/ben/" + name, "new".getBytes(),
                         stat.getVersion());
                 if (withWatcherObj) {
-                    stat = zk.exists("/pat/ben/" + name, watcher);
+                    stat = zk.exists("/pat/ben/" + name, false, watcher);
                 } else {
                 stat = zk.exists("/pat/ben/" + name, true);
                 }

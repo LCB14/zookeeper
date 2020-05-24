@@ -64,7 +64,7 @@ public class TimeTest extends ClientBase {
         while (Time.currentElapsedTime() - nt0 < 100000) {
             System.out.printf("%d\t%s\n", discrepancy(),
                     zk.exists("/ephemeral",
-                            watchCount.get() == 0 ? createWatcher() : null) != null);
+                            false, watchCount.get() == 0 ? createWatcher() : null) != null);
             waitByYielding(500);
         }
     }

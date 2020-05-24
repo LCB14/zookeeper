@@ -210,7 +210,7 @@ public class DisconnectedWatcherTest extends ClientBase {
             if (i % 3 == 0) {
                 zk2.getChildren(path, childWatcher);
             } else if (i % 3 == 1) {
-                zk2.exists(path + "/foo", childWatcher);
+                zk2.exists(path + "/foo", false, childWatcher);
             } else if (i % 3 == 2) {
                 zk2.getData(path, childWatcher, null);
             }

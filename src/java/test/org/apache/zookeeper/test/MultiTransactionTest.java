@@ -325,7 +325,7 @@ public class MultiTransactionTest extends ClientBase {
 
         final CountDownLatch latch = new CountDownLatch(1);
 
-        zk.exists("/foo/bar", new Watcher() {
+        zk.exists("/foo/bar", false, new Watcher() {
                 @Override
                 public void process(WatchedEvent event) {
                     if (event.getType() == Event.EventType.NodeDeleted){
@@ -485,7 +485,7 @@ public class MultiTransactionTest extends ClientBase {
                 ));
 
         // '/multi' should have been deleted
-        Assert.assertNull(zk.exists("/multi", null));
+        Assert.assertNull(zk.exists("/multi", false, null));
     }
 
     @Test
@@ -518,9 +518,9 @@ public class MultiTransactionTest extends ClientBase {
                 ));
 
         //Verify tree deleted
-        Assert.assertNull(zk.exists("/multi/a/1", null));
-        Assert.assertNull(zk.exists("/multi/a", null));
-        Assert.assertNull(zk.exists("/multi", null));
+        Assert.assertNull(zk.exists("/multi/a/1", false, null));
+        Assert.assertNull(zk.exists("/multi/a", false, null));
+        Assert.assertNull(zk.exists("/multi", false, null));
     }
 
     @Test
@@ -544,7 +544,7 @@ public class MultiTransactionTest extends ClientBase {
     @Test
     public void testUpdateConflict() throws Exception {
     
-        Assert.assertNull(zk.exists("/multi", null));
+        Assert.assertNull(zk.exists("/multi", false, null));
         
         try {
             multi(zk, Arrays.asList(
@@ -558,7 +558,7 @@ public class MultiTransactionTest extends ClientBase {
             LOG.error("STACKTRACE: " + e);
         }
 
-        Assert.assertNull(zk.exists("/multi", null));
+        Assert.assertNull(zk.exists("/multi", false, null));
 
         //Updating version solves conflict -- order matters
         multi(zk, Arrays.asList(
@@ -586,7 +586,7 @@ public class MultiTransactionTest extends ClientBase {
         }
 
         // '/multi' should never have been created as entire op should fail
-        Assert.assertNull(zk.exists("/multi", null)) ;
+        Assert.assertNull(zk.exists("/multi", false, null)) ;
     }
 
     @Test
@@ -620,7 +620,7 @@ public class MultiTransactionTest extends ClientBase {
             }
             Assert.assertFalse("/multi should have been deleted so setData should have failed",
                                KeeperException.Code.OK.intValue() == res.rc);
-            Assert.assertNull(zk.exists("/multi", null));
+            Assert.assertNull(zk.exists("/multi", false, null));
             results = res.results;
         } else {
             try {
@@ -628,7 +628,7 @@ public class MultiTransactionTest extends ClientBase {
                 Assert.fail("/multi should have been deleted so setData should have failed");
             } catch (KeeperException e) {
                 // '/multi' should never have been created as entire op should fail
-                Assert.assertNull(zk.exists("/multi", null));
+                Assert.assertNull(zk.exists("/multi", false, null));
                 results = e.getResults();
             }
         }

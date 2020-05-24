@@ -24,15 +24,12 @@ import org.apache.zookeeper.TestableZooKeeper;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
-import org.apache.zookeeper.ZooKeeper;
-import org.apache.zookeeper.data.Stat;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -63,7 +60,7 @@ public class SessionTimeoutTest extends ClientBase {
                 }
             }
         };
-        zk.exists("/foo", watcher);
+        zk.exists("/foo", false, watcher);
 
         zk.getTestable().injectSessionExpiration();
         Assert.assertTrue(expirationLatch.await(5, TimeUnit.SECONDS));
@@ -86,12 +83,12 @@ public class SessionTimeoutTest extends ClientBase {
     public void testSessionDisconnect() throws KeeperException, InterruptedException, IOException {
         zk.create("/sdisconnect", new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.EPHEMERAL);
-        assertNotNull("Ephemeral node has not been created", zk.exists("/sdisconnect", null));
+        assertNotNull("Ephemeral node has not been created", zk.exists("/sdisconnect", false, null));
 
         zk.close();
 
         zk = createClient();
-        assertNull("Ephemeral node shouldn't exist after client disconnect", zk.exists("/sdisconnect", null));
+        assertNull("Ephemeral node shouldn't exist after client disconnect", zk.exists("/sdisconnect", false, null));
     }
 
     /**
@@ -101,13 +98,13 @@ public class SessionTimeoutTest extends ClientBase {
     public void testSessionRestore() throws KeeperException, InterruptedException, IOException {
         zk.create("/srestore", new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.EPHEMERAL);
-        assertNotNull("Ephemeral node has not been created", zk.exists("/srestore", null));
+        assertNotNull("Ephemeral node has not been created", zk.exists("/srestore", false, null));
 
         zk.disconnect();
         zk.close();
 
         zk = createClient();
-        assertNotNull("Ephemeral node should be present when session is restored", zk.exists("/srestore", null));
+        assertNotNull("Ephemeral node should be present when session is restored", zk.exists("/srestore", false, null));
     }
 
     /**
@@ -117,13 +114,13 @@ public class SessionTimeoutTest extends ClientBase {
     public void testSessionSurviveServerRestart() throws Exception {
         zk.create("/sdeath", new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.EPHEMERAL);
-        assertNotNull("Ephemeral node has not been created", zk.exists("/sdeath", null));
+        assertNotNull("Ephemeral node has not been created", zk.exists("/sdeath", false, null));
 
         zk.disconnect();
         stopServer();
         startServer();
         zk = createClient();
 
-        assertNotNull("Ephemeral node should be present when server restarted", zk.exists("/sdeath", null));
+        assertNotNull("Ephemeral node should be present when server restarted", zk.exists("/sdeath", false, null));
     }
 }

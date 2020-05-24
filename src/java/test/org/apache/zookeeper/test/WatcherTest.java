@@ -30,7 +30,6 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.TestableZooKeeper;
 import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.AsyncCallback.StatCallback;
 import org.apache.zookeeper.AsyncCallback.VoidCallback;
@@ -120,7 +119,7 @@ public class WatcherTest extends ClientBase {
                 Stat stat = new Stat();
                 zk.getData(name, watcher, stat);
                 zk.setData(name, "new".getBytes(), stat.getVersion(), scb, null);
-                stat = zk.exists(name, watcher);
+                stat = zk.exists(name, false, watcher);
                 zk.delete(name, stat.getVersion(), vcb, null);
             }
 
@@ -283,7 +282,7 @@ public class WatcherTest extends ClientBase {
         } else {
             zk.getChildren("/watchtest", localWatcher);
             zk.getData("/watchtest/child", localWatcher, new Stat());
-            zk.exists("/watchtest/child2", localWatcher);
+            zk.exists("/watchtest/child2", false, localWatcher);
         }
 
         Assert.assertTrue(localWatcher.events.isEmpty());
@@ -361,7 +360,7 @@ public class WatcherTest extends ClientBase {
         } else {
             zk.getChildren("/watchtest", localWatcher);
             zk.getData("/watchtest/child", localWatcher, new Stat());
-            zk.exists("/watchtest/child2", localWatcher);
+            zk.exists("/watchtest/child2", false, localWatcher);
         }
 
         // Do trigger an event to make sure that we do not get

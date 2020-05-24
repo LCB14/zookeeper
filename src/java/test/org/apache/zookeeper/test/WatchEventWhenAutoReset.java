@@ -110,7 +110,7 @@ public class WatchEventWhenAutoReset extends TestCase {
         watcher.waitForConnected(TIMEOUT);
         watcher.assertEvent(TIMEOUT, EventType.NodeDataChanged);
 
-        zk1.exists(path, watcher);
+        zk1.exists(path, false, watcher);
         qu.shutdown(1);
         zk2.delete(path, -1);
         zk2.create(path, new byte[2], ZooDefs.Ids.OPEN_ACL_UNSAFE,
@@ -133,7 +133,7 @@ public class WatchEventWhenAutoReset extends TestCase {
 
         String path = "/test1-created";
 
-        zk1.exists(path, watcher);
+        zk1.exists(path, false, watcher);
         qu.shutdown(1);
         zk2.create(path, new byte[2], ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.PERSISTENT);
@@ -166,7 +166,7 @@ public class WatchEventWhenAutoReset extends TestCase {
 
         zk1.create(path, new byte[1], ZooDefs.Ids.OPEN_ACL_UNSAFE,
                 CreateMode.PERSISTENT);
-        zk1.exists(path, watcher);
+        zk1.exists(path, false, watcher);
         qu.shutdown(1);
         zk2.delete(path, -1);
         qu.start(1);

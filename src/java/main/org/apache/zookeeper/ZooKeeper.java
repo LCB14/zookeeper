@@ -1061,6 +1061,7 @@ public class ZooKeeper {
      * the data on the node.
      *
      * @param path    the node path
+     * @param b
      * @param watcher explicit watcher
      * @return the stat of the node of the given path; return null if no such a
      * node exists.
@@ -1068,7 +1069,7 @@ public class ZooKeeper {
      * @throws InterruptedException     If the server transaction is interrupted.
      * @throws IllegalArgumentException if an invalid path is specified
      */
-    public Stat exists(final String path, Watcher watcher)
+    public Stat exists(final String path, boolean b, Watcher watcher)
             throws KeeperException, InterruptedException {
         final String clientPath = path;
         PathUtils.validatePath(clientPath);
@@ -1117,13 +1118,13 @@ public class ZooKeeper {
      */
     public Stat exists(String path, boolean watch) throws KeeperException,
             InterruptedException {
-        return exists(path, watch ? watchManager.defaultWatcher : null);
+        return exists(path, false, watch ? watchManager.defaultWatcher : null);
     }
 
     /**
      * The asynchronous version of exists.
      *
-     * @see #exists(String, Watcher)
+     * @see #exists(String, boolean, Watcher)
      */
     public void exists(final String path, Watcher watcher,
                        StatCallback cb, Object ctx) {

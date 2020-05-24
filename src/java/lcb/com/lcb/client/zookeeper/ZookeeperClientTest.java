@@ -20,12 +20,17 @@ public class ZookeeperClientTest {
         ZooKeeper client = new ZooKeeper("localhost:2181", 5000, new Watcher() {
             @Override
             public void process(WatchedEvent event) {
-                System.out.println("绑定成功：" + event);
+                System.out.println("默认监听器：" + event);
             }
         });
 
-        // 创建节点
-        Stat exists = client.exists("/data", true);
+        // 判断节点是否已存在
+        Stat exists = client.exists("/data", true, new Watcher() {
+            @Override
+            public void process(WatchedEvent event) {
+                System.out.println("节点已创建");
+            }
+        });
         if (exists == null) {
             client.create("/data", "Hello zookeeper".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             client.create("/data/child_node", "child mode create".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);

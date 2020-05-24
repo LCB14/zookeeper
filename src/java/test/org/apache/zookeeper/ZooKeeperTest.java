@@ -70,7 +70,7 @@ public class ZooKeeperTest extends ClientBase {
         Assert.assertTrue(children.contains("c"));
 
         ZKUtil.deleteRecursive(zk, "/a");
-        Assert.assertNull(zk.exists("/a", null));
+        Assert.assertNull(zk.exists("/a", false, null));
     }
 
     @Test
