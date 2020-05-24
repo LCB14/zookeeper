@@ -1111,6 +1111,11 @@ public class ClientCnxn {
 
             /**
              * 这个state状态进行变更的地方在哪？
+             * ConnectRequest请求发送并获取到服务端响应之后。
+             *
+             * @see ClientCnxnSocketNIO#doTransport(int, java.util.List, java.util.LinkedList, org.apache.zookeeper.ClientCnxn)
+             * @see ClientCnxnSocketNIO#doIO(java.util.List, java.util.LinkedList, org.apache.zookeeper.ClientCnxn)
+             * @see ClientCnxnSocket#readConnectResult()
              */
             while (state.isAlive()) {
                 try {
@@ -1398,8 +1403,7 @@ public class ClientCnxn {
             hostProvider.onConnected();
             sessionId = _sessionId;
             sessionPasswd = _sessionPasswd;
-            state = (isRO) ?
-                    States.CONNECTEDREADONLY : States.CONNECTED;
+            state = (isRO) ? States.CONNECTEDREADONLY : States.CONNECTED;
             seenRwServerBefore |= !isRO;
             LOG.info("Session establishment complete on server "
                     + clientCnxnSocket.getRemoteSocketAddress()

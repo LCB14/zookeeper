@@ -82,7 +82,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     recvCount++;
                     readLength();
                 } else if (!initialized) {
-                    // 读取连接结果
+                    // 读取初始化服务端信息同步结果响应 -- 重点✨
                     readConnectResult();
                     // 设置Channel可读
                     enableRead();
@@ -97,7 +97,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     updateLastHeard();
                     initialized = true;
                 } else {
-                    // 读取服务端响应（很关键的方法)
+                    // 读取服务端响应（很关键的方法) -- 重点✨
                     sendThread.readResponse(incomingBuffer);
                     lenBuffer.clear();
                     incomingBuffer = lenBuffer;
@@ -407,7 +407,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     sendThread.primeConnection();
                 }
             } else if ((k.readyOps() & (SelectionKey.OP_READ | SelectionKey.OP_WRITE)) != 0) {
-                // 操作channel通道中的数据
+                // 操作channel通道中的数据 -- 重点✨
                 doIO(pendingQueue, outgoingQueue, cnxn);
             }
         }
