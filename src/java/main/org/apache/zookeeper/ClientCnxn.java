@@ -989,7 +989,7 @@ public class ClientCnxn {
             }
 
             /**
-             * 设置通道感兴趣的事件
+             * 设置通道对读写事件感兴趣
              * @see org.apache.zookeeper.ClientCnxnSocketNIO#enableReadWriteOnly()
              */
             clientCnxnSocket.enableReadWriteOnly();
@@ -1112,7 +1112,10 @@ public class ClientCnxn {
              */
             while (state.isAlive()) {
                 try {
-                    // 判断客户端是否已经和服务端建立socket连接，判断条件是SelectionKey是否为null
+                    /**
+                     * 判断客户端是否已经和服务端建立socket连接，判断条件是SelectionKey是否为null
+                     * @see ClientCnxnSocketNIO#registerAndConnect(java.nio.channels.SocketChannel, java.net.InetSocketAddress)
+                     */
                     if (!clientCnxnSocket.isConnected()) {
                         if (!isFirstConnect) {
                             try {
@@ -1140,7 +1143,7 @@ public class ClientCnxn {
                             serverAddress = hostProvider.next(1000);
                         }
 
-                        // 重点 -- 与服务端建立socket连接✨
+                        // 重点 -- 与服务端建立socket连接（绑定地址，注册选择器）✨
                         startConnect(serverAddress);
                         clientCnxnSocket.updateLastSendAndHeard();
                     }
