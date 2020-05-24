@@ -13,7 +13,7 @@ public class ZookeeperClientTest {
     public static void main(String[] args) throws Exception {
 
         /**
-         * zk原生客户端的wacth只能被使用一次
+         * zk原生客户端的watcher只能被使用一次
          */
         ZooKeeper client = new ZooKeeper("localhost:2181", 5000, new Watcher() {
             @Override
@@ -23,25 +23,27 @@ public class ZookeeperClientTest {
         });
 
         // 创建节点
-//        client.create("/data", "node data".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-
-
+        Stat exists = client.exists("/data", true);
+        if (exists == null) {
+            client.create("/data", "Hello zookeeper".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        }
 
         Stat stat = new Stat();
 
-        // 1、使用自定义watch监听器
-        String str = new String(client.getData("/data", new Watcher() {
+        // 1、使用自定义watch监听器（同步获取节点数据）
+        byte[] data = client.getData("/data", new Watcher() {
             @Override
             public void process(WatchedEvent event) {
                 System.out.println("事件类型：" + event.getType());
             }
-        }, stat));
+        }, stat);
+        String str = new String(data);
         System.out.println("节点内容：" + str);
 
         // 2、使用默认的watch监听器
         client.getData("/data", true, stat);
 
-        // 使用回调
+        // 3、使用回调（异步获取节点数据）
         client.getData("/data", false, new AsyncCallback.DataCallback() {
             @Override
             public void processResult(int rc, String path, Object ctx, byte[] data, Stat stat) {
