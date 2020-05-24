@@ -974,6 +974,7 @@ public class ClientCnxn {
                             h.setType(ZooDefs.OpCode.setWatches);
                             h.setXid(-8);
                             Packet packet = new Packet(h, new ReplyHeader(), sw, null, null);
+                            // 把请求添加到请求队列等待发送线程提取 --  重点✨
                             outgoingQueue.addFirst(packet);
                         }
                     }
@@ -984,12 +985,13 @@ public class ClientCnxn {
                             OpCode.auth), null, new AuthPacket(0, id.scheme,
                             id.data), null, null));
                 }
+                // 把ConnectionRequest请求添加到请求队列第一个位置用于真正通信前服务端和客户端的配置信息同步 --  重点✨
                 outgoingQueue.addFirst(new Packet(null, null, conReq,
                         null, null, readOnly));
             }
 
             /**
-             * 设置通道对读写事件感兴趣
+             * 设置通道只对读写事件感兴趣
              * @see org.apache.zookeeper.ClientCnxnSocketNIO#enableReadWriteOnly()
              */
             clientCnxnSocket.enableReadWriteOnly();
@@ -1115,6 +1117,7 @@ public class ClientCnxn {
                     /**
                      * 判断客户端是否已经和服务端建立socket连接，判断条件是SelectionKey是否为null
                      * @see ClientCnxnSocketNIO#registerAndConnect(java.nio.channels.SocketChannel, java.net.InetSocketAddress)
+                     * @see ClientCnxnSocketNIO#isConnected()
                      */
                     if (!clientCnxnSocket.isConnected()) {
                         if (!isFirstConnect) {
