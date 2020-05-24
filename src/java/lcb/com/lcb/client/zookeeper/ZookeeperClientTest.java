@@ -3,6 +3,8 @@ package com.lcb.client.zookeeper;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 
+import java.util.List;
+
 /**
  * @author changbao.li
  * @Description zk 自带客户端测试
@@ -18,7 +20,7 @@ public class ZookeeperClientTest {
         ZooKeeper client = new ZooKeeper("localhost:2181", 5000, new Watcher() {
             @Override
             public void process(WatchedEvent event) {
-                System.out.println("连接：" + event);
+                System.out.println("绑定成功：" + event);
             }
         });
 
@@ -26,6 +28,7 @@ public class ZookeeperClientTest {
         Stat exists = client.exists("/data", true);
         if (exists == null) {
             client.create("/data", "Hello zookeeper".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            client.create("/data/child_node", "child mode create".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
         }
 
         Stat stat = new Stat();
@@ -50,6 +53,15 @@ public class ZookeeperClientTest {
                 System.out.println("method 被回调");
             }
         }, stat);
+
+        // 4、获取孩子节点
+        List<String> children = client.getChildren("/data", new Watcher() {
+            @Override
+            public void process(WatchedEvent event) {
+                System.out.println("获取孩子节点信息成功：" + event);
+            }
+        });
+        System.out.println(children);
 
         System.in.read();
     }

@@ -1502,10 +1502,13 @@ public class ZooKeeper {
 
         RequestHeader h = new RequestHeader();
         h.setType(ZooDefs.OpCode.getChildren);
+
         GetChildrenRequest request = new GetChildrenRequest();
         request.setPath(serverPath);
         request.setWatch(watcher != null);
+
         GetChildrenResponse response = new GetChildrenResponse();
+
         ReplyHeader r = cnxn.submitRequest(h, request, response, wcb);
         if (r.getErr() != 0) {
             throw KeeperException.create(KeeperException.Code.get(r.getErr()),

@@ -145,6 +145,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                         }
                     }
                 }
+
                 if (outgoingQueue.isEmpty()) {
                     // No more packets to send: turn off write interest flag.
                     // Will be turned on later by a later call to enableWrite(),
