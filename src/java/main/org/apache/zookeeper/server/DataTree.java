@@ -563,6 +563,7 @@ public class DataTree {
         synchronized (n) {
             n.copyStat(stat);
             if (watcher != null) {
+                // ServerCnxn 实现了Watcher接口，所以这里的watcher实例表示的就是当前服务端和客户端进行通信的连接
                 dataWatches.addWatch(path, watcher);
             }
             return n.data;
