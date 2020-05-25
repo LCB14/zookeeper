@@ -116,6 +116,10 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
         }
     }
 
+    /**
+     *  调用位置
+     * @see ZooKeeperServerMain#runFromConfig(org.apache.zookeeper.server.ServerConfig)
+     */
     @Override
     public void startup(ZooKeeperServer zks) throws IOException,
             InterruptedException {
@@ -234,7 +238,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
                             sc.configureBlocking(false);
                             SelectionKey sk = sc.register(selector,
                                     SelectionKey.OP_READ);
-                            // NIOServerCnxn 组件封装了服务端针对客户端所有请求的操作
+                            // NIOServerCnxn 组件封装了服务端针对客户端所有请求的操作 -- 重点✨
                             NIOServerCnxn cnxn = createConnection(sc, sk);
                             sk.attach(cnxn);
                             addCnxn(cnxn);

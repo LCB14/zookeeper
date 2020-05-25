@@ -126,10 +126,14 @@ public class ZooKeeperServerMain {
 
             // 根据配置信息，选择是基于NIO还是Netty(默认是NIO)
             cnxnFactory = ServerCnxnFactory.createFactory();
-            // 设置ServerSocketChannel信息，绑定selector -- 重点✨
+            /**
+             * 设置ServerSocketChannel信息，绑定selector -- 重点✨
+             *
+             * @see NIOServerCnxnFactory#configure(java.net.InetSocketAddress, int)
+             */
             cnxnFactory.configure(config.getClientPortAddress(),
                     config.getMaxClientCnxns());
-            // 启动zookeeper服务端
+            // 启动zookeeper服务端 -- 重点✨
             cnxnFactory.startup(zkServer);
 
             // Watch status of ZooKeeper server. It will do a graceful shutdown

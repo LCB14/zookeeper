@@ -650,7 +650,15 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     long createSession(ServerCnxn cnxn, byte passwd[], int timeout) {
+        /**
+         * SessionTracker实例创建时机
+         * @see NIOServerCnxnFactory#startup(org.apache.zookeeper.server.ZooKeeperServer)
+         *
+         * 跳转
+         * @see SessionTrackerImpl#createSession(int)
+         */
         long sessionId = sessionTracker.createSession(timeout);
+
         Random r = new Random(sessionId ^ superSecret);
         r.nextBytes(passwd);
         ByteBuffer to = ByteBuffer.allocate(4);

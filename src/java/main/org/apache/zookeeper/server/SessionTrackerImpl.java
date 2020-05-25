@@ -48,6 +48,7 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
     HashMap<Long, SessionSet> sessionSets = new HashMap<Long, SessionSet>();
 
     ConcurrentHashMap<Long, Integer> sessionsWithTimeout;
+
     long nextSessionId = 0;
     long nextExpirationTime;
 
@@ -240,11 +241,13 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
     }
 
 
+    @Override
     synchronized public long createSession(int sessionTimeout) {
         addSession(nextSessionId, sessionTimeout);
         return nextSessionId++;
     }
 
+    @Override
     synchronized public void addSession(long id, int sessionTimeout) {
         sessionsWithTimeout.put(id, sessionTimeout);
         if (sessionsById.get(id) == null) {
