@@ -199,7 +199,9 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
         // this lock)
         synchronized (ipMap) {
             Set<NIOServerCnxn> s = ipMap.get(cl);
-            if (s == null) return 0;
+            if (s == null) {
+                return 0;
+            }
             return s.size();
         }
     }

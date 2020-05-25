@@ -209,7 +209,7 @@ public class NIOServerCnxn extends ServerCnxn {
             // 统计服务端接收数据包的数量
             packetReceived();
             incomingBuffer.flip();
-            // 客户端与服务端建立连接之后进行真正的业务请求之前会首先向服务端发送一个连接请求同步一下配置信息
+            // 客户端与服务端建立连接之后进行真正的业务请求之前客户端会首先向服务端发送一个ConnectRequest请求同步一下配置信息
             if (!initialized) {
                 readConnectRequest();
             } else {
@@ -269,6 +269,7 @@ public class NIOServerCnxn extends ServerCnxn {
                     }
 
                     if (isPayload) { // not the case for 4letterword
+                        // 重点✨
                         readPayload();
                     } else {
                         // four letter words take care
