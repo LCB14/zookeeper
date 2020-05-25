@@ -245,6 +245,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
                         }
                     } else if ((k.readyOps() & (SelectionKey.OP_READ | SelectionKey.OP_WRITE)) != 0) {
                         NIOServerCnxn c = (NIOServerCnxn) k.attachment();
+                        // 重点✨
                         c.doIO(k);
                     } else {
                         if (LOG.isDebugEnabled()) {

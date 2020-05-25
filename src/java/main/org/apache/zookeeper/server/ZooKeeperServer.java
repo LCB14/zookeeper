@@ -652,6 +652,10 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
                 && Arrays.equals(passwd, generatePasswd(sessionId));
     }
 
+    /**
+     * 调用链上游
+     * @see ZooKeeperServer#processConnectRequest(org.apache.zookeeper.server.ServerCnxn, java.nio.ByteBuffer)
+     */
     long createSession(ServerCnxn cnxn, byte passwd[], int timeout) {
         /**
          * SessionTracker实例创建时机
@@ -940,6 +944,10 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         return serverCnxnFactory.getNumAliveConnections();
     }
 
+    /**
+     * 调用链上游
+     * @see NIOServerCnxn#readConnectRequest()
+     */
     public void processConnectRequest(ServerCnxn cnxn, ByteBuffer incomingBuffer) throws IOException {
         BinaryInputArchive bia = BinaryInputArchive.getArchive(new ByteBufferInputStream(incomingBuffer));
         ConnectRequest connReq = new ConnectRequest();

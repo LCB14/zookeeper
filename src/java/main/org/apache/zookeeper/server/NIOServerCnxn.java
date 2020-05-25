@@ -190,7 +190,12 @@ public class NIOServerCnxn extends ServerCnxn {
         }
     }
 
-    /** Read the request payload (everything following the length prefix) */
+    /**
+     * Read the request payload (everything following the length prefix)
+     *
+     * 调用链上游
+     * @see NIOServerCnxn#doIO(java.nio.channels.SelectionKey)
+     * */
     private void readPayload() throws IOException, InterruptedException {
         // have we read length bytes?
         if (incomingBuffer.remaining() != 0) {
@@ -239,6 +244,9 @@ public class NIOServerCnxn extends ServerCnxn {
 
     /**
      * Handles read/write IO on connection.
+     *
+     * 调用链上游
+     * @see NIOServerCnxnFactory#run()
      */
     void doIO(SelectionKey k) throws InterruptedException {
         try {
@@ -440,6 +448,10 @@ public class NIOServerCnxn extends ServerCnxn {
         }
     }
 
+    /**
+     * 调用链上游
+     * @see NIOServerCnxn#readPayload()
+     */
     private void readConnectRequest() throws IOException, InterruptedException {
         if (!isZKServerRunning()) {
             throw new IOException("ZooKeeperServer not running");
