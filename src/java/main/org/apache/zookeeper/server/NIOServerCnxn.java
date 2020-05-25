@@ -405,6 +405,11 @@ public class NIOServerCnxn extends ServerCnxn {
         }
     }
 
+    /**
+     * 调用链上游
+     *
+     * @see NIOServerCnxn#readPayload()
+     */
     private void readRequest() throws IOException {
         zkServer.processPacket(this, incomingBuffer);
     }

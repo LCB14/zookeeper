@@ -377,6 +377,9 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         }
         long id = cnxn.getSessionId();
         int to = cnxn.getSessionTimeout();
+        /**
+         * @see SessionTrackerImpl#touchSession(long, int)
+         */
         if (!sessionTracker.touchSession(id, to)) {
             throw new MissingSessionException(
                     "No session with sessionid 0x" + Long.toHexString(id)
@@ -776,6 +779,10 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         submitRequest(si);
     }
 
+    /**
+     * 调用链上游
+     * @see ZooKeeperServer#processPacket(org.apache.zookeeper.server.ServerCnxn, java.nio.ByteBuffer)
+     */
     public void submitRequest(Request si) {
         // 需要等待请求处理器初始化并启动完毕
         if (firstProcessor == null) {
@@ -798,6 +805,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         }
 
         try {
+            // 更新session信息--重点✨
             touch(si.cnxn);
             boolean validpacket = Request.isValid(si.type);
             if (validpacket) {
@@ -1030,6 +1038,11 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         return false;
     }
 
+    /**
+     * 调用链上游
+     *
+     * @see NIOServerCnxn#readRequest()
+     */
     public void processPacket(ServerCnxn cnxn, ByteBuffer incomingBuffer) throws IOException {
         // We have the request, now process and setup for next
         InputStream bais = new ByteBufferInputStream(incomingBuffer);

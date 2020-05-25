@@ -219,13 +219,11 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
                 synchronized (this) {
                     selected = selector.selectedKeys();
                 }
-                ArrayList<SelectionKey> selectedList = new ArrayList<SelectionKey>(
-                        selected);
+                ArrayList<SelectionKey> selectedList = new ArrayList<SelectionKey>(selected);
                 Collections.shuffle(selectedList);
                 for (SelectionKey k : selectedList) {
                     if ((k.readyOps() & SelectionKey.OP_ACCEPT) != 0) {
-                        SocketChannel sc = ((ServerSocketChannel) k
-                                .channel()).accept();
+                        SocketChannel sc = ((ServerSocketChannel) k.channel()).accept();
                         InetAddress ia = sc.socket().getInetAddress();
                         int cnxncount = getClientCnxnCount(ia);
                         if (maxClientCnxns > 0 && cnxncount >= maxClientCnxns) {
@@ -236,8 +234,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
                             LOG.info("Accepted socket connection from "
                                     + sc.socket().getRemoteSocketAddress());
                             sc.configureBlocking(false);
-                            SelectionKey sk = sc.register(selector,
-                                    SelectionKey.OP_READ);
+                            SelectionKey sk = sc.register(selector, SelectionKey.OP_READ);
                             // NIOServerCnxn 组件封装了服务端针对客户端所有请求的操作 -- 重点✨
                             NIOServerCnxn cnxn = createConnection(sc, sk);
                             sk.attach(cnxn);
@@ -289,6 +286,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
         }
     }
 
+    @Override
     public void shutdown() {
         try {
             ss.close();

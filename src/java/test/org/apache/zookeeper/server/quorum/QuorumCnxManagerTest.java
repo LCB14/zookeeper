@@ -835,6 +835,7 @@ public class QuorumCnxManagerTest extends ZKTestCase {
     }
 
     private static final class NullServerCnxnFactory extends ServerCnxnFactory {
+        @Override
         public void startup(ZooKeeperServer zkServer)
                 throws IOException, InterruptedException {
         }
@@ -845,6 +846,7 @@ public class QuorumCnxManagerTest extends ZKTestCase {
         public void shutdown() {
         }
 
+        @Override
         public void setMaxClientCnxnsPerHost(int max) {
         }
 

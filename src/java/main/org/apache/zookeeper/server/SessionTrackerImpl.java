@@ -61,6 +61,7 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
 
         /**
          * 调用链上端：
+         *
          * @see SessionTrackerImpl#addSession(long, int)
          */
         SessionImpl(long sessionId, int timeout, long expireTime) {
@@ -180,6 +181,7 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
         try {
             while (running) {
                 currentTime = Time.currentElapsedTime();
+                // nextExpirationTime 变量的初始值为0
                 if (nextExpirationTime > currentTime) {
                     this.wait(nextExpirationTime - currentTime);
                     continue;
