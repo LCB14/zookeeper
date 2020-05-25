@@ -43,10 +43,13 @@ import org.apache.zookeeper.common.Time;
 public class SessionTrackerImpl extends ZooKeeperCriticalThread implements SessionTracker {
     private static final Logger LOG = LoggerFactory.getLogger(SessionTrackerImpl.class);
 
+    // key:sessionId,value:SessionImpl实例
     HashMap<Long, SessionImpl> sessionsById = new HashMap<Long, SessionImpl>();
 
+    // key:expireTime,value:SessionImpl实例
     HashMap<Long, SessionSet> sessionSets = new HashMap<Long, SessionSet>();
 
+    // key:sessionId,value:下次超时时间点
     ConcurrentHashMap<Long, Integer> sessionsWithTimeout;
 
     long nextSessionId = 0;
@@ -55,6 +58,11 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
     int expirationInterval;
 
     public static class SessionImpl implements Session {
+
+        /**
+         * 调用链上端：
+         * @see SessionTrackerImpl#addSession(long, int)
+         */
         SessionImpl(long sessionId, int timeout, long expireTime) {
             this.sessionId = sessionId;
             this.timeout = timeout;
@@ -79,6 +87,7 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
             return timeout;
         }
 
+        @Override
         public boolean isClosing() {
             return isClosing;
         }
@@ -105,6 +114,12 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
 
     private long roundToInterval(long time) {
         // We give a one interval grace period
+        /**
+         * expirationInterval 初始值参考
+         *
+         * @see org.apache.zookeeper.server.SessionTrackerImpl#SessionTrackerImpl(org.apache.zookeeper.server.SessionTracker.SessionExpirer,
+         * java.util.concurrent.ConcurrentHashMap, int, long, org.apache.zookeeper.server.ZooKeeperServerListener)
+         */
         return (time / expirationInterval + 1) * expirationInterval;
     }
 
@@ -193,20 +208,32 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
                     "SessionTrackerImpl --- Touch session: 0x"
                             + Long.toHexString(sessionId) + " with timeout " + timeout);
         }
+
         SessionImpl s = sessionsById.get(sessionId);
         // Return false, if the session doesn't exists or marked as closing
         if (s == null || s.isClosing()) {
             return false;
         }
+
+        // 计算下一次session过期时间点
         long expireTime = roundToInterval(Time.currentElapsedTime() + timeout);
+        /**
+         * s.tickTime 值参考：
+         *
+         * @see org.apache.zookeeper.server.SessionTrackerImpl.SessionImpl#SessionImpl(long, int, long)
+         */
         if (s.tickTime >= expireTime) {
             // Nothing needs to be done
             return true;
         }
+
+        // 获取老的过期日期对应的SessionImpl实例
         SessionSet set = sessionSets.get(s.tickTime);
         if (set != null) {
             set.sessions.remove(s);
         }
+
+        // 为SessionImpl实例同步新的过期时间
         s.tickTime = expireTime;
         set = sessionSets.get(s.tickTime);
         if (set == null) {
