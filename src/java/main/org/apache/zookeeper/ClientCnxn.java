@@ -487,10 +487,8 @@ public class ClientCnxn {
 
             // materialize the watchers based on the event
             // materialize()方法会根据事件类型返回对应的watcher
-            WatcherSetEventPair pair = new WatcherSetEventPair(
-                    watcher.materialize(event.getState(), event.getType(),
-                            event.getPath()),
-                    event);
+            Set<Watcher> materialize = watcher.materialize(event.getState(), event.getType(), event.getPath());
+            WatcherSetEventPair pair = new WatcherSetEventPair(materialize, event);
 
             // queue the pair (watch set & event) for later processing
             waitingEvents.add(pair);
@@ -666,6 +664,7 @@ public class ClientCnxn {
 
     private void finishPacket(Packet p) {
         if (p.watchRegistration != null) {
+            // 把watcher添加到相应的watcher容器
             p.watchRegistration.register(p.replyHeader.getErr());
         }
 
@@ -755,6 +754,9 @@ public class ClientCnxn {
 
         /**
          * 读取服务端响应，成功响应则移除之前放入pendingQueue的请求
+         *
+         * 调用位置：
+         * @see ClientCnxnSocketNIO#doIO(java.util.List, java.util.LinkedList, org.apache.zookeeper.ClientCnxn)
          *
          * @param incomingBuffer
          * @throws IOException
@@ -882,7 +884,7 @@ public class ClientCnxn {
                             + Long.toHexString(sessionId) + ", packet:: " + packet);
                 }
             } finally {
-                // 从 Packet 中取出对应的 Watcher 并注册到 ZKWatchManager 中去
+                // 从 Packet 中取出对应的 Watcher 并注册到 ZKWatchManager 中去 -- 重点✨
                 finishPacket(packet);
             }
         }

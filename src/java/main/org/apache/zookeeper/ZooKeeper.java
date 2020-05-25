@@ -133,6 +133,10 @@ public class ZooKeeper {
      * API.
      */
     private static class ZKWatchManager implements ClientWatchManager {
+        /**
+         * 下面三个map值被添加的位置
+         * @see WatchRegistration#register(int)
+         */
         private final Map<String, Set<Watcher>> dataWatches =
                 new HashMap<String, Set<Watcher>>();
         private final Map<String, Set<Watcher>> existWatches =
@@ -255,6 +259,10 @@ public class ZooKeeper {
          */
         public void register(int rc) {
             if (shouldAddWatch(rc)) {
+                /**
+                 * rc 这个参数在下面子实现类中才会被用到
+                 * @see ExistsWatchRegistration#getWatches(int)
+                 */
                 Map<String, Set<Watcher>> watches = getWatches(rc);
                 synchronized (watches) {
                     Set<Watcher> watchers = watches.get(clientPath);

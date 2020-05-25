@@ -116,10 +116,9 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
                     updateLastSend();
                     // If we already started writing p, p.bb will already exist
                     if (p.bb == null) {
-                        // 如果不是连接事件，不是ping事件，不是认证事件
-                        if ((p.requestHeader != null) &&
-                                (p.requestHeader.getType() != OpCode.ping) &&
-                                (p.requestHeader.getType() != OpCode.auth)) {
+                        // 需满足不是连接事件，不是ping事件，不是认证事件
+                        if ((p.requestHeader != null) && (p.requestHeader.getType() != OpCode.ping)
+                                && (p.requestHeader.getType() != OpCode.auth)) {
                             p.requestHeader.setXid(cnxn.getXid());
                         }
                         // 序列化
