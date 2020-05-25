@@ -191,6 +191,10 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
                 if (set != null) {
                     for (SessionImpl s : set.sessions) {
                         setSessionClosing(s.sessionId);
+                        /**
+                         * 向请求队列提交一个请求（session 过期需要删除与之相关的临时节点和触发watcher关闭socket）
+                         * @see ZooKeeperServer#expire(org.apache.zookeeper.server.SessionTracker.Session)
+                         */
                         expirer.expire(s);
                     }
                 }

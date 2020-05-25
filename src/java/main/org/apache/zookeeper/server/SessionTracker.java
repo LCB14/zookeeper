@@ -58,6 +58,7 @@ public interface SessionTracker {
 
     /**
      * Mark that the session is in the process of closing.
+     *
      * @param sessionId
      */
     void setSessionClosing(long sessionId);
@@ -78,6 +79,7 @@ public interface SessionTracker {
 
     /**
      * Text dump of session information, suitable for debugging.
+     *
      * @param pwriter the output writer
      */
     void dumpSessions(PrintWriter pwriter);

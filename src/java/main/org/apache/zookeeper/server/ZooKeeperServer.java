@@ -305,7 +305,6 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     public void takeSnapshot() {
-
         try {
             txnLogFactory.save(zkDb.getDataTree(), zkDb.getSessionWithTimeOuts());
         } catch (IOException e) {
@@ -356,6 +355,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         }
     }
 
+    @Override
     public void expire(Session session) {
         long sessionId = session.getSessionId();
         LOG.info("Expiring session 0x" + Long.toHexString(sessionId)
