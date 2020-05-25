@@ -419,8 +419,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
             // 创建session监听器，监视session是否过期
             createSessionTracker();
         }
-
-        // 跟踪session
+        // 开启线程，监控session状态（sessionTracker继承了Thread）
         startSessionTracker();
 
         // 设置请求处理器
@@ -468,6 +467,10 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         return listener;
     }
 
+    /**
+     * 上游调用位置
+     * @see ZooKeeperServer#startup()
+     */
     protected void createSessionTracker() {
         sessionTracker = new SessionTrackerImpl(this, zkDb.getSessionWithTimeOuts(),
                 tickTime, 1, getZooKeeperServerListener());

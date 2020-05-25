@@ -69,10 +69,12 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
 
         Object owner;
 
+        @Override
         public long getSessionId() {
             return sessionId;
         }
 
+        @Override
         public int getTimeout() {
             return timeout;
         }
@@ -82,6 +84,12 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
         }
     }
 
+    /**
+     * 调用链
+     *
+     * @see SessionTrackerImpl#SessionTrackerImpl(org.apache.zookeeper.server.SessionTracker.SessionExpirer,
+     * java.util.concurrent.ConcurrentHashMap, int, long, org.apache.zookeeper.server.ZooKeeperServerListener)
+     */
     public static long initializeNextSession(long id) {
         long nextSid = 0;
         nextSid = (Time.currentElapsedTime() << 24) >>> 8;
@@ -100,6 +108,11 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
         return (time / expirationInterval + 1) * expirationInterval;
     }
 
+    /**
+     * 上游调用位置
+     *
+     * @see ZooKeeperServer#createSessionTracker()
+     */
     public SessionTrackerImpl(SessionExpirer expirer,
                               ConcurrentHashMap<Long, Integer> sessionsWithTimeout, int tickTime,
                               long sid, ZooKeeperServerListener listener) {
@@ -118,6 +131,7 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
 
     volatile long currentTime;
 
+    @Override
     synchronized public void dumpSessions(PrintWriter pwriter) {
         pwriter.print("Session Sets (");
         pwriter.print(sessionSets.size());
@@ -171,6 +185,7 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
         LOG.info("SessionTrackerImpl exited loop!");
     }
 
+    @Override
     synchronized public boolean touchSession(long sessionId, int timeout) {
         if (LOG.isTraceEnabled()) {
             ZooTrace.logTraceMessage(LOG,
@@ -202,6 +217,7 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
         return true;
     }
 
+    @Override
     synchronized public void setSessionClosing(long sessionId) {
         if (LOG.isTraceEnabled()) {
             LOG.info("Session closing: 0x" + Long.toHexString(sessionId));
@@ -243,6 +259,10 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
 
     @Override
     synchronized public long createSession(int sessionTimeout) {
+        /**
+         * nextSessionId 值初始化位置
+         * @see org.apache.zookeeper.server.SessionTrackerImpl#initializeNextSession(long)
+         */
         addSession(nextSessionId, sessionTimeout);
         return nextSessionId++;
     }
@@ -265,6 +285,7 @@ public class SessionTrackerImpl extends ZooKeeperCriticalThread implements Sessi
                                 + Long.toHexString(id) + " " + sessionTimeout);
             }
         }
+        // 真正创建session的方法 --  重点✨
         touchSession(id, sessionTimeout);
     }
 

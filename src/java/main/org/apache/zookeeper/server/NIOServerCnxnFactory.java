@@ -133,7 +133,7 @@ public class NIOServerCnxnFactory extends ServerCnxnFactory implements Runnable 
         // 同步zk快照数据到内存
         zks.startdata();
 
-        // 设置请求处理器
+        // 设置请求处理器（顺带创建sessionTracker）
         zks.startup();
     }
 
