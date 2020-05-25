@@ -932,19 +932,18 @@ public class ClientCnxn {
                     List<String> existWatches = zooKeeper.getExistWatches();// 节点删除或添加监听器
                     List<String> childWatches = zooKeeper.getChildWatches();// 创建子节点监听器
 
-                    if (!dataWatches.isEmpty()
-                            || !existWatches.isEmpty() || !childWatches.isEmpty()) {
-
+                    if (!dataWatches.isEmpty() || !existWatches.isEmpty() || !childWatches.isEmpty()) {
                         Iterator<String> dataWatchesIter = prependChroot(dataWatches).iterator();
                         Iterator<String> existWatchesIter = prependChroot(existWatches).iterator();
                         Iterator<String> childWatchesIter = prependChroot(childWatches).iterator();
+
                         long setWatchesLastZxid = lastZxid;
 
-                        while (dataWatchesIter.hasNext()
-                                || existWatchesIter.hasNext() || childWatchesIter.hasNext()) {
+                        while (dataWatchesIter.hasNext() || existWatchesIter.hasNext() || childWatchesIter.hasNext()) {
                             List<String> dataWatchesBatch = new ArrayList<String>();
                             List<String> existWatchesBatch = new ArrayList<String>();
                             List<String> childWatchesBatch = new ArrayList<String>();
+
                             int batchLength = 0;
 
                             // Note, we may exceed our max length by a bit when we add the last

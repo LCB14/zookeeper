@@ -2,44 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0e4761a-a9c0-4dd2-8cc8-72ca1d47d745" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/com/lcb/client/zookeeper/ZookeeperClientTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ZooKeeper.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ZooKeeper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ZooKeeperTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/ZooKeeperTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/common/TimeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/common/TimeTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/server/quorum/EphemeralNodeDeletionTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/server/quorum/EphemeralNodeDeletionTest$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/server/quorum/EphemeralNodeDeletionTest$CustomQuorumPeer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/server/quorum/EphemeralNodeDeletionTest$CustomQuorumPeer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/ChrootTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/ChrootTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/ClientTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/ClientTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/DisconnectedWatcherTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/DisconnectedWatcherTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/MultiTransactionTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/MultiTransactionTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/SessionTimeoutTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/SessionTimeoutTest$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/SessionTimeoutTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/SessionTimeoutTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatchEventWhenAutoReset.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatchEventWhenAutoReset.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherFuncTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherFuncTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest$MyStatCallback.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest$MyStatCallback.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest$MyWatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest$MyWatcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/WatcherTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/system/InstanceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/.eclipse/classes-main/org/apache/zookeeper/test/system/InstanceManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/lcb/com/lcb/client/zookeeper/ZookeeperClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lcb/com/lcb/client/zookeeper/ZookeeperClientTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/systest/org/apache/zookeeper/test/system/InstanceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/systest/org/apache/zookeeper/test/system/InstanceManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/ZooKeeperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/ZooKeeperTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/common/TimeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/common/TimeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/ChrootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/ChrootTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/ClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/ClientTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/DisconnectedWatcherTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/DisconnectedWatcherTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/MultiTransactionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/MultiTransactionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/SessionTimeoutTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/SessionTimeoutTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/WatchEventWhenAutoReset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/WatchEventWhenAutoReset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/WatcherFuncTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/WatcherFuncTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/WatcherTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/WatcherTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocketNIO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +129,7 @@
       <updated>1590057409081</updated>
       <workItem from="1590057415741" duration="11257000" />
       <workItem from="1590114653656" duration="12849000" />
-      <workItem from="1590134331335" duration="58710000" />
+      <workItem from="1590134331335" duration="61359000" />
     </task>
     <servers />
   </component>

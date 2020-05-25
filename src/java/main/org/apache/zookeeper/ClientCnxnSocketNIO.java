@@ -60,7 +60,6 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
      */
     void doIO(List<Packet> pendingQueue, LinkedList<Packet> outgoingQueue, ClientCnxn cnxn)
             throws InterruptedException, IOException {
-
         SocketChannel sock = (SocketChannel) sockKey.channel();
         if (sock == null) {
             throw new IOException("Socket is null!");
@@ -380,9 +379,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
 
     @Override
     void doTransport(int waitTimeOut, List<Packet> pendingQueue, LinkedList<Packet> outgoingQueue,
-                     ClientCnxn cnxn)
-            throws IOException, InterruptedException {
-
+                     ClientCnxn cnxn) throws IOException, InterruptedException {
         selector.select(waitTimeOut);
         Set<SelectionKey> selected;
         synchronized (this) {
