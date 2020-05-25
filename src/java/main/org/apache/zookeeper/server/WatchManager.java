@@ -38,9 +38,11 @@ import org.apache.zookeeper.Watcher.Event.KeeperState;
 public class WatchManager {
     private static final Logger LOG = LoggerFactory.getLogger(WatchManager.class);
 
+    // key：节点路径，value：目前和服务端保持通信的客户端连接集合
     private final HashMap<String, HashSet<Watcher>> watchTable =
         new HashMap<String, HashSet<Watcher>>();
 
+    // key:目前和服务进行通信的客户端，value:该客户端上注册Watcher的节点集合
     private final HashMap<Watcher, HashSet<String>> watch2Paths =
         new HashMap<Watcher, HashSet<String>>();
 
