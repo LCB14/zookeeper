@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumCnxManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumCnxManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/LENonTerminateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/LENonTerminateTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +130,7 @@
       <updated>1590057409081</updated>
       <workItem from="1590057415741" duration="11257000" />
       <workItem from="1590114653656" duration="12849000" />
-      <workItem from="1590134331335" duration="89818000" />
+      <workItem from="1590134331335" duration="92658000" />
     </task>
     <servers />
   </component>
@@ -159,6 +160,10 @@
     </state>
     <state x="23" y="-754" width="1091" height="579" key="#xdebugger.evaluate/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590372180709" />
     <state x="603" y="-830" width="879" height="579" key="#xdebugger.evaluate/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590316173075" />
+    <state x="451" y="-942" key="CommitChangelistDialog2" timestamp="1590475888123">
+      <screen x="-184" y="-1080" width="2048" height="1080" />
+    </state>
+    <state x="451" y="-942" key="CommitChangelistDialog2/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590475888123" />
     <state x="-84" y="-980" width="1848" height="880" key="DiffContextDialog" timestamp="1590206486511">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>

@@ -640,7 +640,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         // 开启一个线程负责接收客户端请求
         cnxnFactory.start();
 
-        // 设置选举算法
+        // 设置选举算法 -- 重点✨
         startLeaderElection();
 
         // 开始选举
@@ -841,8 +841,8 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
                 le = new AuthFastLeaderElection(this, true);
                 break;
             case 3:
-                qcm = createCnxnManager();
                 // 负责zk集群节点之间的通信连接
+                qcm = createCnxnManager();
                 QuorumCnxManager.Listener listener = qcm.listener;
                 if (listener != null) {
                     listener.start();
