@@ -74,7 +74,7 @@ import org.slf4j.LoggerFactory;
  * <li>Leader - the server will process requests and forward them to followers.
  * A majority of followers must log the request before it can be accepted.
  * </ol>
- *
+ * <p>
  * This class will setup a datagram socket that will always respond with its
  * view of the current leader. The response will take the form of:
  *
@@ -87,7 +87,7 @@ import org.slf4j.LoggerFactory;
  *
  * long leader_zxid;
  * </pre>
- *
+ * <p>
  * The request for the current leader will consist solely of an xid: int xid;
  */
 public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider {
@@ -155,7 +155,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         /**
          * Performs a DNS lookup of hostname and (re)creates the this.addr and
          * this.electionAddr InetSocketAddress objects as appropriate
-         *
+         * <p>
          * If the DNS lookup fails, this.addr and electionAddr remain
          * unmodified, unless they were never set. If this.addr is null, then
          * it is set with an unresolved InetSocketAddress object. this.electionAddr
@@ -206,12 +206,11 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
          * Resolve the hostname to IP addresses, and find one reachable address.
          *
          * @param hostname the name of the host
-         * @param timeout the time, in milliseconds, before {@link InetAddress#isReachable}
-         *                aborts
+         * @param timeout  the time, in milliseconds, before {@link InetAddress#isReachable}
+         *                 aborts
          * @return a reachable IP address. If no such IP address can be found,
-         *         just return the first IP address of the hostname.
-         *
-         * @exception UnknownHostException
+         * just return the first IP address of the hostname.
+         * @throws UnknownHostException
          */
         public InetAddress getReachableAddress(String hostname, int timeout)
                 throws UnknownHostException {
@@ -306,7 +305,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
     }
 
     /**
-     * QuorumVerifier implementation; default (majority). 
+     * QuorumVerifier implementation; default (majority).
      */
 
     private QuorumVerifier quorumConfig;
@@ -454,8 +453,8 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
     /**
      * @deprecated As of release 3.4.0, this class has been deprecated, since
      * it is used with one of the udp-based versions of leader election, which
-     * we are also deprecating. 
-     *
+     * we are also deprecating.
+     * <p>
      * This class simply responds to requests for the current leader of this
      * node.
      * <p>
@@ -463,8 +462,6 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
      * <p>
      * The response has the xid, the id of this server, the id of the leader,
      * and the zxid of the leader.
-     *
-     *
      */
     @Deprecated
     class ResponderThread extends ZooKeeperThread {
@@ -753,6 +750,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
 
     /**
      * Count the number of nodes in the map that could be followers.
+     *
      * @param peers
      * @return The number of followers in the map
      */
@@ -1071,7 +1069,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
     }
 
     /**
-     * Observers are not contained in this view, only nodes with 
+     * Observers are not contained in this view, only nodes with
      * PeerType=PARTICIPANT.
      */
     public Map<Long, QuorumPeer.QuorumServer> getVotingView() {
@@ -1180,7 +1178,9 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         this.tickTime = tickTime;
     }
 
-    /** Maximum number of connections allowed from particular host (ip) */
+    /**
+     * Maximum number of connections allowed from particular host (ip)
+     */
     public int getMaxClientCnxnsPerHost() {
         ServerCnxnFactory fac = getCnxnFactory();
         if (fac == null) {
@@ -1189,23 +1189,31 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         return fac.getMaxClientCnxnsPerHost();
     }
 
-    /** minimum session timeout in milliseconds */
+    /**
+     * minimum session timeout in milliseconds
+     */
     public int getMinSessionTimeout() {
         return minSessionTimeout == -1 ? tickTime * 2 : minSessionTimeout;
     }
 
-    /** minimum session timeout in milliseconds */
+    /**
+     * minimum session timeout in milliseconds
+     */
     public void setMinSessionTimeout(int min) {
         LOG.info("minSessionTimeout set to " + min);
         this.minSessionTimeout = min;
     }
 
-    /** maximum session timeout in milliseconds */
+    /**
+     * maximum session timeout in milliseconds
+     */
     public int getMaxSessionTimeout() {
         return maxSessionTimeout == -1 ? tickTime * 20 : maxSessionTimeout;
     }
 
-    /** minimum session timeout in milliseconds */
+    /**
+     * minimum session timeout in milliseconds
+     */
     public void setMaxSessionTimeout(int max) {
         LOG.info("maxSessionTimeout set to " + max);
         this.maxSessionTimeout = max;
@@ -1348,6 +1356,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
 
     /**
      * set zk database for this node
+     *
      * @param database
      */
     public void setZKDatabase(ZKDatabase database) {
@@ -1399,7 +1408,8 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
     /**
      * Write a long value to disk atomically. Either succeeds or an exception
      * is thrown.
-     * @param name file name to write the long to
+     *
+     * @param name  file name to write the long to
      * @param value the long value to write to the named file
      * @throws IOException if the file cannot be written atomically
      */
@@ -1550,8 +1560,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
     /**
      * Sets the time taken for leader election in milliseconds.
      *
-     * @param electionTimeTaken
-     *            time taken for leader election
+     * @param electionTimeTaken time taken for leader election
      */
     void setElectionTimeTaken(long electionTimeTaken) {
         this.electionTimeTaken = electionTimeTaken;

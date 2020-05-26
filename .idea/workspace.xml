@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0e4761a-a9c0-4dd2-8cc8-72ca1d47d745" name="Default Changelist" comment="">
+    <list default="true" id="e0e4761a-a9c0-4dd2-8cc8-72ca1d47d745" name="Default Changelist" comment="2020年05月26日14:51:14">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumCnxManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumCnxManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/LENonTerminateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/test/LENonTerminateTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,12 +128,24 @@
       <updated>1590057409081</updated>
       <workItem from="1590057415741" duration="11257000" />
       <workItem from="1590114653656" duration="12849000" />
-      <workItem from="1590134331335" duration="92658000" />
+      <workItem from="1590134331335" duration="93212000" />
     </task>
+    <task id="LOCAL-00001" summary="2020年05月26日14:51:14">
+      <created>1590475909139</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590475909139</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="2020年05月26日14:51:14" />
+    <option name="LAST_COMMIT_MESSAGE" value="2020年05月26日14:51:14" />
   </component>
   <component name="WindowStateProjectService">
     <state x="304" y="-878" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590057971699">
@@ -160,10 +170,10 @@
     </state>
     <state x="23" y="-754" width="1091" height="579" key="#xdebugger.evaluate/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590372180709" />
     <state x="603" y="-830" width="879" height="579" key="#xdebugger.evaluate/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590316173075" />
-    <state x="451" y="-942" key="CommitChangelistDialog2" timestamp="1590475888123">
+    <state x="451" y="-942" key="CommitChangelistDialog2" timestamp="1590475975337">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
-    <state x="451" y="-942" key="CommitChangelistDialog2/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590475888123" />
+    <state x="451" y="-942" key="CommitChangelistDialog2/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590475975337" />
     <state x="-84" y="-980" width="1848" height="880" key="DiffContextDialog" timestamp="1590206486511">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
@@ -221,6 +231,10 @@
     </state>
     <state width="1024" height="540" key="XDebugger.FullValuePopup/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590314307836" />
     <state width="1024" height="540" key="XDebugger.FullValuePopup/0.23.1680.1027/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590316049143" />
+    <state x="645" y="-616" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590475991425">
+      <screen x="-184" y="-1080" width="2048" height="1080" />
+    </state>
+    <state x="645" y="-616" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1680.1050/-184.-1080.2048.1080@-184.-1080.2048.1080" timestamp="1590475991425" />
     <state x="520" y="-782" width="883" height="486" key="find.popup" timestamp="1590412180689">
       <screen x="-184" y="-1080" width="2048" height="1080" />
     </state>
