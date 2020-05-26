@@ -196,8 +196,8 @@ public class QuorumCnxManager {
                             int quorumCnxnThreadsSize,
                             boolean quorumSaslAuthEnabled,
                             ConcurrentHashMap<Long, SendWorker> senderWorkerMap) {
-        this.senderWorkerMap = senderWorkerMap;
 
+        this.senderWorkerMap = senderWorkerMap;
         this.recvQueue = new ArrayBlockingQueue<Message>(RECV_CAPACITY);
         this.queueSendMap = new ConcurrentHashMap<Long, ArrayBlockingQueue<ByteBuffer>>();
         this.lastMessageSent = new ConcurrentHashMap<Long, ByteBuffer>();
